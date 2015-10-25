@@ -5,7 +5,7 @@
 /datum/species/human
 	name = "Human"
 	id = "human"
-	roundstart = 1
+	roundstart = 0 // Revert to 1 after Halloween or whatever masquerade.
 	specflags = list(EYECOLOR,HAIR,FACEHAIR,LIPS)
 	use_skintones = 1
 
