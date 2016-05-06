@@ -63,6 +63,8 @@ var/global/datum/controller/master/Master = new()
 					msg += "\t [varname] = [varval]\n"
 	world.log << msg
 	subsystems = Master.subsystems
+
+
 /datum/controller/master/proc/Setup(zlevel)
 	// Per-Z-level subsystems.
 	if(zlevel && zlevel > 0 && zlevel <= world.maxz)
@@ -75,8 +77,12 @@ var/global/datum/controller/master/Master = new()
 	createRandomZlevel()
 	// Generate mining.
 	make_mining_asteroid_secret()
+	// Readies Xenoarch
+	SetupXenoarch()
 	// Set up Z-level transistions.
 	setup_map_transitions()
+	// Prepare minimaps
+	crewmonitor.generateMiniMaps()
 	// Sort subsystems by priority, so they initialize in the correct order.
 	sortTim(subsystems, /proc/cmp_subsystem_priority)
 	// Initialize subsystems.
@@ -84,6 +90,7 @@ var/global/datum/controller/master/Master = new()
 		SS.Initialize(world.timeofday, zlevel)
 		CHECK_TICK
 	world << "<span class='boldannounce'>Initializations complete!</span>"
+	world.log << "Initializations complete!"
 	// Sort subsystems by display setting for easy access.
 	sortTim(subsystems, /proc/cmp_subsystem_display)
 	// Set world options.
@@ -92,6 +99,8 @@ var/global/datum/controller/master/Master = new()
 	sleep(1)
 	// Loop.
 	Master.process()
+
+
 // Notify the MC that the round has started.
 /datum/controller/master/proc/RoundStart()
 	var/timer = world.time
@@ -99,6 +108,23 @@ var/global/datum/controller/master/Master = new()
 		timer += world.tick_lag
 		SS.can_fire = 1
 		SS.next_fire = timer + rand(0, SS.wait) // Stagger subsystems.
+	for(var/turf/simulated/T in mining_turfs)
+		set background = TRUE
+		if(!T)
+			continue
+		if(T.lighting_test_overlays())
+			T.lighting_fix_overlays()
+
+	for(var/turf/simulated/wall/W in tunnel_walls)
+		set background = TRUE
+		if(!W)
+			continue
+		if(W.smooth)
+			smooth_icon(W)
+			W.icon_state = ""
+
+
+
 // Used to smooth out costs to try and avoid oscillation.
 #define MC_AVERAGE_FAST(average, current) (0.7 * (average) + 0.3 * (current))
 #define MC_AVERAGE(average, current) (0.8 * (average) + 0.2 * (current))
@@ -221,45 +247,9 @@ var/global/datum/controller/master/Master = new()
 				sleep(50)
 #undef MC_AVERAGE_FAST
 #undef MC_AVERAGE
-
-/datum/controller/game_controller/proc/roundHasStarted()
-	for(var/datum/subsystem/SS in subsystems)
-		SS.can_fire = 1
-		SS.next_fire = world.time + rand(0,SS.wait)
-
-	for(var/turf/simulated/T in mining_turfs)
-		set background = TRUE
-		if(!T)
-			continue
-		if(T.lighting_test_overlays())
-			T.lighting_fix_overlays()
-
-	for(var/turf/simulated/wall/W in tunnel_walls)
-		set background = TRUE
-		if(!W)
-			continue
-		if(W.smooth)
-			smooth_icon(W)
-			W.icon_state = ""
-
-
-/datum/controller/game_controller/proc/Recover()
-	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"
-	for(var/varname in master_controller.vars)
-		switch(varname)
-			if("tag","bestF","type","parent_type","vars")	continue
-			else
-				var/varval = master_controller.vars[varname]
-				if(istype(varval,/datum))
-					var/datum/D = varval
-					msg += "\t [varname] = [D.type]\n"
-				else
-					msg += "\t [varname] = [varval]\n"
-	world.log << msg
-
-	subsystems = master_controller.subsystems
-
 #undef MC_AVERAGE_SLOW
+
+
 /datum/controller/master/proc/stat_entry()
 	if(!statclick)
 		statclick = new/obj/effect/statclick/debug("Initializing...", src)

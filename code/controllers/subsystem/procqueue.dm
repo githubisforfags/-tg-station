@@ -1,6 +1,8 @@
 var/datum/subsystem/procqueue/procqueue
 
 /datum/subsystem/procqueue
+	name = "Queue"
+	priority = 1
 	var/list/queue = list()
 
 /datum/subsystem/procqueue/New()

@@ -2,7 +2,7 @@ var/datum/controller/failsafe/Failsafe
 
 /datum/controller/failsafe // This thing pretty much just keeps poking the master controller
 	var/processing_interval = 100	//poke the MC every 10 seconds - set to 0 to disable
-
+	name = "Failsafe"
 	var/MC_iteration = 0
 	var/MC_defcon = 0			//alert level. For every poke that fails this is raised by 1. When it reaches 5 the MC is replaced with a new one. (effectively killing any master_controller.process() and starting a new one)
 

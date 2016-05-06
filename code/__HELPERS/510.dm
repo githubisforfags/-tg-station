@@ -6,64 +6,14 @@
 //		defines/misc.dm
 //		unsorted.dm (bottom, in stoplag())
 #if DM_VERSION < 510
-#define BYGEX "code/__HELPERS/bygex"
-/proc/replacetext(text, replace, replacement)
-	if(istype(replace, /regex))
-		var/regex/R = replace
-		return R.Replace(text, replacement)
-	else
-		return call(BYGEX, "regex_replaceallliteral")(text, replace, replacement)
 
-/proc/replacetextEx(text, replace, replacement)
-	return call(BYGEX, "regEx_replaceallliteral")(text, replace, replacement)
 
-/proc/regex(pattern, flags)
-	return new /regex(pattern, flags)
+/proc/replacetext(text, find, replacement)
+	return jointext(splittext(text, find), replacement)
 
-/regex
-	var/pattern
-	var/list/flags
-	var/list/group
+/proc/replacetextEx(text, find, replacement)
+	return jointext(splittext(text, find), replacement)
 
-/regex/New(pattern, flags)
-	src.pattern = pattern
-	src.flags = splittext(flags, "")
-	group = list()
-
-/regex/proc/Find(text) // Does not support Start/End.
-	var/method
-	if("i" in flags)
-		method = "regex_find"
-	else
-		method = "regEx_find"
-
-	var/results = call(BYGEX, method)(text, pattern)
-	var/list/L = params2list(results)
-	var/list/M
-	var/i
-	var/j
-
-	for(i in L)
-		M = L[i]
-		for(j = 2, j <= M.len, j += 2)
-			var/pos = text2num(M[j-1])
-			var/len = text2num(M[j])
-			group += copytext(text, pos, pos + len)
-
-/regex/proc/Replace(text, replacement)
-	var/method
-	if("g" in flags)
-		if("i" in flags)
-			method = "regex_replaceall"
-		else
-			method = "regEx_replaceall"
-	else
-		if("i" in flags)
-			method = "regex_replace"
-		else
-			method = "regEx_replace"
-	return call(BYGEX, method)(text, pattern, replacement)
-#undef BYGEX
 
 // Formerly list2text
 /proc/jointext(list/ls, sep)
