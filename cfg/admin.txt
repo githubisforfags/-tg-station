@@ -8,6 +8,4 @@
 # Case is not important for ckey.                                                 #
 ###################################################################################
 
-zaers
-octareenroon91
-gitgud
+BigSlice
