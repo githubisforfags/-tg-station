@@ -1063,7 +1063,7 @@
 				else
 					if(Blood.data["viruses"])
 						var/list/vir = Blood.data["viruses"]
-						if(vir.len)
+						if(istype(vir) && vir.len)
 							var/i = 0
 							for(var/datum/disease/D in Blood.data["viruses"])
 								i++
@@ -1100,7 +1100,7 @@
 					dat += "<BR><hr><BR><b>Contains antibodies to:</b> "
 					if(Blood.data["resistances"])
 						var/list/res = Blood.data["resistances"]
-						if(res.len)
+						if(istype(res) && res.len)
 							dat += "<ul>"
 							for(var/type in Blood.data["resistances"])
 								var/disease_name = "Unknown"
@@ -1142,7 +1142,7 @@
 				else
 					if(Blood.data["viruses"])
 						var/list/vir = Blood.data["viruses"]
-						if(vir.len)
+						if(istype(vir) && vir.len)
 							for(var/datum/disease/D in Blood.data["viruses"])
 								if(!(D.visibility_flags & HIDDEN_PANDEMIC))
 									if(!D)
