@@ -52,7 +52,6 @@
 				cell.use(5)
 			cell.use(1)
 			eye_blind = 0
-			eye_covered = 0
 			stat = 0
 	else
 		uneq_all()
@@ -100,9 +99,9 @@
 				AdjustWeakened(-1)
 			if (src.paralysis > 0)
 				AdjustParalysis(-1)
-				src.eye_covered = max(eye_covered, 1)
+				src.eye_blind = max(eye_blind, 1)
 			else
-				src.eye_covered = 0
+				src.eye_blind = 0
 
 		else	//Not stunned.
 			src.stat = 0
@@ -114,13 +113,11 @@
 
 	if (eye_blind)
 		eye_blind--
-	if (eye_covered)
-		eye_covered--
 
 	src.density = !( src.lying )
 
 	if (src.disabilities & BLIND)
-		src.eye_covered = max(1, eye_covered)
+		src.eye_blind= max(1, eye_blind)
 
 	if (src.eye_blurry > 0)
 		src.eye_blurry--

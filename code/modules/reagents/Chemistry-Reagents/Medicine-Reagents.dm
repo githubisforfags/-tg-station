@@ -272,7 +272,6 @@
 	M.disabilities = 0
 	M.eye_blurry = 0
 	M.eye_blind = 0
-	M.eye_covered = 0
 	M.SetWeakened(0)
 	M.SetStunned(0)
 	M.SetParalysis(0)
@@ -371,7 +370,6 @@
 /datum/reagent/medicine/imidazoline/on_mob_life(var/mob/living/M as mob)
 	M.eye_blurry = max(M.eye_blurry-5 , 0)
 	M.eye_blind = max(M.eye_blind-5 , 0)
-	M.eye_covered = max(M.eye_covered-5 , 0)
 	M.disabilities &= ~NEARSIGHT
 	M.eye_stat = max(M.eye_stat-5, 0)
 	..()
