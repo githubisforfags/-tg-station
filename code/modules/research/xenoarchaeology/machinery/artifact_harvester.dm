@@ -72,15 +72,24 @@
 
 /obj/machinery/artifact_harvester/process()
 	if(stat & (NOPOWER|BROKEN))
+		if(cur_artifact)
+			cur_artifact = null
 		return
 	if(!cur_artifact)
+		return
+	if(!owned_scanner)
+		cur_artifact = null
+		return
+	if(cur_artifact.loc != owned_scanner.loc)
+		cur_artifact = null
 		return
 
 	if(harvesting > 0)
 		//chargerate is chargemaxlevel/effectrange
 		//creates variable charging rates, with the minimum being 0.5
 		inserted_battery.stored_charge += chargerate
-		cur_artifact.being_used = 1
+		cur_artifact.user = src
+		cur_artifact.anchored = 1
 
 		//check if we've finished
 		if(inserted_battery.stored_charge >= inserted_battery.capacity)
@@ -88,7 +97,7 @@
 			use_power = 1
 			harvesting = 0
 			cur_artifact.anchored = 0
-			cur_artifact.being_used = 0
+			cur_artifact.user = null
 			src.visible_message("<b>[name]</b> states, \"Battery is full.\"")
 			icon_state = "incubator"
 
@@ -113,6 +122,7 @@
 			use_power = 1
 			inserted_battery.stored_charge = 0
 			harvesting = 0
+			cur_artifact.user = null
 			cur_artifact.anchored = 0
 			if(inserted_battery.battery_effect && inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate()
@@ -120,7 +130,7 @@
 			icon_state = "incubator"
 	if(!harvesting && cur_artifact)
 		cur_artifact.anchored = 0
-		cur_artifact.being_used = 0
+		cur_artifact.user = null
 
 /obj/machinery/artifact_harvester/Topic(href, href_list)
 
@@ -176,7 +186,7 @@
 					harvesting = 1
 					use_power = 2
 					cur_artifact.anchored = 1
-					cur_artifact.being_used = 1
+					cur_artifact.user = src
 					icon_state = "incubator_on"
 					var/message = "<b>[src]</b> states, \"Beginning artifact energy harvesting.\""
 					src.visible_message(message)
@@ -214,7 +224,7 @@
 				inserted_battery.battery_effect.ToggleActivate()
 			harvesting = 0
 			cur_artifact.anchored = 0
-			cur_artifact.being_used = 0
+			cur_artifact.user = null
 			src.visible_message("<b>[name]</b> states, \"Activity interrupted.\"")
 			icon_state = "incubator"
 
@@ -222,6 +232,7 @@
 		src.inserted_battery.loc = src.loc
 		src.inserted_battery = null
 		cur_artifact.anchored = 0
+		cur_artifact.user = null
 
 	if (href_list["drainbattery"])
 		if(inserted_battery)
@@ -234,6 +245,7 @@
 					harvesting = -1
 					use_power = 2
 					cur_artifact.anchored = 0
+					cur_artifact.user = null
 					icon_state = "incubator_on"
 					var/message = "<b>[src]</b> states, \"Warning, battery charge dump commencing.\""
 					src.visible_message(message)

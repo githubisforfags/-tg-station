@@ -67,7 +67,7 @@ var/list/valid_secondary_effect_types = list(\
 	pressure_resistance = 50
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
-	var/being_used = 0
+	var/obj/machinery/user
 
 /obj/machinery/artifact/New()
 	..()
@@ -119,6 +119,26 @@ var/list/valid_secondary_effect_types = list(\
 	var/turf/L = loc
 	if(isnull(L) || !istype(L)) 	// We're inside a container or on null turf, either way stop processing effects
 		return
+
+	if(user)
+		if(istype(user, /obj/machinery/artifact_analyser))
+			var/obj/machinery/artifact_analyser/A = user
+			if(A.scanned_object != src || !A.owned_scanner)
+				anchored = 0
+				user = null
+			if(A.owned_scanner.loc != loc)
+				anchored = 0
+				A.scanned_object = null
+				user = null
+		if(istype(user, /obj/machinery/artifact_harvester))
+			var/obj/machinery/artifact_harvester/H = user
+			if(H.cur_artifact != src || !H.owned_scanner)
+				anchored = 0
+				user = null
+			if(H.owned_scanner.loc != loc)
+				anchored = 0
+				H.cur_artifact = null
+				user = null
 
 	if(my_effect)
 		my_effect.process()
