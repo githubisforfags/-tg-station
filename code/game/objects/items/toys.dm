@@ -15,7 +15,6 @@
  *		Carp plushie
  *		Foam armblade
  *		Toy big red button
- *		Rubber Ducks
  */
 
 
@@ -1090,7 +1089,7 @@
 
 /obj/item/toy/minimeteor
 	name = "\improper Mini-Meteor"
-	desc = "Relive the excitement of a meteor shower! SweetMeat-eor. Co is not responsible for any injuries, headaches or hearing loss caused by Mini-Meteor"
+	desc = "Relive the excitement of a meteor shower! SweetMeat-eor. Co is not responsible for any injuries, headaches or hearing loss caused by Mini-Meteor©"
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "minimeteor"
 	w_class = 2.0
@@ -1157,95 +1156,9 @@
 	user.drop_item()
 	src.throw_at(target, throw_range, throw_speed)
 
-
-
 /obj/item/toy/lifebuoy
 	name = "Lifebuoy"
 	desc = "If you drown in space, you should feel ashamed."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "lifebuoy"
 	w_class = 2.0
-
-/obj/item/toy/ducks
-	name = "Rubber Duck"
-	desc = "On dark nights, the ducks gather and unleash hell upon the station."
-	icon = 'icons/obj/ducks.dmi'
-	icon_state = "1"
-	var/number_of_ducks = 1
-	var/tied = 0
-	w_class = 1.0
-	var/cooldown = 0
-
-/obj/item/toy/ducks/attack_self(mob/user)
-	if (cooldown < world.time)
-		cooldown = (world.time + 100) // Sets cooldown at 10 seconds
-		if(tied)
-			var/obj/item/stack/cable_coil/C = new /obj/item/stack/cable_coil(get_turf(src))
-			C.amount = 1
-			tied = 0
-			spawn(30) //countdown so you can throw it to a safe distance
-				if(number_of_ducks<4)
-					playsound(loc, 'sound/items/ducks/Annoying_duck.ogg', number_of_ducks * 30, 0) //standard one
-				else
-					playsound(loc, 'sound/items/ducks/DuckArmy.ogg', (number_of_ducks-3)*50, 0) //horrible one. Volume is either 50 or 100 for 5 ducks
-				icon_state = "[number_of_ducks]"
-				for(var/mob/living/M in viewers(7,loc))
-					if(number_of_ducks<4)
-						M << "<span class='warning'><b>[src]</b> screams as if in pain!</span>"
-					else
-						M << "<span class='danger'><b>[src]</b> wails and unleashes a hellish sound!</span>"
-					if(!M.check_ear_prot())
-						M.setEarDamage(M.ear_damage + (number_of_ducks*2), max(M.ear_deaf,20))
-
-		else
-			playsound(loc, 'sound/items/ducks/Annoying_duck.ogg', number_of_ducks * 30, 0) //standard one
-			for(var/mob/living/M in viewers(7,loc))
-				if(number_of_ducks<4)
-					M << "<span class='warning'><b>[src]</b> screams as if in pain!</span>"
-				else
-					M << "<span class='danger'><b>[src]</b> wails and unleashes a hellish sound!</span>"
-
-				if(!M.check_ear_prot())
-					M.setEarDamage(M.ear_damage + (number_of_ducks*2), max(M.ear_deaf,20))
-
-/obj/item/toy/ducks/attackby(obj/item/C, mob/living/user, params)
-	if(istype(C,/obj/item/stack/cable_coil))
-		if(!tied)
-			var/obj/item/stack/cable_coil/coil = C
-			if (coil.use(1))
-				tied = 1
-				icon_state = "[number_of_ducks]-tied"
-				user << "<span class='notice'>You tie the stack of ducks.</span>"
-			else
-				user << "<span class='notice'>You don't have enough wires!</span>"
-		else
-			user << "<span class='notice'>The stack of ducks is already tied!</span>"
-
-	else if(istype(C,/obj/item/toy/ducks))
-		var/obj/item/toy/ducks/D = C
-		if(number_of_ducks<4)
-			if(!tied)
-				var/ducks_transfer = min(D.number_of_ducks,5-number_of_ducks)
-				number_of_ducks += ducks_transfer
-				icon_state = "[number_of_ducks]"
-				D.number_of_ducks -= ducks_transfer
-				if(D.number_of_ducks <1)
-					qdel(D) //stop duck breeding
-				user << "<span class='notice'>You add another duck to the stack.</span>"
-			else
-				user << "<span class='notice'>The stack of ducks is tied!</span>"
-		else
-			user << "<span class='notice'>The stack of ducks already has too many ducks!</span>"
-
-/obj/item/toy/ducks/attack_hand(mob/user as mob)
-	if (ismob(loc))
-		if(tied)
-			attack_self(user)
-			return
-		if(number_of_ducks >1)
-			var/mob/M = loc
-			M.put_in_hands(new /obj/item/toy/ducks)
-			number_of_ducks -= 1
-			icon_state = "[number_of_ducks]"
-			usr << "<span class='notice'>You remove one duck from the stack.</span>"
-	..()
