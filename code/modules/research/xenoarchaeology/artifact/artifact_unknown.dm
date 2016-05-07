@@ -184,7 +184,7 @@ var/list/valid_secondary_effect_types = list(\
 	else
 		if(my_effect.trigger == TRIGGER_COLD && my_effect.activated)
 			my_effect.ToggleActivate()
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_COLD && !secondary_effect.activated)
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_COLD && secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
 	//HEAT ACTIVATION
@@ -196,7 +196,7 @@ var/list/valid_secondary_effect_types = list(\
 	else
 		if(my_effect.trigger == TRIGGER_HEAT && my_effect.activated)
 			my_effect.ToggleActivate()
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_HEAT && !secondary_effect.activated)
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_HEAT && secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
 	//PLASMA GAS ACTIVATION
@@ -208,7 +208,7 @@ var/list/valid_secondary_effect_types = list(\
 	else
 		if(my_effect.trigger == TRIGGER_PLASMA && my_effect.activated)
 			my_effect.ToggleActivate()
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_PLASMA && !secondary_effect.activated)
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_PLASMA && secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
 	//OXYGEN GAS ACTIVATION
@@ -220,7 +220,7 @@ var/list/valid_secondary_effect_types = list(\
 	else
 		if(my_effect.trigger == TRIGGER_OXY && my_effect.activated)
 			my_effect.ToggleActivate()
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_OXY && !secondary_effect.activated)
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_OXY && secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
 	//CO2 GAS ACTIVATION
@@ -232,7 +232,7 @@ var/list/valid_secondary_effect_types = list(\
 	else
 		if(my_effect.trigger == TRIGGER_CO2 && my_effect.activated)
 			my_effect.ToggleActivate()
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_CO2 && !secondary_effect.activated)
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_CO2 && secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
 	//NITROGEN GAS ACTIVATION
@@ -244,7 +244,7 @@ var/list/valid_secondary_effect_types = list(\
 	else
 		if(my_effect.trigger == TRIGGER_NITRO && my_effect.activated)
 			my_effect.ToggleActivate()
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_NITRO && !secondary_effect.activated)
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_NITRO && secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
 /obj/machinery/artifact/attack_hand(var/mob/user as mob)

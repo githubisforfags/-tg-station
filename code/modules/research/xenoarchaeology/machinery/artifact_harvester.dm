@@ -104,8 +104,8 @@
 	else if(harvesting < 0)
 		//dump some charge
 		inserted_battery.stored_charge -= 2
-		cur_artifact.being_used = 1
-
+		cur_artifact.user = src
+		cur_artifact.anchored = 1
 		//do the effect
 		if(inserted_battery.battery_effect)
 			inserted_battery.battery_effect.process()
@@ -160,7 +160,7 @@
 			var/message = "<b>[src]</b> states, \"Cannot harvest, unable to analyse.\""
 			src.visible_message(message)
 			return
-		if(analysed.being_used)
+		if(analysed.user)
 			var/message = "<b>[src]</b> states, \"Cannot harvest. Too much interference.\""
 			src.visible_message(message)
 		else if(articount == 1 && !mundane)
