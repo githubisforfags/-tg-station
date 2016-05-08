@@ -51,7 +51,13 @@ var/datum/subsystem/events/SSevent
 
 //decides which world.time we should select another random event at.
 /datum/subsystem/events/proc/reschedule()
-	scheduled = world.time + rand(frequency_lower, max(frequency_lower,frequency_upper))
+	var/coeff = getPopCoefficient(clients.len)
+	var/adjusted_lower_freq = frequency_lower * coeff
+	var/adjusted_upper_freq = frequency_upper * coeff
+	scheduled = world.time + rand(adjusted_lower_freq, max(adjusted_lower_freq, adjusted_upper_freq))
+
+/datum/subsystem/events/proc/getPopCoefficient(n)
+	return max(1, 1 + 1 - log(n, 10)) //Does not go below 1
 
 //selects a random event based on whether it can occur and it's 'weight'(probability)
 /datum/subsystem/events/proc/spawnEvent()
@@ -64,6 +70,8 @@ var/datum/subsystem/events/SSevent
 	for(var/datum/round_event_control/E in control)
 		if(E.occurrences >= E.max_occurrences)	continue
 		if(E.earliest_start >= world.time)		continue
+		if(E.max_pop &&  clients.len > E.max_pop) continue
+		if(E.min_pop &&  clients.len < E.min_pop) continue
 		if(E.holidayID)
 			if(!holidays || !holidays[E.holidayID])			continue
 		if(E.weight < 0)						//for round-start events etc.
