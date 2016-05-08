@@ -146,6 +146,14 @@ Calculate the longest number of ticks the MC can wait between each cycle without
 		if(T.lighting_test_overlays())
 			T.lighting_fix_overlays()
 
+	for(var/turf/simulated/wall/W in tunnel_walls)
+		set background = TRUE
+		if(!W)
+			continue
+		if(W.smooth)
+			smooth_icon(W)
+			W.icon_state = ""
+
 
 /datum/controller/game_controller/proc/Recover()
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"

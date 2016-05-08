@@ -410,6 +410,9 @@
 		if(istype(S, /turf/space) || istype(S.loc, /area/space/mine/explored))
 			sanity = 0
 			break
+		var/turf/simulated/wall/W = S
+		if(istype(W))
+			tunnel_walls += W
 	if(!sanity)
 		return
 

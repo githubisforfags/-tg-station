@@ -19,3 +19,4 @@ var/global/list/turfs = list()						//all the turfs
 var/global/list/areas = list()						//all the areas
 
 var/global/list/mining_turfs = list()				//all mining minerals walls, used by some lighting code
+var/global/list/tunnel_walls = list()				//all simulated walls affected by tunnel-making in the asteroid
