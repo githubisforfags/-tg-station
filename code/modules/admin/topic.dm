@@ -2208,6 +2208,16 @@
 				feedback_add_details("admin_secrets_fun_used","OO")
 				usr.client.only_one()
 //				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
+
+/*
+			if("onlyme")
+				if(!check_rights(R_FUN))
+					return
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","OM")
+				only_me()
+*/
+
 		if(E)
 			E.processing = 0
 			if(E.announceWhen>0)
