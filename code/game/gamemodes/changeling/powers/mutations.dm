@@ -79,6 +79,7 @@
 
 		changeling.geneticdamage += genetic_damage //Casting off a space suit leaves you weak for a few seconds.
 		changeling.chem_recharge_slowdown -= recharge_slowdown
+		changeling.chem_recharge_slowdown = max(0, changeling.chem_recharge_slowdown)
 		return
 	..(H, target)
 
