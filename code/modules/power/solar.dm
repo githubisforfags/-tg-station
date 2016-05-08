@@ -1,7 +1,5 @@
 #define SOLAR_MAX_DIST 40
 #define SOLARGENRATE 1500
-#define DIRTRATE 5      //Probability that a solar panel will advance it's "dirt level", both values are multiplied.
-#define DIRTLIMIT 99       //Maximum Dirt level. Percentage is calculated as 1-(current_dirt/(DIRTLIMIT+1)) so it's never 100% obscured
 
 /obj/machinery/power/solar
 	name = "solar panel"
@@ -17,13 +15,10 @@
 	var/health = 10
 	var/obscured = 0
 	var/sunfrac = 0
-	var/sgen = 0 //power produced
 	var/adir = SOUTH // actual dir
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
-	var/current_dirt = 0 //current dirtyness of the panel
 	var/obj/machinery/power/solar_control/control = null
-	var/maintenance_mode = 0 //if set to 1, they will rotate and clean themselves
 
 /obj/machinery/power/solar/New(var/turf/loc, var/obj/item/solar_assembly/S)
 	..(loc)
@@ -62,22 +57,16 @@
 
 /obj/machinery/power/solar/attackby(obj/item/weapon/W, mob/user, params)
 
-	if(istype(W, /obj/item/device/multitool))
-		user << "<span class='notice'>The [W.name] detects that [sgen]W were recently produced.</span>"
-		user << "<span class='notice'>The panel is [current_dirt]% obstructed by dirt and debris.</span>"
-		return 1
-
 	if(istype(W, /obj/item/weapon/crowbar))
-		playsound(src.loc, 'sound/machines/click.ogg', 20, 1)
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
 		if(do_after(user, 50, target = src))
 			var/obj/item/solar_assembly/S = locate() in src
 			if(S)
 				S.loc = src.loc
 				S.give_glass()
-			playsound(src.loc, 'sound/items/Deconstruct.ogg', 20, 1)
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='notice'>[user] takes the glass off the solar panel.</span>")
-			current_dirt = 0
 			qdel(src)
 		return
 	else if (W)
@@ -111,10 +100,7 @@
 	if(stat & BROKEN)
 		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = FLY_LAYER)
 	else
-		if(current_dirt < DIRTLIMIT /2)
-			overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
-		else
-			overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-d", layer = FLY_LAYER)
+		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
 		src.dir = angle2dir(adir)
 	return
 
@@ -135,37 +121,19 @@
 	//isn't the power recieved from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 	//The above isn't correct. This is because it's an area, not a single axis, so it's squared //Koriath
 
-	sunfrac = sunfrac * (1-(current_dirt/(DIRTLIMIT+1)*(current_dirt/(DIRTLIMIT+1)))) //quadradtic progression so low levels of dirt barely affect it, but it grows quickly after a while.
-	//this will make it produce less when it's dirtier
 
 /obj/machinery/power/solar/process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
 	if(stat & BROKEN)
 		return
 	if(!control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
 		return
-	if(prob(DIRTRATE) && current_dirt <= DIRTLIMIT)
-		current_dirt += 1
-		if(current_dirt > DIRTLIMIT /2)
-			update_icon()
-	//if(current_dirt >= DIRTLIMIT) //comented out for now. Renable if needed.
-	//	stat |= BROKEN
-	if(maintenance_mode && current_dirt>0)
-		adir += 60 //should take 6 ticks = 10 seconds to fully rotate.
-		if(adir > 360)
-			adir -= 360
-		update_icon()
-		current_dirt -= 2 //it takes a maximum of 2 minutes to clean a compeltly dirt solar panel.
-		return //maintenance mode means no power is produced
 
-	if(maintenance_mode && current_dirt<=0)
-		current_dirt = max(current_dirt,0) //so we don't get negative dirt
-		maintenance_mode = 0
 
 	if(powernet)
 		if(powernet == control.powernet)//check if the panel is still connected to the computer
 			if(obscured) //get no light from the sun, so don't generate power
 				return
-			sgen = SOLARGENRATE * sunfrac
+			var/sgen = SOLARGENRATE * sunfrac
 			add_avail(sgen)
 			control.gen += sgen
 		else //if we're no longer on the same powernet, remove from control computer
@@ -474,10 +442,6 @@
 /obj/machinery/power/solar_control/Topic(href, href_list)
 	if(..())
 		return
-	if(href_list["auto_clean"])
-		if(connected_tracker)
-			for(var/obj/machinery/power/solar/S in connected_panels)
-				S.maintenance_mode = 1 //beings maintenance mode on the panels
 	if(href_list["rate_control"])
 		if(href_list["cdir"])
 			src.cdir = dd_range(0,359,(360+src.cdir+text2num(href_list["cdir"]))%360)
