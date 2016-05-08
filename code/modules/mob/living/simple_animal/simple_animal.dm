@@ -518,3 +518,10 @@
 		return
 	else
 		..()
+
+
+/mob/living/simple_animal/update_canmove()
+	canmove = ..()
+	density = initial(density) & !lying // 0 density if it's not dense or if it's dead
+	return canmove
+
