@@ -124,7 +124,7 @@ proc/process_ghost_teleport_locs()
 	name = "Shuttle"
 	requires_power = 0
 	luminosity = 1
-	lighting_use_dynamic = 0
+	lighting_use_dynamic = 1
 	has_gravity = 1
 	valid_territory = 0
 	icon_state = "shuttle"
