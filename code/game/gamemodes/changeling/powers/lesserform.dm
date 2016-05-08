@@ -12,6 +12,8 @@
 		return 0
 	user << "<span class='warning'>Our genes cry out!</span>"
 
+	var/datum/changeling/changeling = user.mind.changeling
+	changeling.chem_recharge_slowdown = 0 //Monkeys will always regen their chemicals
 	user.monkeyize(TR_KEEPITEMS | TR_KEEPIMPLANTS | TR_KEEPORGANS | TR_KEEPDAMAGE | TR_KEEPSE | TR_KEEPSRC)
 
 	// Human-form power now handled in monkeyize()
