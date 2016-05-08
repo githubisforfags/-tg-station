@@ -32,6 +32,10 @@ proc/spawn_room(var/atom/start_loc, var/x_size, var/y_size, var/list/walltypes, 
 
 			A.contents += T
 
+	for(var/turf/simulated/wall/W in room_turfs["walls"])
+		if(W.smooth)
+			smooth_icon(W)
+			W.icon_state = ""
 	return room_turfs
 
 //////////////
@@ -183,10 +187,6 @@ proc/make_mining_asteroid_secret()
 
 	if(room)//time to fill it with stuff
 		var/list/emptyturfs = room["floors"]
-		for(var/turf/simulated/floor/A in emptyturfs) //remove pls doesn't fix problem
-			if(istype(A))
-				spawn(2)
-					A.fullUpdateMineralOverlays()
 		T = pick(emptyturfs)
 		if(T)
 			new /obj/effect/glowshroom/single(T) //Just to make it a little more visible
