@@ -26,6 +26,7 @@
 	user << "<span class='notice'>We transform our appearance.</span>"
 	user.dna = chosen_dna
 
+	changeling.chem_recharge_slowdown = 0
 	user.humanize((TR_KEEPITEMS | TR_KEEPIMPLANTS | TR_KEEPORGANS | TR_KEEPDAMAGE | TR_KEEPSRC),chosen_dna.real_name)
 
 	changeling.purchasedpowers -= src
