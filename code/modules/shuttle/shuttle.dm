@@ -431,7 +431,7 @@
 				continue
 			T.update_overlay()
 			T.reconsider_lights()
-			if(!T.lighting_overlay)
+			if(!T.lighting_overlay && !istype(T, /turf/space))
 				T.lighting_fix_overlays()
 
 
