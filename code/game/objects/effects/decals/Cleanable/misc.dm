@@ -159,11 +159,3 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "ash"
 	anchored = 1
-
-/obj/effect/decal/cleanable/lingseek_gibs
-	name = "bloody gibs"
-	desc = "Some of the entrails seem to be smiling."
-	gender = PLURAL
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "lingseek_gibs"
-	anchored = 1

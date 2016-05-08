@@ -16,7 +16,7 @@ var/list/blob_nodes = list()
 	recommended_enemies = 1
 
 	round_ends_with_antag_death = 1
-	restricted_jobs = list("Cyborg", "AI", "MoMMI", "Mr. Meeseeks")
+	restricted_jobs = list("Cyborg", "AI", "MoMMI")
 
 	var/declared = 0
 	var/burst = 0

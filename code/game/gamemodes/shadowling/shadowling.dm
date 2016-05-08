@@ -71,7 +71,7 @@ Made by Xhuis
 	required_players = 15
 	required_enemies = 2
 	recommended_enemies = 2
-	restricted_jobs = list("AI", "Cyborg", "MoMMI", "Mr. Meeseeks")
+	restricted_jobs = list("AI", "Cyborg", "MoMMI")
 	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel")
 
 /datum/game_mode/shadowling/announce()
