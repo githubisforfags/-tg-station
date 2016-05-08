@@ -57,6 +57,7 @@ var/datum/subsystem/events/SSevent
 	scheduled = world.time + rand(adjusted_lower_freq, max(adjusted_lower_freq, adjusted_upper_freq))
 
 /datum/subsystem/events/proc/getPopCoefficient(n)
+	if(n <= 0) return 2
 	return max(1, 1 + 1 - log(10, n)) //Does not go below 1
 
 //selects a random event based on whether it can occur and it's 'weight'(probability)
