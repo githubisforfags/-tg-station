@@ -162,6 +162,8 @@
 	if(scrubbing)
 		if((environment.toxins>0) || (environment.carbon_dioxide>0) || (environment.trace_gases.len>0))
 			var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles()
+			if(air_contents.return_pressure() >= 50 * ONE_ATMOSPHERE) //pressure inside is too strong, can't scrub any more
+				return
 
 			//Take a gas sample
 			var/datum/gas_mixture/removed = tile.remove_air(transfer_moles)
@@ -195,7 +197,7 @@
 			tile.air_update_turf()
 
 	else //Just siphoning all air
-		if (air_contents.return_pressure()>=50*ONE_ATMOSPHERE)
+		if (air_contents.return_pressure() >= 50 * ONE_ATMOSPHERE)
 			return
 
 		var/transfer_moles = environment.total_moles()*(volume_rate/environment.volume)
