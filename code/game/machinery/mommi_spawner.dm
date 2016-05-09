@@ -124,7 +124,7 @@
 		return TRUE
 
 /obj/machinery/mommi_spawner/proc/makeMoMMI(var/mob/user)
-	if(!user || !istype(user.mind.current, /mob/dead) || !istype(user.mind.current, /mob/living/carbon/brain))
+	if(!user || user.mind && (!istype(user.mind.current, /mob/dead) && !istype(user.mind.current, /mob/living/carbon/brain)))
 		metal=0
 		building=0
 		update_icon()
