@@ -10,6 +10,7 @@
 	righthand_file = 'icons/mob/inhands/clothing_righthand.dmi'
 	var/alt_desc = null
 	var/gang //Is this a gang outfit?
+	var/scan_reagents = 0
 
 //Ears: currently only used for headsets and earmuffs
 /obj/item/clothing/ears
@@ -38,6 +39,7 @@
 	var/vision_flags = 0
 	var/darkness_view = 2//Base human is 2
 	var/invis_view = SEE_INVISIBLE_LIVING
+	var/invis_override = 0
 	var/emagged = 0
 	var/list/icon/current = list() //the current hud icons
 	strip_delay = 20

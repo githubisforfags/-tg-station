@@ -734,10 +734,10 @@ var/list/slot_equipment_priority = list( \
 			stat("CPU:","[world.cpu]")
 			stat("Instances:","[world.contents.len]")
 
-			if(master_controller)
-				stat("MasterController:","[round(master_controller.cost,0.001)]ds (Interval:[master_controller.processing_interval] | Iteration:[master_controller.iteration])")
-				stat("Subsystem cost per second:","[round(master_controller.SSCostPerSecond,0.001)]ds")
-				for(var/datum/subsystem/SS in master_controller.subsystems)
+			if(Master)
+				stat("MasterController:","[round(Master.subsystem_cost,0.001)]ds (Interval:[Master.processing] | Iteration:[Master.iteration])")
+				stat("Subsystem cost per second:","[round(Master.subsystem_cost,0.001)]ds")
+				for(var/datum/subsystem/SS in Master.subsystems)
 					if(SS.can_fire)
 						SS.stat_entry()
 			else
@@ -978,3 +978,23 @@ var/list/slot_equipment_priority = list( \
 		spell.action.background_icon_state = spell.action_background_icon_state
 	if(isliving(src))
 		spell.action.Grant(src)
+		spell.action.Grant(src)
+
+/mob/proc/can_see_reagents()
+	if(stat == DEAD) //Ghosts and such can always see reagents
+		return 1
+	if(has_unlimited_silicon_privilege) //Silicons can automatically view reagents
+		return 1
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		if(H.head && istype(H.head, /obj/item/clothing))
+			var/obj/item/clothing/CL = H.head
+			if(CL.scan_reagents)
+				return 1
+		if(H.wear_mask && H.wear_mask.scan_reagents)
+			return 1
+		if(H.glasses && istype(H.glasses, /obj/item/clothing))
+			var/obj/item/clothing/CL = H.glasses
+			if(CL.scan_reagents)
+				return 1
+	return 0
