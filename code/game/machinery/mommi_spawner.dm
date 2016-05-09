@@ -74,6 +74,7 @@
 		update_icon()
 		spawn(50)
 			makeMoMMI(user)
+		update_icon()
 
 /obj/machinery/mommi_spawner/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O,/obj/item/device/mmi))
@@ -119,18 +120,27 @@
 		mmi.loc=src
 		spawn(50)
 			makeMoMMI(mmi.brainmob)
+		update_icon()
 		return TRUE
 
 /obj/machinery/mommi_spawner/proc/makeMoMMI(var/mob/user)
+	if(!user || !istype(user.mind.current, /mob/dead) || !istype(user.mind.current, /mob/living/carbon/brain))
+		metal=0
+		building=0
+		update_icon()
+		return
 	var/mob/living/silicon/robot/mommi/M = new /mob/living/silicon/robot/mommi(get_turf(loc))
-	if(!M)	return
+	if(!M)
+		metal=0
+		building=0
+		update_icon()
+		return
 
 	M.generated = 1
 	M.invisibility = 0
 	//M.custom_name = created_name
 
-
-	if(user.mind)		//TODO
+	if(user.mind)
 		user.mind.transfer_to(M)
 		M.key = user.key
 		if(M.mind.assigned_role == "MoMMI")
@@ -141,12 +151,6 @@
 		M.key = user.key
 
 	M.job = "MoMMI"
-/* Now generic
-	if(M.z==4) // Derelict Z-level?
-		M.add_ion_law("The Derelict is your station.  Do not leave the Derelict.")
-		M.killswitch = 1
-		M.allowed_z = 4
-*/
 
 	M.initialize_killswitch()
 
