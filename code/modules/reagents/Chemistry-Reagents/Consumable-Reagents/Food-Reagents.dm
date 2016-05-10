@@ -15,7 +15,8 @@
 /datum/reagent/consumable/on_mob_life(var/mob/living/M as mob)
 	current_cycle++
 	M.nutrition += nutriment_factor
-	holder.remove_reagent(src.id, metabolization_rate)
+	if(holder)
+		holder.remove_reagent(src.id, metabolization_rate)
 
 /datum/reagent/consumable/nutriment
 	name = "Nutriment"
