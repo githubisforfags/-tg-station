@@ -121,7 +121,7 @@ var/datum/subsystem/air/SSair
 	while(processing.len)
 		var/turf/simulated/T = processing[1]
 		processing.Cut(1, 2)
-		if (T)
+		if (istype(T))
 			T.process_cell(fire_count)
 		if (MC_TICK_CHECK)
 			return

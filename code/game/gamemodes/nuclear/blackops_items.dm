@@ -32,6 +32,8 @@ var/list/total_extraction_beacons = list()
 	if(!beacon)
 		user << "[src] is not linked to a beacon, and cannot be used."
 		return
+	if(!istype(A))
+		return
 	if(!flag)
 		return
 	else
