@@ -412,13 +412,13 @@
 	//Eyes
 	if(stat)
 		eye_blind = max(eye_blind, 5)
-	if(!(disabilities & BLIND))	//blindness from disability or unconsciousness doesn't get better on its own
+	if(!(disabilities & BLIND) && exists("eyes"))	//blindness from disability or unconsciousness doesn't get better on its own
 		if(eye_blind)			//blindness, heals slowly over time
 			eye_blind = max(eye_blind-1,0)
 		else if(eye_blurry)			//blurry eyes heal slowly
 			eye_blurry = max(eye_blurry-1, 0)
 	else
-		eye_blind = max(eye_blind,1) //Force blindness if user is actually blind
+		eye_blind = max(eye_blind,5) //Force blindness if user is actually blind
 	//Ears
 	if(disabilities & DEAF)		//disabled-deaf, doesn't get better on its own
 		setEarDamage(-1, max(ear_deaf, 1))
