@@ -194,7 +194,6 @@
  * Text modification
  */
 // See bygex.dm
-#if DM_VERSION < 510
 #ifndef USE_BYGEX
 /proc/replacetext(text, find, replacement)
 	return list2text(text2list(text, find), replacement)
@@ -202,7 +201,6 @@
 /proc/replacetextEx(text, find, replacement)
 	return list2text(text2listEx(text, find), replacement)
 #endif
-#endif\
 
 //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
