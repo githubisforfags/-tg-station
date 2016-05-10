@@ -33,11 +33,7 @@
 	verbs += /mob/living/proc/mob_sleep
 	verbs += /mob/living/proc/lay_down
 
-	internal_organs += new /obj/item/organ/internal/brain/alien
-	internal_organs += new /obj/item/organ/internal/alien/hivenode
-	for(var/obj/item/organ/internal/I in internal_organs)
-		I.Insert(src)
-	AddAbility(new/obj/effect/proc_holder/alien/nightvisiontoggle(null))
+	//Organs now handled by castes
 
 	..()
 
@@ -162,8 +158,8 @@ Des: Gives the client of the alien an image on each infected mob.
 /mob/living/carbon/alien/proc/AddInfectionImages()
 	if (client)
 		for (var/mob/living/C in mob_list)
-			if(C.status_flags & XENO_HOST)
-				var/obj/item/organ/internal/body_egg/alien_embryo/A = getorgan(/obj/item/organ/internal/body_egg/alien_embryo)
+			if(C && C.status_flags & XENO_HOST)
+				var/obj/item/organ/internal/body_egg/alien_embryo/A = C.get_organ("egg")
 				var/I = image('icons/mob/alien.dmi', loc = C, icon_state = "infected[A.stage]")
 				client.images += I
 	return

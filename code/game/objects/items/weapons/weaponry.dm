@@ -73,6 +73,11 @@
 	user.visible_message("<span class='suicide'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>")
 	return(BRUTELOSS)
 
+/obj/item/weapon/claymore/vorpal
+	name = "Vorpal Blade"
+	desc = "One, two! One, two! And through and through<br>The vorpal blade went snicker-snack!<br>He left it dead, and with its head<br>He went galumphing back."
+	dismember_class = new /datum/dismember_class/max/
+
 /obj/item/weapon/katana
 	name = "katana"
 	desc = "Woefully underpowered in D20"
@@ -86,6 +91,8 @@
 	w_class = 3
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+
+	dismember_class = new /datum/dismember_class/medium
 
 /obj/item/weapon/katana/cursed
 	slot_flags = null

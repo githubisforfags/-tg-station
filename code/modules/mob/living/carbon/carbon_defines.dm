@@ -3,11 +3,12 @@
 	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD)
 	has_limbs = 1
 	var/list/stomach_contents	= list()
-	var/list/internal_organs	= list()	//List of /obj/item/organ/internal in the mob. They don't go in the contents for some reason I don't want to know.
 
 	var/list/obj/effect/proc_holder/alien/abilities = list()
 
 	var/silent = 0 		//Can't talk. Value goes down every life proc. //NOTE TO FUTURE CODERS: DO NOT INITIALIZE NUMERICAL VARS AS NULL OR I WILL MURDER YOU.
+
+	var/datum/organsystem/organsystem = null
 
 	var/obj/item/handcuffed = null //Whether or not the mob is handcuffed
 	var/obj/item/legcuffed = null  //Same as handcuffs but for legs. Bear traps use this.

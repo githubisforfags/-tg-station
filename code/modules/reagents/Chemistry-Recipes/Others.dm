@@ -117,6 +117,7 @@
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in holder.reagent_list
 	if(B && B.data)
 		var/datum/disease/advance/D = locate(/datum/disease/advance) in B.data["viruses"]
+		//Regen Symptom
 		var/damage_converter = locate(/datum/symptom/damage_converter) in D.symptoms
 		var/healer = locate(/datum/symptom/heal) in D.symptoms
 		if(damage_converter && healer)
@@ -124,6 +125,22 @@
 			D.RemoveSymptom(healer)
 			D.AddSymptom(new /datum/symptom/regen())
 			D.Refresh(1) //It needs to actually change the disease name for reasons
+		//purge virus
+		var/liggeritis = locate(/datum/symptom/liggeritis) in D.symptoms
+		var/metabolism = locate(/datum/symptom/heal/metabolism) in D.symptoms
+		if(liggeritis && metabolism)
+			D.RemoveSymptom(liggeritis)
+			D.RemoveSymptom(metabolism)
+			D.AddSymptom(new /datum/symptom/purge())
+			D.Refresh(1)
+		//sensory restoration
+		var/visionaid = locate(/datum/symptom/visionaid) in D.symptoms
+		var/youth = locate(/datum/symptom/youth) in D.symptoms
+		if(visionaid && youth)
+			D.RemoveSymptom(visionaid)
+			D.RemoveSymptom(youth)
+			D.AddSymptom(new /datum/symptom/sensres())
+			D.Refresh(1)
 
 /datum/chemical_reaction/mix_virus/rem_virus
 
