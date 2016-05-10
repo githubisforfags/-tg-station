@@ -144,7 +144,7 @@
 			if(do_after(user, 10))
 				var/eyes = remove_suborgan("eyes")
 				if(eyes)
-					user.put_in_hands(eyes) //Give the brain to the surgeon
+					user.put_in_hands(eyes) //Give the eyes to the surgeon
 					user << "<span class='notice'>You pluck the [eyes] out of the head.</span>"
 				else
 					user << "<span class='notice'>Something else removed the eyes before you were done.</span>"
@@ -264,15 +264,15 @@
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
-/obj/item/organ/limb/proc/heal_damage(brute, burn, robotic)
+/obj/item/organ/limb/proc/heal_damage(brute, burn, robotic = 0)
 
 	if(robotic && organtype != ORGAN_ROBOTIC) // This makes organic limbs not heal when the proc is in Robotic mode.
-		brute = max(0, brute - 3)
-		burn = max(0, burn - 3)
+		brute = 0
+		burn = 0
 
 	if(!robotic && organtype == ORGAN_ROBOTIC) // This makes robolimbs not healable by chems.
-		brute = max(0, brute - 3)
-		burn = max(0, burn - 3)
+		brute = 0
+		burn = 0
 
 	brute_dam	= max(brute_dam - brute, 0)
 	burn_dam	= max(burn_dam - burn, 0)

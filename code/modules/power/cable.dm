@@ -524,18 +524,15 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/obj/item/organ/limb/affecting = limbdata.organitem
 
 	if(user && affecting.organtype == ORGAN_ROBOTIC)
-		if(H != user)
-			user.visible_message("<span class='green'>[user] fixes some of the burnt wires on [H].</span>", "<span class='green'>You fix some of the burnt wires on [H].</span>")
-		else
+		if(H == user)
 			var/t_himself = "itself"
 			if(user.gender == MALE)
 				t_himself = "himself"
 			else if(user.gender == FEMALE)
 				t_himself = "herself"
-			user.visible_message("<span class='notice'>[user] starts to fix burnt wires on [t_himself]...</span>", "<span class='notice'>You begin fixing burnt wires [src] on yourself...</span>")
+			user.visible_message("<span class='notice'>[user] starts to fix burnt wires on [t_himself]...</span>", "<span class='notice'>You begin fixing burnt wires with [src] on yourself...</span>")
 			if(!do_mob(user, H, self_delay))
 				return
-			user.visible_message("<span class='green'>[user] fixes some of the burnt wires on [t_himself].</span>", "<span class='green'>You fixed some of the burnt wires on yourself.</span>")
 		item_heal_robotic(H, user, 0, 30)
 		src.use(1)
 		return

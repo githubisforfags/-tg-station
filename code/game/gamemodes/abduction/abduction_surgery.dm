@@ -30,9 +30,9 @@
 
 /datum/surgery_step/extract_organ/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(IC && IC.exists())
-		user.visible_message("<span class='notice'>[user] pulls [IC] out of [target]'s [target_zone]!</span>")
+		user.visible_message("<span class='notice'>[user] pulls the [IC] out of [target]'s [target_zone]!</span>")
 		IC.dismember(ORGAN_REMOVED, special = 1)
-		user.put_in_hands(IC)
+		user.put_in_hands(IC.organitem)
 		return 1
 	else
 		user.visible_message("<span class='notice'>[user] doesn't find anything in [target]'s [target_zone].</span>")
@@ -51,6 +51,7 @@
 	var/obj/item/organ/internal/heart/gland/G = tool
 	user.drop_item()
 	G.Insert(target, 2)
+	G.loc = null
 	return 1
 
 

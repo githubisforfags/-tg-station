@@ -742,7 +742,7 @@
 						status += "numb"
 					if(status == "")
 						status = "OK"
-					src << "\t [status == "OK" ? "\blue" : "\red"] Your [org] is [status]."
+					src << "\t [status == "OK" ? "\blue" : "\red"] Your [org.name] is [status]."
 
 					for(var/obj/item/I in org.embedded_objects)
 						src << "\t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red There is \a [I] embedded in your [org]!</a>"

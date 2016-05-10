@@ -61,12 +61,13 @@
 
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
+		var/datum/organ/O = H.get_organ(check_zone(user.zone_sel.selecting))
+		var/obj/item/organ/limb/affecting = O.organitem
 		if(stop_bleeding)
 			if(!H.bleedsuppress) //so you can't stack bleed suppression
 				H.suppress_bloodloss(stop_bleeding)
 		if(affecting.status == ORGAN_ORGANIC) //Limb must be organic to be healed - RR
-			if(affecting.heal_damage(src.heal_brute, src.heal_burn, 0))
+			if(affecting.heal_damage(heal_brute, heal_burn, 0))
 				H.update_damage_overlays(0)
 
 			M.updatehealth()

@@ -216,7 +216,7 @@
 	materials = list(MAT_METAL = 2000, MAT_SILVER = 500)
 	build_path = /obj/item/weapon/suppressor
 	category = list("Weapons")
-
+/*
 /datum/design/extraction_pack
 	name = "Balloon Extraction Pack"
 	desc = "A balloon extraction pack."
@@ -226,7 +226,7 @@
 	materials = list(MAT_METAL = 4000, MAT_GLASS = 5000)
 	build_path = /obj/item/weapon/extraction_pack
 	category = list("Weapons")
-
+*/
 //WT550 Mags
 
 /datum/design/mag_oldsmg
