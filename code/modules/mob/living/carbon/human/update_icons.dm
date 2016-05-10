@@ -320,14 +320,13 @@ Please contact me on #coderbus IRC. ~Carnie x
 				gloves.screen_loc = ui_gloves		//...draw the item in the inventory screen
 			client.screen += gloves					//Either way, add the item to the HUD
 
-		if(!(exists("l_arm") && exists("r_arm")))
-			return
 
 		var/datum/organ/limb/left = get_organ("l_arm")
 		var/datum/organ/limb/right = get_organ("r_arm")
+		if(!left && !right) return
 		var/obj/item/organ/larm = left.organitem
 		var/obj/item/organ/rarm = right.organitem
-		if(larm.organtype == ORGAN_WEAPON || rarm.organtype == ORGAN_WEAPON)
+		if((larm && larm.organtype == ORGAN_WEAPON) || (rarm && rarm.organtype == ORGAN_WEAPON))
 			return
 
 		var/t_state = gloves.item_state
@@ -345,6 +344,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			overlays_standing[GLOVES_LAYER] = image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands")
 
 	apply_overlay(GLOVES_LAYER)
+	update_disabled_overlays()
 
 
 
@@ -379,14 +379,13 @@ Please contact me on #coderbus IRC. ~Carnie x
 /mob/living/carbon/human/update_inv_shoes()
 	remove_overlay(SHOES_LAYER)
 
+
 	if(shoes)
 		if(client && hud_used && hud_used.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open ...
 				shoes.screen_loc = ui_shoes			//...draw the item in the inventory screen
 			client.screen += shoes					//Either way, add the item to the HUD
 
-		if(!(exists("l_leg") && exists("r_leg")))
-			return
 
 		var/image/standing = image("icon"='icons/mob/feet.dmi', "icon_state"="[shoes.icon_state]", "layer"=-SHOES_LAYER)
 
@@ -396,6 +395,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="shoeblood")
 
 	apply_overlay(SHOES_LAYER)
+	update_disabled_overlays()
 
 
 /mob/living/carbon/human/update_inv_s_store()
@@ -529,6 +529,29 @@ Please contact me on #coderbus IRC. ~Carnie x
 		if(hud_used)
 			hud_used.hidden_inventory_update() 	//Updates the screenloc of the items on the 'other' inventory bar
 
+/mob/living/carbon/human/proc/update_disabled_overlays()
+	if(hud_used)
+		var/obj/screen/inventory/R = hud_used.adding[3]
+		if(!exists("r_arm"))
+			R.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="x")
+		else
+			R.overlays = null
+		var/obj/screen/inventory/L = hud_used.adding[4]
+		if(!exists("l_arm"))
+			L.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="x")
+		else
+			L.overlays = null
+		if(hud_used.hud_shown && hud_used.inventory_shown)
+			var/obj/screen/inventory/S = hud_used.other[8]
+			if(!exists("l_leg") && !exists("r_leg"))
+				S.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="x")
+			else
+				S.overlays = null
+			var/obj/screen/inventory/G = hud_used.other[4]
+			if(!exists("l_arm") && !exists("r_arm"))
+				G.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="x")
+			else
+				G.overlays = null
 
 /mob/living/carbon/human/update_inv_handcuffed()
 	remove_overlay(HANDCUFF_LAYER)
@@ -570,13 +593,6 @@ Please contact me on #coderbus IRC. ~Carnie x
 		drop_r_hand()
 		return
 
-	if(hud_used)
-		var/obj/screen/inventory/R = hud_used.adding[3]
-		if(!exists("r_arm"))
-			R.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="x")
-		else
-			R.overlays = null
-
 
 	if(r_hand)
 		r_hand.screen_loc = ui_rhand	//TODO
@@ -589,6 +605,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 		overlays_standing[R_HAND_LAYER] = image("icon" = r_hand.righthand_file, "icon_state"="[t_state]", "layer"=-R_HAND_LAYER)
 
 	apply_overlay(R_HAND_LAYER)
+	update_disabled_overlays()
 
 
 
@@ -598,12 +615,6 @@ Please contact me on #coderbus IRC. ~Carnie x
 		drop_l_hand()
 		return
 
-	if(hud_used)
-		var/obj/screen/inventory/L = hud_used.adding[4]
-		if(!exists("l_arm"))
-			L.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="x")
-		else
-			L.overlays = null
 
 	if(l_hand)
 		l_hand.screen_loc = ui_lhand	//TODO
@@ -616,6 +627,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 		overlays_standing[L_HAND_LAYER] = image("icon" = l_hand.lefthand_file, "icon_state"="[t_state]", "layer"=-L_HAND_LAYER)
 
 	apply_overlay(L_HAND_LAYER)
+	update_disabled_overlays()
 
 /mob/living/carbon/human/proc/wear_female_version(t_color, icon, layer, type)
 	var/index = "[t_color]_s"

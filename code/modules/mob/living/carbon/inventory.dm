@@ -18,14 +18,12 @@
 //After that we can just call the super. |- Ricotez
 /mob/living/carbon/put_in_l_hand(var/obj/item/W)
 	if(organsystem)
-		var/datum/organ/limb/limbdata = get_organ("l_arm")
-		if(!limbdata.exists())
+		if(!exists("l_arm"))
 			return 0
 	return ..()
 
 /mob/living/carbon/put_in_r_hand(var/obj/item/W)
 	if(organsystem)
-		var/datum/organ/limb/limbdata = get_organ("r_arm")
-		if(!limbdata.exists())
+		if(!exists("r_arm"))
 			return 0
 	return ..()

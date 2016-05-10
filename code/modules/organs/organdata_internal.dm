@@ -1,7 +1,3 @@
-/datum/organ/butt
-	name = "butt"
-	organitem_type = /obj/item/organ/butt
-
 //For cavity implants, obviously
 /datum/organ/cavity
 	name = "cavity"

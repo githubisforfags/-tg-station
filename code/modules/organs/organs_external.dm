@@ -1,8 +1,3 @@
-/obj/item/organ/butt
-	name = "butt"
-	hardpoint = "butt"
-	icon_state = "butt"
-
 // These only serve to represent the groin and mouth target zones.
 /obj/item/organ/abstract/groin
 	name = "groin"

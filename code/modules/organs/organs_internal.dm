@@ -130,7 +130,8 @@
 
 /obj/item/organ/internal/heart/prepare_eat()
 	var/obj/S = ..()
-	S.icon_state = "heart-off"
+	if(icon_state == "heart-on")
+		S.icon_state = "heart-off"
 	return S
 
 

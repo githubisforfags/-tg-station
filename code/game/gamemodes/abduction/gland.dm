@@ -15,6 +15,7 @@
 /obj/item/organ/internal/heart/gland/update_icon()	//Overriding heart's proc
 	return
 
+
 /obj/item/organ/internal/heart/gland/proc/ownerCheck()
 	if(ishuman(owner))
 		return 1
