@@ -26,6 +26,8 @@
 		air_update_turf()
 
 /obj/machinery/atmospherics/pipe/return_air()
+	if(!parent && ticker.current_state == GAME_STATE_STARTUP) //do not error during game init
+		return
 	return parent.air
 
 /obj/machinery/atmospherics/pipe/build_network()

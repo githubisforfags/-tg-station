@@ -29,26 +29,14 @@
 	//BREATH TEMPERATURE
 	handle_breath_temperature(breath)
 
-
-/mob/living/carbon/alien/handle_regular_status_updates()
-	..()
-	//natural reduction of movement delay due to stun.
-	if(move_delay_add > 0)
-		move_delay_add = max(0, move_delay_add - rand(1, 2))
-
-	return 1
-
-/mob/living/carbon/alien/handle_vision()
-
-	client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
-
-	if (stat == 2)
+/mob/living/carbon/alien/update_sight()
+	if(stat == DEAD)
 		sight |= SEE_TURFS
 		sight |= SEE_MOBS
 		sight |= SEE_OBJS
 		see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_LEVEL_TWO
-	else if (stat != 2)
+	else
 		sight |= SEE_MOBS
 		sight &= ~SEE_TURFS
 		sight &= ~SEE_OBJS
@@ -61,34 +49,14 @@
 		if(see_override)
 			see_invisible = see_override
 
-	if ((blind && stat != 2))
-		if((eye_blind))
-			blind.layer = 18
-		else
-			blind.layer = 0
 
-			if(eye_covered)
-				cover.layer = 17
-			else
-				cover.layer = 0
+/mob/living/carbon/alien/handle_regular_status_updates()
+	..()
+	//natural reduction of movement delay due to stun.
+	if(move_delay_add > 0)
+		move_delay_add = max(0, move_delay_add - rand(1, 2))
 
-			if (disabilities & NEARSIGHT)
-				client.screen += global_hud.vimpaired
-
-			if (eye_blurry)
-				client.screen += global_hud.blurry
-
-			if (druggy)
-				client.screen += global_hud.druggy
-
-	if (stat != 2)
-		if(machine)
-			if (!( machine.check_eye(src) ))
-				reset_view(null)
-		else
-			if(!client.adminobs)
-				reset_view(null)
-
+	return 1
 
 /mob/living/carbon/alien/handle_hud_icons()
 	update_action_buttons()

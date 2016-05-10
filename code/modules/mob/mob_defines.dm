@@ -43,7 +43,6 @@
 	var/notransform = null	//Carbon
 	var/hand = null
 	var/eye_blind = 0		//Carbon
-	var/eye_covered = 0		//Carbon
 	var/eye_blurry = 0		//Carbon
 	var/ear_deaf = 0		//Carbon
 	var/ear_damage = 0		//Carbon

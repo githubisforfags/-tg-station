@@ -417,7 +417,6 @@ Sorry Giacom. Please don't be mad :(
 	bodytemperature = 310
 	disabilities = 0
 	eye_blind = 0
-	eye_covered = 0
 	eye_blurry = 0
 	ear_deaf = 0
 	ear_damage = 0
@@ -756,11 +755,11 @@ Sorry Giacom. Please don't be mad :(
 		floating = 0
 
 //called when the mob receives a bright flash
-/mob/living/proc/flash_eyes(intensity = 1, override_blindness_check = 0)
+/mob/living/proc/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0, type = /obj/screen/fullscreen/flash)
 	if(check_eye_prot() < intensity && (override_blindness_check || !(disabilities & BLIND)))
-		flick("e_flash", flash)
+		overlay_fullscreen("flash", type)
+		addtimer(src, "clear_fullscreen", 25, argList = list("flash", 25) )
 		return 1
-
 //this returns the mob's protection against eye damage (number between -1 and 2)
 /mob/living/proc/check_eye_prot()
 	return 0

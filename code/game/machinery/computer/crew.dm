@@ -253,9 +253,12 @@ var/global/datum/crewmonitor/crewmonitor = new
 	procqueue.schedule(50, crewmonitor, "update", z)
 
 /datum/crewmonitor/proc/generateMiniMaps()
+	world << "<span class='boldannounce'>Generating minimaps."
+	world.log << "Generating minimaps."
 	for(var/z = 1 to world.maxz)
 		generateMiniMap(z)
 	world << "<span class='boldannounce'>All minimaps have been generated."
+	world.log << "All minimaps have been generated."
 	for(var/client/C in clients)
 		sendResources(C)
 	initialized = TRUE
