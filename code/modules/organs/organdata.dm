@@ -61,7 +61,7 @@
  **/
 /datum/organ/proc/regenerate_organitem(var/datum/dna/D)
 	var/obj/item/organ/neworgan = new organitem_type()
-	if(neworgan.organtype == ORGAN_ORGANIC)
+	if(istype(neworgan) && neworgan.organtype == ORGAN_ORGANIC)
 		set_dna(D)
 		return set_organitem(neworgan)
 	else return null
