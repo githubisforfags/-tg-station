@@ -54,7 +54,7 @@
 		user << "<span class='warning'>It's too heavy for you to wield fully.</span>"
 		return
 	if(!user.active_hand_exists(1))	//Checks for inactive hand, 1 means inverted
-		user << "<span class='warning'>You need don't have an other hand!</span>"
+		user << "<span class='warning'>You don't have an other hand!</span>"
 		return
 	if(user.get_inactive_hand())
 		user << "<span class='warning'>You need your other hand to be empty</span>"

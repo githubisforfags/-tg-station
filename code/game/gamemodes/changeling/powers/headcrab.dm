@@ -11,9 +11,14 @@
 	var/list/organs = user.get_internal_organs("head")
 	var/list/organitems
 
+	var/datum/organ/brain = user.get_organ("brain")
+	var/obj/item/organ/internal/brain/B
+	if(brain)
+		B = brain.organitem
 	for(var/datum/organ/internal/I in organs)
-		organitems += I.organitem
-		I.dismember(ORGAN_DESTROYED)
+		if(I)
+			organitems += I.organitem
+			I.dismember(ORGAN_DESTROYED)
 
 	explosion(get_turf(user),0,0,2,0,silent=1)
 	var/turf = get_turf(user)
@@ -25,6 +30,8 @@
 		if(M)
 			M.transfer_to(crab)
 			crab << "<span class='warning'>You burst out of the remains of your former body in a shower of gore!</span>"
+		if(B)
+			qdel(B)
 	user.gib()
 	feedback_add_details("changeling_powers","LR")
 	return 1

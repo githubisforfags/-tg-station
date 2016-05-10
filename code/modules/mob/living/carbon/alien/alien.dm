@@ -160,6 +160,7 @@ Des: Gives the client of the alien an image on each infected mob.
 		for (var/mob/living/C in mob_list)
 			if(C && C.status_flags & XENO_HOST)
 				var/obj/item/organ/internal/body_egg/alien_embryo/A = C.get_organ("egg")
+				if(!istype(A)) return
 				var/I = image('icons/mob/alien.dmi', loc = C, icon_state = "infected[A.stage]")
 				client.images += I
 	return

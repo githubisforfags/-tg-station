@@ -481,7 +481,7 @@
 					add_blood(H)//it embedded itself in you, of course it's bloody!
 					loc = H
 					L.take_damage(w_class*embedded_impact_pain_multiplier)
-					H.visible_message("<span class='danger'>\the [name] embeds itself in [H]'s [L]!</span>","<span class='userdanger'>\the [name] embeds itself in your [L]!</span>")
+					H.visible_message("<span class='danger'>\the [name] embeds itself in [H]'s [L.name]!</span>","<span class='userdanger'>\the [name] embeds itself in your [L.name]!</span>")
 					return
 
 	//Reset regardless of if we hit a human.

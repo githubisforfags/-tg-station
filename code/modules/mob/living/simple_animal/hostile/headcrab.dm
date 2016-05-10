@@ -24,6 +24,7 @@
 /mob/living/simple_animal/hostile/headcrab/proc/Infect(mob/living/carbon/victim)
 	var/obj/item/organ/internal/body_egg/changeling_egg/egg = new(victim)
 	egg.Insert(victim)
+	src << "<span class='userdanger'>With your egg laid you feel your death rapidly approaching, time to die...</span>"
 	if(mind)
 		mind.transfer_to(egg.mind_holder)
 	for(var/obj/item/organ/internal/I in src)
@@ -40,7 +41,7 @@
 		var/mob/living/carbon/C = target
 		if(C.stat == DEAD)
 			Infect(target)
-			src << "<span class='userdanger'>With your egg laid you feel your death rapidly approaching, time to die...</span>"
+			AIStatus = AI_OFF
 			spawn(100)
 				death()
 			return
@@ -84,7 +85,8 @@
 	progress++
 	if(progress >= time_to_live)
 		Pop()
-		organdatum.dismember(ORGAN_REMOVED)
+		if(organdatum)
+			organdatum.dismember(ORGAN_REMOVED)
 		qdel(src)
 
 /obj/item/organ/internal/body_egg/changeling_egg/proc/Pop()
