@@ -831,6 +831,9 @@
 	src << "<span class='warning'>You don't have the dexterity to do this!</span>"
 	return
 
+/mob/living/carbon/slime/active_hand_exists()
+	return 1
+
 
 //////////////////////////////Old shit from metroids/RoRos, and the old cores, would not take much work to re-add them////////////////////////
 

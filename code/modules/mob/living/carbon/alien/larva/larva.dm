@@ -83,6 +83,9 @@
 /mob/living/carbon/alien/larva/restrained()
 	return 0
 
+/mob/living/carbon/alien/larva/active_hand_exists()
+	return 1
+
 // new damage icon system
 // now constructs damage icon for each organ from mask * damage field
 
