@@ -220,6 +220,10 @@
 		else
 			if(!client.adminobs)
 				reset_view(null)
+	if(eye_blind)
+		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+	else
+		clear_fullscreen("blind")
 
 	return 1
 
