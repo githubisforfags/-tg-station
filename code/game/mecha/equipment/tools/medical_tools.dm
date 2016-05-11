@@ -217,8 +217,8 @@
 	M.AdjustStunned(-4)
 	M.AdjustWeakened(-4)
 	M.AdjustStunned(-4)
-	if(M.reagents.get_reagent_amount("epinephrine") < 5)
-		M.reagents.add_reagent("epinephrine", 5)
+	if(M.reagents.get_reagent_amount("inaprovaline") < 5)
+		M.reagents.add_reagent("inaprovaline", 5)
 	chassis.use_power(energy_drain)
 	update_equip_info()
 
@@ -249,7 +249,7 @@
 	..()
 	flags |= NOREACT
 	syringes = new
-	known_reagents = list("epinephrine"="Epinephrine","charcoal"="Charcoal")
+	known_reagents = list("inaprovaline"="Inaprovaline","anti_toxin"="Dylovene")
 	processed_reagents = new
 	create_reagents(max_volume)
 
@@ -356,10 +356,10 @@
 		var/message
 		for(var/i=1 to known_reagents.len)
 			if(m>=synth_speed)
-				break
+				continue
 			var/reagent = filter.get("reagent_[i]")
 			if(reagent && (reagent in known_reagents))
-				message = "[m ? ", " : null][known_reagents[reagent]]"
+				message += "[m ? ", " : ""][known_reagents[reagent]]"
 				processed_reagents += reagent
 				m++
 		if(processed_reagents.len)
