@@ -413,8 +413,9 @@
 			return 1 //dirted
 		else
 			var/icon/new_icon = D.icon
-			new_icon.ChangeOpacity(2)
-			D.icon = new_icon
+			if(istype(new_icon))
+				new_icon.ChangeOpacity(2)
+				D.icon = new_icon
 
 /datum/reagent/chlorine
 	name = "Chlorine"
