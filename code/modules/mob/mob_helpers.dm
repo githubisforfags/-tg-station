@@ -481,12 +481,12 @@ proc/is_special_character(mob/M) // returns 1 for special characters and 2 for h
 	else
 		dam = 0
 
-	if(affecting.organtype == ORGAN_ROBOTIC)
+	if(affecting && affecting.organtype == ORGAN_ROBOTIC)
 		if(brute > 0 && affecting.brute_dam > 0 || burn > 0 && affecting.burn_dam > 0)
 			affecting.heal_damage(brute,burn,1)
 			H.update_damage_overlays(0)
 			H.updatehealth()
-			user.visible_message("<span class='notice'>[user] has fixed some of the [dam ? "dents on" : "burnt wires in"] [H]'s [affecting.name]!</span>")
+			user.visible_message("<span class='notice'>[user] has fixed some of the [dam ? "dents on" : "burnt wires in"] [H]'s [limbdata.getDisplayName()]!</span>")
 			return
 		else
 			user << "<span class='notice'>[H]'s [affecting.name] is already in good condition</span>"

@@ -24,8 +24,12 @@
 						if(organdata.exists())
 							var/obj/item/organ/O = organdata.organitem
 							if(istype(O))
+								O.add_suborgans()
 								O.on_insertion()
-							user << "<span class='notice'>We regrow our [organdata.name]</span>"
+							user << "<span class='notice'>We regrow our [organdata.getDisplayName()]</span>"
+			H.update_hud()
+			H.update_body_parts()
+			H.update_damage_overlays(0)
 
 
 		for(var/i = 0, i<10,i++)
