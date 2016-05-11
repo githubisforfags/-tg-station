@@ -532,6 +532,7 @@ var/global/image/plasmaman_on_fire = image("icon"='icons/mob/OnFire.dmi', "icon_
 	return base
 
 /datum/species/plasmaman/spec_life(mob/living/carbon/human/H)
+	if(!H.loc) return
 	var/datum/gas_mixture/environment = H.loc.return_air()
 
 	if(!(istype(H.wear_suit, /obj/item/clothing/suit/bio_suit/plasma) && istype(H.head, /obj/item/clothing/head/bio_hood/plasma)) && !istype(H.head, /obj/item/clothing/head/helmet/space/hardsuit/atmos/plasmaman)) //disgust
