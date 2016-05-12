@@ -54,7 +54,7 @@
 	return 0
 
 /obj/machinery/sleeper/MouseDrop_T(mob/target, mob/user)
-	if(stat || user.stat || user.lying || target.buckled || !Adjacent(user) || !target.Adjacent(user)|| !iscarbon(target))
+	if(stat || user.stat || user.lying || !iscarbon(target) || target.buckled || !Adjacent(user) || !target.Adjacent(user) )
 		return
 	close_machine(target)
 

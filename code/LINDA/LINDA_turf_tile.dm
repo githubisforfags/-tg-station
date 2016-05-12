@@ -144,6 +144,8 @@
 	var/remove = 1 //set by non simulated turfs who are sharing with this turf
 
 	universe.OnTurfTick()
+	if(!air)
+		return
 
 	for(var/direction in cardinal)
 		if(!(atmos_adjacent_turfs & direction))
