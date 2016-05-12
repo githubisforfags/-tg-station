@@ -60,6 +60,7 @@
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/excavation_amount = 100
 
+
 /obj/item/weapon/pickaxe/proc/playDigSound()
 	playsound(src, pick(digsound),50,1)
 
@@ -71,6 +72,7 @@
 	origin_tech = "materials=4;engineering=3"
 	desc = "A pickaxe with a diamond pick head. Extremely robust at cracking rock walls and digging up dirt."
 
+
 /obj/item/weapon/pickaxe/drill
 	name = "mining drill"
 	icon_state = "handdrill"
@@ -80,7 +82,6 @@
 	hitsound = 'sound/weapons/drill.ogg'
 	origin_tech = "materials=2;powerstorage=3;engineering=2"
 	desc = "An electric mining drill for the especially scrawny."
-
 
 
 

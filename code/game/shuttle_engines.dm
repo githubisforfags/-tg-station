@@ -23,6 +23,12 @@
 		set_light(brightness_radius, brightness_strength, brightness_color)
 		active = 1
 
+/obj/structure/shuttle/engine/proc/set_active(bool)
+	if(bool)
+		set_light(brightness_radius, brightness_strength, brightness_color)
+	else
+		set_light(0)
+
 
 /obj/structure/shuttle/engine/heater
 	name = "heater"

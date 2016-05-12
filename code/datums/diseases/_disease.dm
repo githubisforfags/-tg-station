@@ -166,10 +166,8 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 		if(ishuman(affected_mob))
 			var/mob/living/carbon/human/H = affected_mob
 			for(var/obj/item/organ/O in required_organs)
-				if(!locate(O) in H.organs)
-					if(!locate(O) in H.internal_organs)
-						cure()
-						return
+				if(!(H.exists(O.hardpoint)))
+					return
 
 	SSdisease.processing += src
 

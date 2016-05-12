@@ -223,7 +223,7 @@ They can only use one tool at a time, they can't choose modules, and they have 1
 
 	if (istype(W, /obj/item/weapon/weldingtool))
 		if (src.health >= src.maxHealth)	//When you don't inherit parent functions shit like this goes forgotten
-			user << "<span class='warning'>[src] is already in good condition.</span>"
+			user << "<span class='warning'>[src.name] is already in good condition.</span>"
 			return 1
 		var/obj/item/weapon/weldingtool/WT = W
 		if (WT.remove_fuel(0))
@@ -231,7 +231,7 @@ They can only use one tool at a time, they can't choose modules, and they have 1
 			updatehealth()
 			add_fingerprint(user)
 			for(var/mob/O in viewers(user, null))
-				O.show_message(text("\red [user] has fixed some of the dents on [src]!"), 1)
+				O.show_message(text("\red [user] has fixed some of the dents on [src.name]!"), 1)
 		else
 			user << "Need more welding fuel!"
 			return
@@ -240,9 +240,9 @@ They can only use one tool at a time, they can't choose modules, and they have 1
 		if (coil.use(1))
 			adjustFireLoss(-30)
 			updatehealth()
-			visible_message("<span class='notice'>[user] has fixed some of the burnt wires on [src].</span>")
+			visible_message("<span class='notice'>[user] has fixed some of the burnt wires on [src.name].</span>")
 		else
-			user << "<span class='warning'>You need one length of cable to repair [src].</span>"
+			user << "<span class='warning'>You need one length of cable to repair [src.name].</span>"
 
 	else if (istype(W, /obj/item/weapon/crowbar))	// crowbar means open or close the cover
 		if(stat == DEAD)

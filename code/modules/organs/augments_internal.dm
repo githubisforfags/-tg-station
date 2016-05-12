@@ -3,7 +3,7 @@
 /obj/item/organ/internal/cyberimp
 	name = "cybernetic implant"
 	desc = "a state-of-the-art implant that improves a baseline's functionality"
-	status = ORGAN_ROBOTIC
+	organtype = ORGAN_ROBOTIC
 	var/implant_color = "#FFFFFF"
 	var/implant_overlay
 
@@ -22,6 +22,7 @@
 
 /obj/item/organ/internal/cyberimp/brain
 	name = "cybernetic brain implant"
+	hardpoint = "cyberimp_brain"
 	desc = "injectors of extra sub-routines for the brain"
 	icon_state = "brain_implant"
 	implant_overlay = "brain_implant_overlay"
@@ -148,6 +149,7 @@
 
 /obj/item/organ/internal/cyberimp/chest
 	name = "cybernetic torso implant"
+	hardpoint = "cyberimp_chest"
 	desc = "implants for the organs in your torso"
 	icon_state = "chest_implant"
 	implant_overlay = "chest_implant_overlay"
@@ -260,7 +262,7 @@
 	name = "boxed cybernetic implants"
 	desc = "A sleek, sturdy box."
 	icon_state = "cyber_implants"
-	var/list/boxed = list(/obj/item/organ/internal/cyberimp/eyes/xray,/obj/item/organ/internal/cyberimp/eyes/thermals,
+	var/list/boxed = list(/obj/item/organ/internal/eyes/cyberimp/xray,/obj/item/organ/internal/eyes/cyberimp/thermals,
 						/obj/item/organ/internal/cyberimp/brain/anti_stun, /obj/item/organ/internal/cyberimp/chest/reviver)
 	var/amount = 5
 

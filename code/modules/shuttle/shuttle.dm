@@ -24,6 +24,7 @@
 	var/height = 0	//size of covered area, paralell to dir
 	var/dwidth = 0	//position relative to covered area, perpendicular to dir
 	var/dheight = 0	//position relative to covered area, parallel to dir
+	var/engine_lights = 0 //Controls the shuttle engine lighting
 
 	//these objects are indestructable
 /obj/docking_port/Destroy()
@@ -160,6 +161,7 @@
 /obj/docking_port/stationary/transit
 	name = "In Transit"
 	turf_type = /turf/space/transit
+	engine_lights = 1
 
 /obj/docking_port/stationary/transit/New()
 	..()
@@ -434,7 +436,7 @@
 			if(!T.lighting_overlay && !istype(T, /turf/space))
 				T.lighting_fix_overlays()
 			for(var/obj/structure/shuttle/engine/E in T)
-				E.toggle_light()
+				E.set_active(S1.engine_lights)
 
 
 /*

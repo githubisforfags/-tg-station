@@ -15,8 +15,10 @@
 
 //This is fine right now, if we're adding organ specific damage this needs to be updated
 /mob/living/carbon/alien/larva/New()
+
+	organsystem = new/datum/organsystem/alienlarva(src)
+
 	regenerate_icons()
-	internal_organs += new /obj/item/organ/internal/alien/plasmavessel/small/tiny
 	AddAbility(new/obj/effect/proc_holder/alien/hide(null))
 	AddAbility(new/obj/effect/proc_holder/alien/larva_evolve(null))
 	..()
@@ -80,6 +82,9 @@
 
 /mob/living/carbon/alien/larva/restrained()
 	return 0
+
+/mob/living/carbon/alien/larva/active_hand_exists()
+	return 1
 
 // new damage icon system
 // now constructs damage icon for each organ from mask * damage field

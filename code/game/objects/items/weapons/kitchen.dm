@@ -113,6 +113,7 @@
 	sharp = 1
 	origin_tech = "materials=1"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	dismember_class = new /datum/dismember_class/low
 
 /obj/item/weapon/kitchenknife/suicide_act(mob/user)
 	user.visible_message(pick("<span class='suicide'>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</span>", \
@@ -145,6 +146,8 @@
 	origin_tech = "materials=1"
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	dismember_class = new /datum/dismember_class/low
+
 
 
 /*

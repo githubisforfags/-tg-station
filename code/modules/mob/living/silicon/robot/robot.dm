@@ -430,13 +430,13 @@
 			user << "<span class='warning'>You lack the reach to be able to repair yourself.</span>"
 			return 1
 		if (src.health >= src.maxHealth)
-			user << "<span class='warning'>[src] is already in good condition.</span>"
+			user << "<span class='warning'>[src.name] is already in good condition.</span>"
 			return 1
 		if (WT.remove_fuel(0, user))
 			adjustBruteLoss(-30)
 			updatehealth()
 			add_fingerprint(user)
-			visible_message("<span class='notice'>[user] has fixed some of the dents on [src].</span>")
+			visible_message("<span class='notice'>[user] has fixed some of the dents on [src.name].</span>")
 			return 0
 		else
 			user << "<span class='warning'>The welder must be on for this task.</span>"
@@ -447,9 +447,9 @@
 		if (coil.use(1))
 			adjustFireLoss(-30)
 			updatehealth()
-			visible_message("<span class='notice'>[user] has fixed some of the burnt wires on [src].</span>")
+			visible_message("<span class='notice'>[user] has fixed some of the burnt wires on [src.name].</span>")
 		else
-			user << "<span class='warning'>You need one length of cable to repair [src].</span>"
+			user << "<span class='warning'>You need one length of cable to repair [src.name].</span>"
 
 	else if (istype(W, /obj/item/weapon/crowbar))	// crowbar means open or close the cover
 		if(opened)

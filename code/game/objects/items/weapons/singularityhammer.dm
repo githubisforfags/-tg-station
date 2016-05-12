@@ -89,6 +89,7 @@
 	var/datum/effect/effect/system/lightning_spread/s = new /datum/effect/effect/system/lightning_spread
 	s.set_up(5, 1, target.loc)
 	s.start()
+	target.take_organ_damage(0,30)
 	target.visible_message("<span class='danger'>[target.name] was shocked by the [src.name]!</span>", \
 		"<span class='userdanger'>You feel a powerful shock course through your body sending you flying!</span>", \
 		"<span class='danger'>You hear a heavy electrical crack.</span>")
@@ -107,7 +108,7 @@
 		if(istype(M, /mob/living))
 			M.Stun(3)
 			shock(M)
-			
+
 /obj/item/weapon/twohanded/mjollnir/throw_impact(atom/target)
 	. = ..()
 	if(istype(target, /mob/living))

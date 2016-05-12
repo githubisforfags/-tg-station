@@ -41,6 +41,10 @@
 
 
 /datum/hud/proc/human_hud(ui_style = 'icons/mob/screen_midnight.dmi')
+	var/mob/living/carbon/mycarbon = null
+	if(istype(/mob/living/carbon, mymob)) //Quick check so we know if we can check the organsystem.
+		mycarbon = mymob
+
 	adding = list()
 	other = list()
 	hotkeybuttons = list()	//These can be disabled for hotkey users
@@ -90,6 +94,9 @@
 	inv_box.icon_state = "hand_r_inactive"
 	if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
 		inv_box.icon_state = "hand_r_active"
+	if(mycarbon && mycarbon.organsystem)
+		if(!mycarbon.exists("r_arm"))
+			inv_box.overlays += image("icons/mob/screen_gen.dmi", "x")
 	inv_box.screen_loc = ui_rhand
 	inv_box.slot_id = slot_r_hand
 	inv_box.layer = 19
@@ -102,6 +109,10 @@
 	inv_box.icon_state = "hand_l_inactive"
 	if(mymob && mymob.hand)	//This being 1 means the left hand is in use
 		inv_box.icon_state = "hand_l_active"
+	//If player has no left hand, we draw a nice X on it.
+	if(mycarbon && mycarbon.organsystem)
+		if(!mycarbon.exists("l_arm"))
+			inv_box.overlays += image("icons/mob/screen_gen.dmi", "x")
 	inv_box.screen_loc = ui_lhand
 	inv_box.slot_id = slot_l_hand
 	inv_box.layer = 19
@@ -197,6 +208,10 @@
 	inv_box.name = "gloves"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "gloves"
+	//Only if both hands are missing do we draw the X.
+	if(mycarbon && mycarbon.organsystem)
+		if(!mycarbon.exists("l_arm") && !mycarbon.exists("r_arm"))
+			inv_box.overlays += image("icons/mob/screen_gen.dmi", "x")
 	inv_box.screen_loc = ui_gloves
 	inv_box.slot_id = slot_gloves
 	inv_box.layer = 19
@@ -233,6 +248,10 @@
 	inv_box.name = "shoes"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "shoes"
+	//Only if both feet are missing do we draw the X.
+	if(mycarbon && mycarbon.organsystem)
+		if(!mycarbon.exists("l_leg") && !mycarbon.exists("r_leg"))
+			inv_box.overlays += image("icons/mob/screen_gen.dmi", "x")
 	inv_box.screen_loc = ui_shoes
 	inv_box.slot_id = slot_shoes
 	inv_box.layer = 19

@@ -71,6 +71,7 @@
 	damage_type = BRUTE
 	nodamage = 1
 	flag = "bullet"
+	dismember_class = new /datum/dismember_class/low/
 
 /obj/item/projectile/meteor/Bump(atom/A, yes)
 	if(!yes) //prevents multi bumps.
@@ -232,6 +233,8 @@
 	damage_type = BRUTE
 	damage = 5
 	range = 1
+	dismember_class = new/datum/dismember_class/low/
+
 
 /obj/item/projectile/plasma/New()
 	var/turf/proj_turf = get_turf(src)
@@ -243,6 +246,8 @@
 		name = "full strength plasma blast"
 		damage *= 3
 		range += 3
+		dismember_class = new/datum/dismember_class/medium/
+
 	..()
 
 /obj/item/projectile/plasma/on_hit(var/atom/target)

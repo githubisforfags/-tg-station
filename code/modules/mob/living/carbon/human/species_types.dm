@@ -6,7 +6,7 @@
 	name = "Human"
 	id = "human"
 	roundstart = 1
-	specflags = list(EYECOLOR,HAIR,FACEHAIR,LIPS)
+	specflags = list(EYECOLOR,HAIR,FACEHAIR,LIPS,MUTCOLORS)
 	use_skintones = 1
 
 /datum/species/human/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
@@ -29,7 +29,7 @@
 	say_mod = "hisses"
 	default_color = "00FF00"
 	roundstart = 1
-	specflags = list(MUTCOLORS,EYECOLOR,LIPS)
+	specflags = list(EYECOLOR,LIPS,MUTCOLORS)
 	mutant_bodyparts = list("tail", "snout")
 	attack_verb = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
@@ -97,11 +97,11 @@
 
 /datum/species/plant
 	// Creatures made of leaves and plant matter.
-	name = "Plant"
+	name = "Sentient Vegetable"
 	id = "plant"
-//	roundstart = 1	Redundant with podpeople right now
+	roundstart = 1
 	default_color = "59CE00"
-	specflags = list(MUTCOLORS,EYECOLOR)
+	specflags = list(EYECOLOR,MUTCOLORS)
 	attack_verb = "slice"
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
@@ -144,8 +144,8 @@
 	// A mutation caused by a human being ressurected in a revival pod. These regain health in light, and begin to wither in darkness.
 	name = "Podperson"
 	id = "pod"
-	specflags = list(MUTCOLORS,EYECOLOR)
-	roundstart = 1
+	specflags = list(EYECOLOR,MUTCOLORS)
+	roundstart = 0	//These are only the cloned ones. They grow up to be plant people after a while
 
 /datum/species/plant/pod/spec_life(mob/living/carbon/human/H)
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
@@ -192,10 +192,12 @@
 			if(A.lighting_use_dynamic)	light_amount = T.get_lumcount() * 10
 			else						light_amount =  10
 		if(light_amount > 7) //if there's enough light, start dying
-			H.take_overall_damage(1,1)
 			if(!light_message)
 				light_message = 1
-				H << "<span class='warning'>The light burns you!</span>"
+				H << "<span class='warning'>The light is too strong here! Find shelter!</span>"
+			H.take_overall_damage(1,1)
+			H << "<span class='userdanger'>The light burns you!</span>"
+			H << 'sound/weapons/sear.ogg'
 		else
 			if(light_message)
 				light_message = 0
@@ -218,7 +220,7 @@
 	default_color = "00FFFF"
 //	darksight = 3
 	invis_sight = SEE_INVISIBLE_LEVEL_ONE
-	specflags = list(MUTCOLORS,EYECOLOR,HAIR,FACEHAIR,NOBLOOD)
+	specflags = list(EYECOLOR,HAIR,FACEHAIR,NOBLOOD)
 	hair_color = "mutcolor"
 	hair_alpha = 150
 	ignored_by = list(/mob/living/carbon/slime)
@@ -267,7 +269,7 @@
 	default_color = "00FF90"
 	say_mod = "chirps"
 	eyes = "jelleyes"
-	specflags = list(MUTCOLORS,EYECOLOR,NOBLOOD)
+	specflags = list(EYECOLOR,NOBLOOD)
 	meat = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/mutant/slime
 	exotic_blood = /datum/reagent/toxin/slimejelly
 	var/recently_changed = 1

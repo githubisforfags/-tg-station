@@ -21,11 +21,12 @@ Here it is: Buttbot.
 	maxhealth = 25
 	verb_yell = "yells"
 	var/cooldown = 0  //stop spam 2k15, 1 unit is 20ds
-	var/buttchance = 80 //Like an 80% chance of it working. It's just a butt with an arm in it.
+	var/buttchance = 50 //Like an 50% chance of it working. It's just a butt with an arm in it.
 	var/sincelastfart = 0
 	var/mob/living/carbon/victim = null
 	var/mob/living/carbon/oldvictim = null
 	var/last_found = 0
+	var/list/replacement_list = list("butt")
 	flags = HEAR
 
 /obj/machinery/bot/buttbot/bot_process()
@@ -68,7 +69,6 @@ Here it is: Buttbot.
 		return
 	if(sincelastfart + 10 < world.timeofday)
 		say("butt")
-		playsound(get_turf(src), 'sound/items/drink.ogg', 50, 1) //slurp
 		sincelastfart = world.timeofday
 
 /obj/machinery/bot/buttbot/Hear(message, atom/movable/speaker, var/datum/language/speaking, raw_message, radio_freq)
@@ -78,7 +78,7 @@ Here it is: Buttbot.
 		var/list/split_phrase = splittext(message," ") //Split it up into words.
 
 		var/list/prepared_words = split_phrase.Copy()
-		var/i = rand(1,3)
+		var/i = rand(1,2)
 		for(,i > 0,i--) //Pick a few words to change.
 
 			if (!prepared_words.len)
@@ -87,7 +87,7 @@ Here it is: Buttbot.
 			prepared_words -= word //Remove from unstuttered words so we don't stutter it again.
 			var/index = split_phrase.Find(word) //Find the word in the split phrase so we can replace it.
 
-			split_phrase[index] = pick("slurp","meta","cuck","filtered","proprietary","white wash","cancer")
+			split_phrase[index] = pick(replacement_list)
 
 		say(jointext(split_phrase," ")) //say() already sanitizes
 		sincelastfart = world.timeofday
@@ -98,10 +98,8 @@ Here it is: Buttbot.
 /obj/machinery/bot/buttbot/explode()
 	src.on = 0
 	src.visible_message("<span class='danger'>[src] blows apart!</span>", 1)
-	playsound(get_turf(src), 'sound/items/drink.ogg', 50, 1) //slurp
 	var/turf/Tsec = get_turf(src)
-	new /obj/item/clothing/head/butt(Tsec)
-	say("FUCKING FILTERED, YOU METAGAMING CUCK! SLURP SLURP SLURP!")
+	new /obj/item/organ/limb/butt(Tsec)
 
 	if (prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
@@ -114,14 +112,14 @@ Here it is: Buttbot.
 	qdel(src)
 
 
-/obj/item/clothing/head/butt/attackby(var/obj/item/W, mob/user as mob)
+/obj/item/organ/limb/butt/attackby(var/obj/item/W, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm))
 		qdel(W)
 		var/turf/T = get_turf(user.loc)
 		var/obj/machinery/bot/buttbot/A = new /obj/machinery/bot/buttbot(T)
 		A.name = src.created_name
-		user << "<span class='notice'>You roughly shove the robot arm into the ass! Butt Butt!</span>" //I don't even.
+		user << "<span class='notice'>You roughly shove the robot arm into the ass! Butt Butt!</span>"
 		user.drop_item()
 		qdel(W)
 		qdel(src)
