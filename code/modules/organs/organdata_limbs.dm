@@ -86,3 +86,8 @@
 	organitem_type = /obj/item/organ/limb/leg/r_leg
 	healthdoll = 1
 	can_be_damaged = 1
+
+
+/datum/organ/limb/butt
+	name = "butt"
+	organitem_type = /obj/item/organ/limb/butt

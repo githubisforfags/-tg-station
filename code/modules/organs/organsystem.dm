@@ -109,6 +109,7 @@
 
 		var/datum/organ/abstract/groin/G = organlist["groin"]
 		var/obj/item/organ/abstract/groin 	= G.organitem
+		organlist["butt"]					= new/datum/organ/limb/butt(groin, new/obj/item/organ/limb/butt())
 		organlist["appendix"]				= new/datum/organ/internal/appendix(groin, new/obj/item/organ/internal/appendix())
 		organlist["liver"]					= new/datum/organ/internal/liver(groin, new/obj/item/organ/internal/liver())
 		organlist["kidneys"]				= new/datum/organ/internal/kidneys(groin, new/obj/item/organ/internal/kidneys())

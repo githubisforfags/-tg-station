@@ -316,3 +316,13 @@
 			var/obj/item/organ/limb/L = limbdata.organitem
 			for(var/obj/item/I in L.embedded_objects)
 				return 1
+
+/obj/item/organ/limb/butt
+	name = "butt"
+	hardpoint = "butt"
+	desc = "So many butts, so little time."
+	icon_state = "butt"
+	item_state= "butt"
+	body_parts_covered = HEAD
+	slot_flags = SLOT_HEAD
+	var/created_name = "Buttbot"
