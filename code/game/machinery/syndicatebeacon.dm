@@ -55,7 +55,7 @@
 			if(1)
 				temptext = "<font color=red><i><b>Double-crosser. You planned to betray us from the start. Allow us to repay the favor in kind.</b></i></font>"
 				src.updateUsrDialog()
-				spawn(rand(50,200)) selfdestruct()
+				spawn(50) selfdestruct()
 				return
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/N = M
@@ -99,7 +99,7 @@
 
 /obj/machinery/syndicate_beacon/proc/selfdestruct()
 	selfdestructing = 1
-	spawn() explosion(src.loc, rand(3,8), rand(1,3), 1, 10)
+	spawn() explosion(src.loc, 1, 3, 5, 10, 0)
 
 ////////////////////////////////////////
 //Singularity beacon
