@@ -16,7 +16,7 @@
 		var/mob/living/silicon/ai/A = src
 		for(var/mob/living/silicon/robot/R in A.connected_robots)
 			if(R.lawupdate)
-				R.show_laws(1, 1)
+				R.show_laws()
 	//			R.law_change_counter++
 
 	//Checks if keeper status needs to be changed
