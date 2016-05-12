@@ -146,7 +146,7 @@
 	origin_tech = "materials=1"
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	dismember_class = new /datum/dismember_class/low
+	dismember_class = new /datum/dismember_class/medium
 
 
 
