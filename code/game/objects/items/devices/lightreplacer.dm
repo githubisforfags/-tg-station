@@ -15,7 +15,7 @@
 //
 // HOW TO REFILL THE DEVICE
 //
-// It will need to be manually refilled with lights.
+// It will need to be manually refilled with lights or glass sheets.
 // If it's part of a robot module, it will charge when the Robot is inside a Recharge Station.
 //
 // EMAGGED FEATURES
@@ -41,7 +41,7 @@
 /obj/item/device/lightreplacer
 
 	name = "light replacer"
-	desc = "A device to automatically replace lights. Refill with working lightbulbs."
+	desc = "A device to automatically replace lights. Refill with working lightbulbs or sheets of glass."
 
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
