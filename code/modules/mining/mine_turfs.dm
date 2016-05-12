@@ -573,15 +573,16 @@
 /turf/simulated/mineral/proc/gets_drilled(var/mob/user, triggered_by_explosion = 0, var/artifact_fail = 0)
 	if(artifact_find && artifact_fail)
 		for(var/mob/living/M in range(src, 200))
-			M << "<span class='userdanger'>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</span>"
-			if(prob(50)) //pain
+			if(M)
+				M << "<span class='userdanger'>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</span>"
+				if(prob(50)) //pain
 		//		flick("pain",M.pain)
-				M.adjustBruteLoss(5)
-			else
-				flick("flash",M.flash)
-				if(prob(50))
-					M.Stun(5)
-			M.apply_effect(25, IRRADIATE)
+					M.adjustBruteLoss(5)
+				else
+					flick("flash",M.flash)
+					if(prob(50))
+						M.Stun(5)
+				M.apply_effect(25, IRRADIATE)
 	if (mineralType && (src.mineralAmt > 0) && (src.mineralAmt < 11))
 		var/i
 		for (i=0;i<mineralAmt;i++)
