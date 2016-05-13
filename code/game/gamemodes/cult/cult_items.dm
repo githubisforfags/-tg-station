@@ -20,9 +20,11 @@
 		user.Paralyse(5)
 		user << "<span class='danger'>An unexplicable force powerfully repels the sword from [target]!</span>"
 		var/organ = ((user.hand ? "l_":"r_") + "arm")
-		var/obj/item/organ/limb/affecting = user.get_organ(organ)
-		if(affecting.take_damage(rand(force/2, force))) //random amount of damage between half of the blade's force and the full force of the blade.
-			user.update_damage_overlays(0)
+		var/datum/organ/limb/L = user.get_organ(organ)
+		if(L && L.exists())
+			var/obj/item/organ/limb/affecting = L.organitem
+			if(affecting.take_damage(rand(force/2, force))) //random amount of damage between half of the blade's force and the full force of the blade.
+				user.update_damage_overlays(0)
 	return
 
 /obj/item/weapon/melee/cultblade/pickup(mob/living/user as mob)

@@ -368,9 +368,11 @@
 		)
 	if(is_human_victim)
 		var/mob/living/carbon/human/U = M
-		var/obj/item/organ/limb/affecting = U.get_organ("head")
-		if(affecting.take_damage(7))
-			U.update_damage_overlays(0)
+		var/datum/organ/limb/L = U.get_organ("head")
+		if(L && L.exists())
+			var/obj/item/organ/limb/affecting = L.organitem
+			if(affecting.take_damage(7))
+				U.update_damage_overlays(0)
 
 	else
 		M.take_organ_damage(7)

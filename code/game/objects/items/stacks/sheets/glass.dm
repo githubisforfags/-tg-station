@@ -304,9 +304,11 @@
 		if(!H.gloves)
 			H << "<span class='warning'>[src] cuts into your hand!</span>"
 			var/organ = (H.hand ? "l_" : "r_") + "arm"
-			var/obj/item/organ/limb/affecting = H.get_organ(organ)
-			if(affecting.take_damage(force / 2))
-				H.update_damage_overlays(0)
+			var/datum/organ/limb/L = H.get_organ(organ)
+			if(L && L.exists())
+				var/obj/item/organ/limb/affecting = L.organitem
+				if(affecting.take_damage(force / 2))
+					H.update_damage_overlays(0)
 	else if(ismonkey(user))
 		var/mob/living/carbon/monkey/M = user
 		M << "<span class='warning'>[src] cuts into your hand!</span>"
