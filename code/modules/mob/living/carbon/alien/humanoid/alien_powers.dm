@@ -273,28 +273,25 @@ Doesn't work on other aliens/AI.*/
 	desc = "Toggles Night Vision"
 	plasma_cost = 0
 	has_action = 0 // Has dedicated GUI button already
-	var/active = 1
 
 /obj/effect/proc_holder/alien/nightvisiontoggle/fire(mob/living/carbon/user)
-	if(!active)
-		user.see_in_dark = 8
-		user.see_invisible = SEE_INVISIBLE_MINIMUM
-		active = 1
+	var/obj/item/organ/internal/eyes/alien/EY = loc
+	if(!istype(EY))
+		return
+	if(!EY.active)
+		EY.dark_sight = 8
+		EY.invis_sight= SEE_INVISIBLE_MINIMUM
+		EY.active = 1
 		if(isalien(user))
 			user.hud_used.nightvisionicon.icon_state = "nightvision1"
 	else
-		user.see_in_dark = 4
-		user.see_invisible = 45
-		active = 0
+		EY.dark_sight = 4
+		EY.invis_sight = SEE_INVISIBLE_LEVEL_TWO
+		EY.active = 0
 		if(isalien(user))
 			user.hud_used.nightvisionicon.icon_state = "nightvision0"
 
 	return 1
-
-/obj/effect/proc_holder/alien/nightvisiontoggle/on_lose()
-	var/obj/item/organ/internal/eyes/alien/EY = loc
-	if(EY.owner && active)
-		fire(EY.owner)
 
 /mob/living/carbon/proc/getPlasma()
 	var/datum/organ/internal/alien/plasmavessel/OR = get_organ("plasmavessel")

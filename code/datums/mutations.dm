@@ -178,20 +178,9 @@
 	lowest_value = 256 * 15
 	text_gain_indication = "<span class='notice'>The walls suddenly disappear!</span>"
 
-/datum/mutation/human/x_ray/on_acquiring(mob/living/carbon/human/owner)
-	if(..())	return
-	on_life(owner)
-
-/datum/mutation/human/x_ray/on_life(mob/living/carbon/human/owner)
-	owner.sight |= SEE_MOBS|SEE_OBJS|SEE_TURFS
-	owner.see_in_dark = 8
-
-/datum/mutation/human/x_ray/on_losing(mob/living/carbon/human/owner)
-	if(..())	return
-	if((SEE_MOBS & owner.permanent_sight_flags) && (SEE_OBJS & owner.permanent_sight_flags) && (SEE_TURFS & owner.permanent_sight_flags)) //Xray flag combo
-		return
-	owner.see_in_dark = initial(owner.see_in_dark)
-	owner.sight = initial(owner.sight)
+/*
+The mutation is now handled in human species life code
+*/
 
 /datum/mutation/human/nearsight
 

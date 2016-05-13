@@ -595,26 +595,32 @@
 		H.sight &= ~SEE_MOBS
 	if(!(SEE_OBJS & H.permanent_sight_flags))
 		H.sight &= ~SEE_OBJS
-	if(H.remote_view)
+	if(H.remote_view || mutations_list[XRAY] in H.dna.mutations) //this is the dumbest shit ever
 		H.sight |= SEE_TURFS
 		H.sight |= SEE_MOBS
 		H.sight |= SEE_OBJS
-	H.see_in_dark = (H.sight == SEE_TURFS|SEE_MOBS|SEE_OBJS) ? 8 : darksight
-	var/see_temp = H.see_invisible
+	H.see_in_dark = darksight //Reset to defaults, this will be fixed up later down after all other flags have been applied
 	H.see_invisible = invis_sight
+	if(H.exists("eyes"))
+		var/datum/organ/internal/eyes/eyedatum = H.get_organ("eyes")
+		var/obj/item/organ/internal/eyes/E = eyedatum.organitem
+		H.see_in_dark = max(H.see_in_dark, E.dark_sight)
+		H.see_invisible = min(H.see_invisible, E.invis_sight)
+		H.sight |= E.sight_flags
 	if(H.glasses)
 		if(istype(H.glasses, /obj/item/clothing/glasses))
 			var/obj/item/clothing/glasses/G = H.glasses
 			H.sight |= G.vision_flags
-			H.see_in_dark = G.darkness_view
+			H.see_in_dark = max(G.darkness_view, H.see_in_dark)
 			if(G.invis_override)
 				H.see_invisible = G.invis_override
 			else
 				H.see_invisible = min(G.invis_view, H.see_invisible)
-	if(H.druggy)	//Override for druggy
-		H.see_invisible = see_temp
 	if(H.see_override)	//Override all
 		H.see_invisible = H.see_override
+	//This is here to fix issues with the vars not being applied correctly
+	H.see_in_dark = (H.sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : darksight
+	H.see_invisible = (H.sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ?  SEE_INVISIBLE_MINIMUM : invis_sight
 	//	This checks how much the mob's eyewear impairs their vision
 	if(H.tinttotal >= TINT_IMPAIR)
 		if(tinted_weldhelh)
@@ -1412,7 +1418,7 @@
 /datum/species/proc/handle_breath_temperature(datum/gas_mixture/breath, var/mob/living/carbon/human/H) // called by human/life, handles temperatures
 	if(abs(310.15 - breath.temperature) > 50)
 
-		if(!(mutations_list[COLDRES] in H.dna.mutations)) // COLD DAMAGE
+		if(!(mutations_list[COLDRES] in H.dna.mutations) && !(COLDRES in specflags)) // COLD DAMAGE
 			if(breath.temperature <= cold_damage_limit-140)
 				H.apply_damage(COLD_GAS_DAMAGE_LEVEL_3, BURN, "head")
 			else if(breath.temperature <= cold_damage_limit-60)

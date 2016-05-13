@@ -4,6 +4,8 @@
 	hardpoint = "eyes"
 	icon_state = "eye"
 	var/sight_flags = 0
+	var/invis_sight = SEE_INVISIBLE_LIVING
+	var/dark_sight = 2
 	var/eye_color = "fff"
 //	var/old_eye_color = "fff"
 	var/flash_protect = 0
@@ -30,6 +32,10 @@
 	name = "alien eyes"
 	eye_color = "83F52C"
 	var/obj/effect/proc_holder/alien/nightvisiontoggle/power = null
+	invis_sight = SEE_INVISIBLE_MINIMUM
+	dark_sight = 8
+	var/active = 1
+	sight_flags = SEE_MOBS
 	organtype = ORGAN_ALIEN
 
 
@@ -67,20 +73,13 @@
 		overlays |= overlay
 	return ..()
 
-/obj/item/organ/internal/eyes/cyberimp/on_life()
-	..()
-	owner.sight |= sight_flags
+//Sight flags now handled by the mob life
 
 /obj/item/organ/internal/eyes/cyberimp/on_insertion(special = 0)
 	..()
 	if(aug_message && !special)
 		owner << "<span class='notice'>[aug_message]</span>"
-	owner.sight |= sight_flags
 	return 1
-
-/obj/item/organ/internal/eyes/cyberimp/Remove(var/special = 0)
-	owner.sight ^= sight_flags
-	..()
 
 /obj/item/organ/internal/eyes/cyberimp/emp_act(severity)
 	if(!owner)
