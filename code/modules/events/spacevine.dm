@@ -136,7 +136,7 @@
 
 /datum/spacevine_mutation/light/on_grow(obj/effect/spacevine/holder)
 	if(prob(10*severity))
-		holder.light_range = 4
+		holder.set_light(4, 2)
 
 /datum/spacevine_mutation/toxicity
 	name = "toxic"

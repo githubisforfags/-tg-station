@@ -657,11 +657,13 @@ About the new airlock wires panel:
 	if(ishuman(user) && prob(40) && src.density)
 		var/mob/living/carbon/human/H = user
 		if(H.getBrainLoss() >= 60)
-			playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
-			if(!istype(H.head, /obj/item/clothing/head/helmet))
-				H.visible_message("<span class='danger'>[user] headbutts the airlock.</span>", \
+			var/datum/organ/limb/L = H.get_organ("head")
+			if(L && L.exists())
+				playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
+				if(!istype(H.head, /obj/item/clothing/head/helmet))
+					H.visible_message("<span class='danger'>[user] headbutts the airlock.</span>", \
 									"<span class='userdanger'>[user] headbutts the airlock!</span>")
-				var/obj/item/organ/limb/affecting = H.get_organ("head")
+				var/obj/item/organ/limb/affecting = L.organitem
 				H.Stun(5)
 				H.Weaken(5)
 				if(affecting.take_damage(10, 0))

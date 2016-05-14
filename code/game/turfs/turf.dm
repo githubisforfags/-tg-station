@@ -164,10 +164,6 @@
 	#else
 	W.lighting_overlays = old_lighting_overlays
 	#endif
-	if(!istype(W, /turf/space))
-		W.lighting_build_overlays()
-	else
-		W.lighting_clear_overlays()
 
 	if(istype(W, /turf/simulated))
 		W:Assimilate_Air()
@@ -181,14 +177,18 @@
 //	if(old_opacity != W.opacity)			//opacity has changed. Need to update surrounding lights
 //		if(W.lighting_lumcount)				//unless we're being illuminated, don't bother (may be buggy, hard to test)
 //			W.UpdateAffectingLights()
-
+	if(!istype(W, /turf/space))
+		W.lighting_build_overlays()
+	else
+		W.lighting_clear_overlays()
 	for(var/turf/space/S in range(W,1))
 		S.update_starlight()
 
 	W.levelupdate()
 	W.CalculateAdjacentTurfs()
-	spawn(2)
-		W.update_overlay()
+	W.update_overlay()
+	spawn(5)
+		W.mark_for_update()
 
 	universe.OnTurfChange(W)
 	return W

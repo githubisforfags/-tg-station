@@ -135,6 +135,18 @@
 		Obj.update_all_lights()
 	..()
 
+/turf/proc/mark_for_update()
+	#if LIGHTING_RESOLUTION == 1
+	if(lighting_overlay)
+		lighting_overlay.needs_update = 1
+		lighting_update_overlays += lighting_overlay
+	#else
+	for(var/atom/movable/lighting_overlay/L in lighting_overlays)
+		L.needs_update = 1
+		lighting_update_overlays += L
+	#endif
+
+
 /turf/Exited(atom/movable/Obj, atom/newloc)
 	..()
 	if(Obj && Obj.opacity)
