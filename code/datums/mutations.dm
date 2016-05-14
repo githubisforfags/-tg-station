@@ -12,7 +12,6 @@
 
 	var/dna_block
 	var/quality
-	var/get_chance = 100
 	var/lowest_value = 256 * 8
 	var/text_gain_indication = ""
 	var/text_lose_indication = ""
@@ -101,7 +100,6 @@
 
 	name = "Hulk"
 	quality = POSITIVE
-	get_chance = 100
 	lowest_value = 256 * 14
 	text_gain_indication = "<span class='notice'>Your muscles hurt!</span>"
 
@@ -142,7 +140,6 @@
 
 	name = "Telekinesis"
 	quality = POSITIVE
-	get_chance = 100
 	lowest_value = 256 * 14
 	text_gain_indication = "<span class='notice'>You feel smarter!</span>"
 
@@ -157,7 +154,6 @@
 
 	name = "Cold Resistance"
 	quality = POSITIVE
-	get_chance = 100
 	lowest_value = 256 * 12
 	text_gain_indication = "<span class='notice'>Your body feels warm!</span>"
 
@@ -174,7 +170,6 @@
 
 	name = "X Ray Vision"
 	quality = POSITIVE
-	get_chance = 100
 	lowest_value = 256 * 15
 	text_gain_indication = "<span class='notice'>The walls suddenly disappear!</span>"
 
@@ -347,7 +342,6 @@ The mutation is now handled in human species life code
 /datum/mutation/human/stealth
 	name = "Cloak Of Darkness"
 	quality = POSITIVE
-	get_chance = 33
 	lowest_value = 256 * 14
 	text_gain_indication = "<span class='notice'>You begin to fade into the shadows.</span>"
 	text_lose_indication = "<span class='notice'>You become fully visible.</span>"
@@ -369,7 +363,6 @@ The mutation is now handled in human species life code
 /datum/mutation/human/chameleon
 	name = "Chameleon"
 	quality = POSITIVE
-	get_chance = 33
 	lowest_value = 256 * 14
 	text_gain_indication = "<span class='notice'>You feel one with your surroundings.</span>"
 	text_lose_indication = "<span class='notice'>You feel oddly exposed.</span>"
