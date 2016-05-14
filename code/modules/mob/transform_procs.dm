@@ -300,13 +300,12 @@
 	O.job = "AI"
 
 	O.rename_self("ai",1)
-	. = O
 	qdel(src)
-	return
+	return O
 
 
-//human -> robot
-/mob/living/carbon/human/proc/Robotize(var/delete_items = 0)
+//mob -> robot
+/mob/proc/Robotize(var/delete_items = 0)
 	if (notransform)
 		return
 	for(var/obj/item/W in src)
@@ -319,7 +318,6 @@
 	canmove = 0
 	icon = null
 	invisibility = 101
-	qdel(organsystem)
 
 	var/mob/living/silicon/robot/O = new /mob/living/silicon/robot( loc )
 
@@ -347,11 +345,11 @@
 	O.job = "Cyborg"
 	O.notify_ai(1)
 
-	. = O
 	qdel(src)
+	return O
 
-//human -> mommi
-/mob/living/carbon/human/proc/Mommize(var/delete_items = 0)
+//mob -> mommi
+/mob/proc/Mommize(var/delete_items = 0)
 	if (notransform)
 		return
 	for(var/obj/item/W in src)
@@ -364,7 +362,6 @@
 	canmove = 0
 	icon = null
 	invisibility = 101
-	qdel(organsystem)
 
 	var/mob/living/silicon/robot/mommi/O = new /mob/living/silicon/robot/mommi( loc )
 
@@ -383,8 +380,8 @@
 	O.loc = loc
 	O.job = "MoMMI"
 	O.updateicon()
-	. = O
 	qdel(src)
+	return O
 
 
 //human -> alien
