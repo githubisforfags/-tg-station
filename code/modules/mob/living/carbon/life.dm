@@ -534,8 +534,8 @@
 			see_in_dark = max(see_in_dark, E.dark_sight)
 			see_invisible = min(see_invisible, E.invis_sight)
 			sight |= E.sight_flags
-		see_in_dark = (sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : see_in_dark  //Xray flag combo
-		see_invisible = (sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? SEE_INVISIBLE_MINIMUM : see_invisible //same here
+		see_in_dark = ((sight & SEE_TURFS) && (sight & SEE_MOBS) && (sight & SEE_OBJS)) ? 8 : see_in_dark  //Xray flag combo
+		see_invisible = ((sight & SEE_TURFS) && (sight & SEE_MOBS) && (sight & SEE_OBJS)) ? SEE_INVISIBLE_MINIMUM : see_invisible //same here
 		if(see_override)
 			see_invisible = see_override
 
