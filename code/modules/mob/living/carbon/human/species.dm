@@ -619,8 +619,8 @@
 	if(H.see_override)	//Override all
 		H.see_invisible = H.see_override
 	//This is here to fix issues with the vars not being applied correctly
-	H.see_in_dark = (H.sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : darksight
-	H.see_invisible = (H.sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ?  SEE_INVISIBLE_MINIMUM : invis_sight
+	H.see_in_dark = ((H.sight & SEE_TURFS) && (H.sight & SEE_MOBS) && (H.sight & SEE_OBJS)) ? 8 : H.see_in_dark
+	H.see_invisible = ((H.sight & SEE_TURFS) && (H.sight & SEE_MOBS) && (H.sight & SEE_OBJS)) ?  SEE_INVISIBLE_MINIMUM : H.see_invisible
 	//	This checks how much the mob's eyewear impairs their vision
 	if(H.tinttotal >= TINT_IMPAIR)
 		if(tinted_weldhelh)
