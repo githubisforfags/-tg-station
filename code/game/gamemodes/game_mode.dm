@@ -136,7 +136,7 @@
 	var/list/antag_canadates = list()
 
 	for(var/mob/living/carbon/human/H in living_crew)
-		if(H.client && H.client.prefs.allow_midround_antag)
+		if(H.client && H.client.prefs.toggles & MIDROUND_ANTAG)
 			antag_canadates += H
 
 	if(!antag_canadates)

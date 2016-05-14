@@ -37,7 +37,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		chat_toggles = TOGGLES_DEFAULT_CHAT
 		toggles = TOGGLES_DEFAULT
 	if(current_version < 12)
-		allow_midround_antag = 0
+		toggles &= ~(MIDROUND_ANTAG)
 	return
 
 //should this proc get fairly long (say 3 versions long),
