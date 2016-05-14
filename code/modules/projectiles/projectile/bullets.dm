@@ -6,16 +6,17 @@
 	nodamage = 0
 	flag = "bullet"
 
-
 /obj/item/projectile/bullet/weakbullet //beanbag, heavy stamina damage
-	damage = 5
-	stamina = 80
-
+	damage = 10
+	stamina = 75
+	stun = 2
+	weaken = 2
 
 /obj/item/projectile/bullet/weakbullet2 //detective revolver instastuns, but multiple shots are better for keeping punks down
 	damage = 15
-	weaken = 3
 	stamina = 50
+	stun = 3
+	weaken = 3
 
 /obj/item/projectile/bullet/weakbullet3
 	damage = 20
@@ -54,15 +55,13 @@
 /obj/item/projectile/bullet/heavybullet
 	damage = 35
 
-
 /obj/item/projectile/bullet/stunshot //taser slugs for shotguns, nothing special
 	name = "stunshot"
-	damage = 5
+	damage = 10
 	stun = 5
 	weaken = 5
 	stutter = 5
 	jitter = 20
-	range = 7
 	icon_state = "spark"
 	color = "#FFFF00"
 
@@ -93,6 +92,47 @@
 /obj/item/projectile/bullet/incendiary/firebullet
 	damage = 10
 
+/obj/item/projectile/bullet/honker
+	damage = 0
+	weaken = 5
+	stun = 5
+	nodamage = 1
+	hitsound = 'sound/items/bikehorn.ogg'
+	icon = 'icons/obj/hydroponics/harvest.dmi'
+	icon_state = "banana"
+
+/obj/item/projectile/bullet/honker/New()
+	..()
+	SpinAnimation()
+
+/*
+you see this shit right here is EXACTLY why I don't code
+/obj/item/projectile/bullet/henker
+	damage = 0
+	weaken = 5
+	stun = 5
+	stutter = 20
+	nodamage = 1
+	hitsound = 'sound/items/AirHorn.ogg'
+	icon = 'icons/obj/hydroponics/harvest.dmi'
+	icon_state = "banana"
+
+/obj/item/projectile/bullet/henker/on_hit(var/mob/target) // dude procs lmao
+	. = ..()
+	if(!iscarbon(target))
+		return 0
+	var/mob/living/carbon/M = target
+	var/ear_safety = M.check_ear_prot()
+		if(!ear_safety)
+			(M.ear_damage + 10, 100)
+			M.ear_deaf = 10
+		M << "<font color='red' size='7'>HONK</font>"
+
+/obj/item/projectile/bullet/henker/New()
+	..()
+	SpinAnimation()
+*/
+
 /obj/item/projectile/bullet/meteorshot
 	name = "meteor"
 	icon = 'icons/obj/meteor.dmi'
@@ -112,7 +152,6 @@
 /obj/item/projectile/bullet/meteorshot/New()
 	..()
 	SpinAnimation()
-
 
 /obj/item/projectile/bullet/mime
 	damage = 20
@@ -157,7 +196,6 @@
 		reagents.add_reagent("aluminium", 15)
 		reagents.add_reagent("foaming_agent", 5)
 		reagents.add_reagent("facid", 5)
-
 
 //This one is for future syringe guns update
 /obj/item/projectile/bullet/dart/syringe

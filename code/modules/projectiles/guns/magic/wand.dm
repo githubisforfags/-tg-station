@@ -161,3 +161,17 @@
 	explosion(user.loc, -1, 0, 2, 3, 0, flame_range = 2)
 	charges--
 	..()
+
+/////////////////////////////////////
+//WAND OF HONK
+/////////////////////////////////////
+
+/obj/item/weapon/gun/magic/wand/honk
+	name = "wand of honk"
+	desc = "Honk!"
+	fire_sound = "sound/items/bikehorn.ogg"
+	ammo_type = /obj/item/ammo_casing/magic/honk
+	icon_state = "nothingwand"
+	item_state = "wand"
+	max_charges = 10
+	recharge_rate = 2

@@ -46,3 +46,16 @@
 	max_charges = 10
 	recharge_rate = 2
 	no_den_usage = 1
+
+/*
+never ever
+/obj/item/weapon/gun/magic/staff/honk
+	name = "staff of the honkmother"
+	desc = "HONK!"
+	fire_sound = "sound/items/bikehorn.ogg"
+	ammo_type = /obj/item/ammo_casing/magic/henk
+	icon_state = "staffofnothing"
+	item_state = "staffofnothing"
+	max_charges = 10
+	recharge_rate = 2
+*/
