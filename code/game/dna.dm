@@ -859,8 +859,7 @@
 								I = new /obj/item/weapon/dnainjector(loc)
 								for(var/datum/mutation/human/HM in good_mutations + bad_mutations + not_good_mutations)
 									if(HM.check_block_string(buffer_slot["SE"]))
-										if(prob(HM.get_chance))
-											I.add_mutations.Add(HM)
+										I.add_mutations.Add(HM)
 									else
 										I.remove_mutations.Add(HM)
 								I.damage_coeff  = connected.damage_coeff
