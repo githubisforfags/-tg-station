@@ -174,7 +174,8 @@
 	// Humans cursed to stay in the darkness, lest their life forces drain. They regain health in shadow and die in light.
 	name = "Shadow"	//Used to be ???
 	id = "shadow"
-//	darksight = 8 //Doesn't work as intended
+	darksight = 8
+	invis_sight = SEE_INVISIBLE_MINIMUM
 	sexes = 0
 	roundstart = 1
 	ignored_by = list(/mob/living/simple_animal/hostile/faithless)
@@ -205,10 +206,6 @@
 			if (light_amount < 2) //heal in the dark
 				H.heal_overall_damage(1,1)
 
-/datum/species/shadow/handle_vision(mob/living/carbon/human/H) //Nightvision does not function without these lines.
-	H.see_in_dark = 8
-	H.see_invisible = SEE_INVISIBLE_MINIMUM
-
 /*
  SLIMEPEOPLE
 */
@@ -218,8 +215,8 @@
 	name = "Slimeperson"
 	id = "slime"
 	default_color = "00FFFF"
-//	darksight = 3
-	invis_sight = SEE_INVISIBLE_LEVEL_ONE
+	darksight = 3
+	invis_sight = SEE_INVISIBLE_MINIMUM
 	specflags = list(EYECOLOR,HAIR,FACEHAIR,NOBLOOD)
 	hair_color = "mutcolor"
 	hair_alpha = 150
@@ -252,10 +249,6 @@
 /datum/species/slime/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
 	if(chem.id == "slimejelly")
 		return 1
-
-/datum/species/slime/handle_vision(mob/living/carbon/human/H)
-	H.see_in_dark = 3
-	H.see_invisible = SEE_INVISIBLE_MINIMUM
 
 /*
  JELLYPEOPLE
