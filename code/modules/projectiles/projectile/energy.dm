@@ -5,18 +5,16 @@
 	damage_type = BURN
 	flag = "energy"
 
-
 /obj/item/projectile/energy/electrode
 	name = "electrode"
 	icon_state = "spark"
 	color = "#FFFF00"
 	nodamage = 1
-	stun = 5
-	weaken = 5
+	stun = 10
+	weaken = 10
 	stutter = 5
 	jitter = 20
 	hitsound = 'sound/weapons/taserhit.ogg'
-	range = 7
 
 /obj/item/projectile/energy/electrode/on_hit(var/atom/target, var/blocked = 0)
 	. = ..()
@@ -45,14 +43,13 @@
 	damage_type = CLONE
 	irradiate = 40
 
-
 /obj/item/projectile/energy/dart //ninja throwing dart
 	name = "dart"
 	icon_state = "toxin"
 	damage = 5
 	damage_type = TOX
 	weaken = 5
-	range = 7
+	range = 10
 
 /obj/item/projectile/energy/bolt //ebow bolts
 	name = "bolt"
@@ -60,9 +57,8 @@
 	damage = 15
 	damage_type = TOX
 	nodamage = 0
-	weaken = 5
+	weaken = 10
 	stutter = 5
 
 /obj/item/projectile/energy/bolt/large
 	damage = 20
-

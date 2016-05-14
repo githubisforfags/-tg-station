@@ -53,7 +53,7 @@
 		else
 			if(cooldown <= 0)
 				playsound(get_turf(src), 'sound/effects/woodhit.ogg', 75, 1, -1)
-				target.Weaken(3)
+				target.Weaken(5)
 				add_logs(user, target, "stunned", object="classic baton")
 				src.add_fingerprint(user)
 				target.visible_message("<span class ='danger'>[user] has knocked down [target] with \the [src]!</span>", \
@@ -88,7 +88,7 @@
 		user << "<span class ='warning'>You extend the baton.</span>"
 		icon_state = "telebaton_1"
 		item_state = "nullrod"
-		w_class = 4 //doesnt fit in backpack when its on for balance
+		w_class = 3
 		force = 10 //stunbaton damage
 		attack_verb = list("smacked", "struck", "cracked", "beaten")
 	else
