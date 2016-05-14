@@ -172,7 +172,7 @@
 
 /obj/item/areaeditor/proc/edit_area()
 	var/area/A = get_area()
-	var/prevname = "[A.name]"
+	var/prevname = A.name
 	var/str = trim(stripped_input(usr,"New area name:", "Blueprint Editing", "", MAX_NAME_LEN))
 	if(!str || !length(str) || str==prevname) //cancel
 		return
@@ -180,6 +180,7 @@
 		usr << "<span class='warning'>The given name is too long.  The area's name is unchanged.</span>"
 		return
 	set_area_machinery_title(A,str,prevname)
+	A.name = str
 	usr << "<span class='notice'>You rename the '[prevname]' to '[str]'.</span>"
 	interact()
 	return
@@ -189,15 +190,15 @@
 	if (!oldtitle) // or replacetext goes to infinite loop
 		return
 	for(var/obj/machinery/alarm/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.name = url_decode(replacetext(url_encode(M.name),url_encode(oldtitle),title)) //This does not cause sanitization failures because title is already stripped
 	for(var/obj/machinery/power/apc/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.name = url_decode(replacetext(url_encode(M.name),url_encode(oldtitle),title))
 	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.name = url_decode(replacetext(url_encode(M.name),url_encode(oldtitle),title))
 	for(var/obj/machinery/atmospherics/components/unary/vent_pump/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.name = url_decode(replacetext(url_encode(M.name),url_encode(oldtitle),title))
 	for(var/obj/machinery/door/M in A)
-		M.name = replacetext(M.name,oldtitle,title)
+		M.name = url_decode(replacetext(url_encode(M.name),url_encode(oldtitle),title))
 	//TODO: much much more. Unnamed airlocks, cameras, etc.
 
 
