@@ -103,7 +103,7 @@
 	playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, 1)
 	add_fingerprint(user)
 
-/*
+
 /obj/item/weapon/melee/supermatter_sword // This can ONLY be a good idea.
 	name = "supermatter sword"
 	desc = "In a station full of bad ideas, this might just be the worst."
@@ -114,7 +114,7 @@
 	w_class = 4
 	force = 0.001
 	armour_penetration = 1000
-	var/obj/machinery/power/supermatter_shard/shard
+	var/obj/machinery/power/supermatter/shard/shard
 	var/balanced = 1
 	origin_tech = "combat=5;materials=6"
 
@@ -195,4 +195,4 @@
 
 /obj/item/weapon/melee/supermatter_sword/add_blood()
 	return
-*/
+

@@ -49,7 +49,7 @@
 	message_admins("<span class='adminnotice'>[key_name_admin(usr)] used THERE CAN BE ONLY ONE!</span>")
 	log_admin("[key_name(usr)] used there can be only one.")
 
-/*
+
 /proc/only_me()
 	if(!ticker || !ticker.mode)
 		alert("The game hasn't started yet!")
@@ -91,4 +91,4 @@
 
 	message_admins("<span class='adminnotice'>[key_name_admin(usr)] used THERE CAN BE ONLY ME!</span>")
 	log_admin("[key_name(usr)] used there can be only me.")
-*/
+
