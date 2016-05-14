@@ -418,7 +418,7 @@
 		else if(eye_blurry)			//blurry eyes heal slowly
 			eye_blurry = max(eye_blurry-1, 0)
 	else
-		eye_blind = max(eye_blind,5) //Force blindness if user is actually blind
+		eye_blind = max(eye_blind,1) //Force blindness if user is actually blind
 	//Ears
 	if(disabilities & DEAF)		//disabled-deaf, doesn't get better on its own
 		setEarDamage(-1, max(ear_deaf, 1))
@@ -526,8 +526,16 @@
 			sight |= SEE_TURFS
 			sight |= SEE_MOBS
 			sight |= SEE_OBJS
-		see_in_dark = (sight == SEE_TURFS|SEE_MOBS|SEE_OBJS) ? 8 : 2  //Xray flag combo
-		see_invisible = SEE_INVISIBLE_LIVING
+		see_in_dark =  2
+		see_invisible =  SEE_INVISIBLE_LIVING
+		if(exists("eyes"))
+			var/datum/organ/internal/eyes/eyedatum = get_organ("eyes")
+			var/obj/item/organ/internal/eyes/E = eyedatum.organitem
+			see_in_dark = max(see_in_dark, E.dark_sight)
+			see_invisible = min(see_invisible, E.invis_sight)
+			sight |= E.sight_flags
+		see_in_dark = (sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : see_in_dark  //Xray flag combo
+		see_invisible = (sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? SEE_INVISIBLE_MINIMUM : see_invisible //same here
 		if(see_override)
 			see_invisible = see_override
 

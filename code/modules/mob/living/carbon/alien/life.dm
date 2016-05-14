@@ -37,15 +37,17 @@
 		see_in_dark = 8
 		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 	else
-		sight |= SEE_MOBS
-		sight &= ~SEE_TURFS
-		sight &= ~SEE_OBJS
-		if(nightvision)
-			see_in_dark = 8
-			see_invisible = SEE_INVISIBLE_MINIMUM
-		else if(!nightvision)
-			see_in_dark = 4
-			see_invisible = 45
+		see_in_dark =  4
+		see_invisible =  SEE_INVISIBLE_LEVEL_TWO
+		if(exists("eyes"))
+			var/datum/organ/internal/eyes/eyedatum = get_organ("eyes")
+			var/obj/item/organ/internal/eyes/E = eyedatum.organitem
+			see_in_dark = max(see_in_dark, E.dark_sight)
+			see_invisible = min(see_invisible, E.invis_sight)
+			sight |= E.sight_flags
+		see_in_dark = (sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? 8 : see_in_dark  //Xray flag combo
+		see_invisible = (sight & (SEE_TURFS|SEE_MOBS|SEE_OBJS)) ? SEE_INVISIBLE_MINIMUM : see_invisible //same here
+
 		if(see_override)
 			see_invisible = see_override
 
