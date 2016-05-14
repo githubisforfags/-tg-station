@@ -41,7 +41,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	var/toggles = TOGGLES_DEFAULT
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
 	var/ghost_form = "ghost"
-	var/allow_midround_antag = 1
+	var/allow_midround_antag = 0
 
 	//character preferences
 	var/real_name						//our character's name
