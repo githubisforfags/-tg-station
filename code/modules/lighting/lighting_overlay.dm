@@ -87,24 +87,32 @@
 			color = rgb(lum_r * 255 * ., lum_g * 255 * ., lum_b * 255 * .),
 			LIGHTING_TRANSITION_SPEED
 			)
+		spawn(LIGHTING_TRANSITION_SPEED)
+			color = rgb(lum_r * 255 * ., lum_g * 255 * ., lum_b * 255 * .)
+			update_color_luminosity()
 		#else
 		color = rgb(lum_r * 255 * ., lum_g * 255 * ., lum_b * 255 * .)
 		#endif
-		if(color != "#000000")
-			T.luminosity = 1
-		else  //No light, set the turf's luminosity to 0 to remove it from view()
-			#if LIGHTING_TRANSITIONS == 1
-			spawn(LIGHTING_TRANSITION_SPEED)
-				T.luminosity = 0
-			#else
-			T.luminosity = 0
-			#endif
-
+		update_color_luminosity()
 		universe.OnTurfTick(T)
 	else
 		if(loc)
 			warning("A lighting overlay realised it's loc was NOT a turf (actual loc: [loc], [loc.type]) in update_overlay() and got pooled!")
 		qdel(src)
+
+/atom/movable/lighting_overlay/proc/update_color_luminosity()
+	var/turf/T = loc
+	if(!istype(T))
+		return
+	if(color != "#000000")
+		T.luminosity = 1
+	else  //No light, set the turf's luminosity to 0 to remove it from view()
+		#if LIGHTING_TRANSITIONS == 1
+		spawn(LIGHTING_TRANSITION_SPEED)
+			T.luminosity = 0
+		#else
+		T.luminosity = 0
+		#endif
 
 /atom/movable/lighting_overlay/ResetVars()
 //	testing("Lighting_overlays: resetvars called")
