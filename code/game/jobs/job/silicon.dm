@@ -6,7 +6,7 @@ AI
 	flag = AI
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 0
+	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#ccffcc"
 	supervisors = "your laws"
@@ -29,7 +29,7 @@ Cyborg
 	flag = CYBORG
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 0
+	total_positions = 1
 	spawn_positions = 1
 	supervisors = "your laws and the AI"	//Nodrak
 	selection_color = "#ddffdd"
@@ -45,7 +45,7 @@ Cyborg
 	flag = MOMMI
 	department_flag = ENGSEC
 	faction = "Station"
-	total_positions = 0
+	total_positions = 1
 	spawn_positions = 4 // to match the number of drone shells that spawned on the station, was 2 on /vg/
 	supervisors = "your laws and the AI"	//Nodrak
 	selection_color = "#ddffdd"

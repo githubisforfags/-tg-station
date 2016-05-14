@@ -234,28 +234,50 @@
 		src << alert("[rank] is not available. Please try another.")
 		return 0
 
+	src << browse(null, "window=playersetup") //closes the player setup window
 	SSjob.AssignRole(src, rank, 1)
-
-	var/mob/living/character = create_character()	//creates the human and transfers vars and mind
-	SSjob.EquipRank(character, rank, 1)					//equips the human
-	character.loc = pick(latejoin)
-	character.lastarea = get_area(loc)
-
-	if( !( character.mind.assigned_role in list( "Cyborg" ,  "Mobile MMI" , "AI") ) )
+	if( !( rank in list( "Cyborg" ,  "MoMMI" , "AI") ) )
+		var/mob/living/character = create_character()	//creates the human and transfers vars and mind
+		ticker.minds += character.mind
+		SSjob.EquipRank(character, rank, 1)					//equips the human
+		character.loc = pick(latejoin)
+		character.lastarea = get_area(loc)
 		data_core.manifest_inject(character)
-		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 		AnnounceArrival(character, rank)
-
-	joined_player_list += character.ckey
-
-	if(config.allow_latejoin_antagonists)
-		switch(SSshuttle.emergency.mode)
-			if(SHUTTLE_RECALL, SHUTTLE_IDLE)
-				ticker.mode.make_antag_chance(character)
-			if(SHUTTLE_CALL)
-				if(SSshuttle.emergency.timeLeft(1) > initial(SSshuttle.emergencyCallTime)*0.5)
+		joined_player_list += character.ckey
+		if(config.allow_latejoin_antagonists)
+			switch(SSshuttle.emergency.mode)
+				if(SHUTTLE_RECALL, SHUTTLE_IDLE)
 					ticker.mode.make_antag_chance(character)
+				if(SHUTTLE_CALL)
+					if(SSshuttle.emergency.timeLeft(1) > initial(SSshuttle.emergencyCallTime)*0.5)
+						ticker.mode.make_antag_chance(character)
+
+	else
+		var/mob/living/character = AttemptSiliconLateSpawn(src, rank)
+		ticker.minds += character.mind
+		joined_player_list += character.ckey
 	qdel(src)
+
+
+
+/mob/new_player/proc/AttemptSiliconLateSpawn(var/mob/living/M, rank)
+	switch(rank)
+		if("AI")
+			var/mob/living/silicon/R = M.AIize() //loc handled in there
+			return R
+		if("Cyborg")
+			var/mob/living/silicon/R = M.Robotize(1)
+			R.loc = pick(latejoin)
+			R.lastarea = get_area(loc)
+			return R
+		if("MoMMI")
+			var/mob/living/silicon/R = M.Mommize(1)
+			R.loc = pick(latejoin)
+			R.lastarea = get_area(loc)
+			return R
+
+
 
 /mob/new_player/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)
 	if (ticker.current_state == GAME_STATE_PLAYING)
@@ -265,7 +287,7 @@
 		if (ailist.len)
 			var/mob/living/silicon/ai/announcer = pick(ailist)
 			if(character.mind)
-				if((character.mind.assigned_role != "Cyborg") && (character.mind.special_role != "MODE"))
+				if(character.mind.special_role != "MODE")
 					announcer.say("[announcer.radiomod] [character.real_name] has signed up as [rank].")
 
 /mob/new_player/proc/LateChoices()
@@ -311,7 +333,7 @@
 	//src << browse(dat, "window=latechoices;size=300x640;can_close=1")
 
 	// Added the new browser window method
-	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 440, 500)
+	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 500, 550)
 	popup.add_stylesheet("playeroptions", 'html/browser/playeroptions.css')
 	popup.set_content(dat)
 	popup.open(0) // 0 is passed to open so that it doesn't use the onclose() proc
