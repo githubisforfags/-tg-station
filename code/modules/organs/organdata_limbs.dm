@@ -91,3 +91,43 @@
 /datum/organ/limb/butt
 	name = "butt"
 	organitem_type = /obj/item/organ/limb/butt
+
+/datum/organ/limb/proc/make_robotic(var/drop_suborgans)
+	return
+
+
+/datum/organ/limb/head/make_robotic()
+	var/RL = new /obj/item/organ/limb/head/robot(src)
+	switch_organitem(RL)
+	var/datum/organ/internal/eyes/EY = owner.get_organ("eyes")
+	if(EY && EY.exists())
+		var/obj/item/organ/internal/eyes/org = EY.organitem
+		if(org.status == ORGAN_ORGANIC)
+			EY.switch_organitem(new /obj/item/organ/internal/eyes/cyberimp)
+
+/datum/organ/limb/head/make_robotic(drop_suborgans)
+	var/RL = new /obj/item/organ/limb/chest/robot(src)
+	switch_organitem(RL)
+	for(var/datum/organ/internal/I in owner.get_internal_organs("chest"))
+		if(I.status == ORGAN_ORGANIC && drop_suborgans) // FLESH IS WEAK
+			I.dismember(ORGAN_REMOVED, special = 1)
+	for(var/datum/organ/internal/I in owner.get_internal_organs("groin"))
+		if(I.status == ORGAN_ORGANIC && drop_suborgans) // FLESH IS WEAK
+			I.dismember(ORGAN_REMOVED, special = 1)
+	owner.organsystem.remove_organ("egg")	//Can't get impregnated anymore
+
+/datum/organ/limb/arm/l_arm/make_robotic()
+	var/RL = new /obj/item/organ/limb/arm/l_arm/robot()
+	switch_organitem(RL)
+
+/datum/organ/limb/arm/r_arm/make_robotic()
+	var/RL = new /obj/item/organ/limb/arm/r_arm/robot()
+	switch_organitem(RL)
+
+/datum/organ/limb/leg/r_leg/make_robotic()
+	var/RL = new /obj/item/organ/limb/leg/r_leg/robot()
+	switch_organitem(RL)
+
+/datum/organ/limb/leg/l_leg/make_robotic()
+	var/RL = new /obj/item/organ/limb/leg/l_leg/robot()
+	switch_organitem(RL)

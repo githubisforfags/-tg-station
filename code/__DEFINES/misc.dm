@@ -158,3 +158,6 @@
 #define MAT_URANIUM		"$uranium"
 #define MAT_PLASMA		"$plasma"
 #define MAT_BANANIUM	"$bananium"
+
+//subtypesof(), typesof() without the parent path
+#define subtypesof(typepath) ( typesof(typepath) - typepath )

@@ -174,7 +174,7 @@
 	H.equip_to_slot_or_del(new /obj/item/weapon/claymore(H), slot_r_hand)
 	H.equip_to_slot_or_del(new /obj/item/weapon/twohanded/spear(H), slot_back)
 
-/*
+
 /////////////////////Multiverse Blade////////////////////
 var/global/list/multiverse = list()
 
@@ -242,7 +242,7 @@ var/global/list/multiverse = list()
 					usr.mind.special_role = "[usr.real_name] Prime"
 					evil = FALSE
 		else
-			var/list/candidates = get_candidates(ROLE_WIZARD)
+			var/list/candidates = get_candidates(BE_WIZARD)
 			if(candidates.len)
 				var/client/C = pick(candidates)
 				spawn_copy(C, get_turf(user.loc), user)
@@ -273,11 +273,11 @@ var/global/list/multiverse = list()
 			var/datum/species/S = new speciestype()
 			if(!S.dangerous_existence)
 				all_species += speciestype
-		M.set_species(pick(all_species), icon_update=0)
+		var/datum/species/species = pick(all_species)
+		hardset_dna(M, null, null, null, null, species.type)
 	M.update_body()
 	M.update_hair()
 	M.update_body_parts()
-	M.dna.update_dna_identity()
 	equip_copy(M)
 
 	if(evil)
@@ -333,9 +333,8 @@ var/global/list/multiverse = list()
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/wizard/red(M), slot_head)
 			M.equip_to_slot_or_del(sword, slot_r_hand)
 		if("cyborg")
-			for(var/X in M.bodyparts)
-				var/obj/item/bodypart/affecting = X
-				affecting.change_bodypart_status(ORGAN_ROBOTIC)
+			for(var/datum/organ/limb/X in M.get_limbs())
+				X.make_robotic(0)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/eyepatch(M), slot_glasses)
 			M.equip_to_slot_or_del(sword, slot_r_hand)
 
@@ -392,7 +391,7 @@ var/global/list/multiverse = list()
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/welding(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_ears)
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/apron(M), slot_wear_suit)
-			M.equip_to_slot_or_del(new /obj/item/weapon/kitchen/knife(M), slot_l_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/kitchenknife(M), slot_l_store)
 			M.equip_to_slot_or_del(new /obj/item/weapon/scalpel(M), slot_r_store)
 			M.equip_to_slot_or_del(sword, slot_r_hand)
 			for(var/obj/item/carried_item in M.contents)
@@ -448,4 +447,4 @@ var/global/list/multiverse = list()
 	W.registered_name = M.real_name
 	W.update_label(M.real_name)
 	M.equip_to_slot_or_del(W, slot_wear_id)
-*/
+
