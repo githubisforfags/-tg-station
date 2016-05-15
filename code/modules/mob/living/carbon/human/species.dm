@@ -1240,7 +1240,14 @@
 			H.adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
 			H.failed_last_breath = 1
 
-		H.throw_alert("oxy")
+		if(safe_oxygen_min)
+			H.throw_alert("oxy")
+		if(safe_nitrogen_min)
+			H.throw_alert("not_enough_n2")
+		if (safe_co2_min)
+			H.throw_alert("not_enough_co2")
+		if(safe_toxins_min)
+			H.throw_alert("not_enough_tox")
 
 		return 0
 

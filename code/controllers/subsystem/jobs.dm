@@ -359,7 +359,6 @@ var/datum/subsystem/job/SSjob
 		if(ismob(new_mob))
 			H = new_mob
 		job.apply_fingerprints(H)
-
 	H << "<b>You are the [rank].</b>"
 	H << "<b>As the [rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 	H << "<b>To speak on your departments radio, use the :h button. To see others, look closely at your headset.</b>"
@@ -368,7 +367,8 @@ var/datum/subsystem/job/SSjob
 	if(config.minimal_access_threshold)
 		H << "<FONT color='blue'><B>As this station was initially staffed with a [config.jobs_have_minimal_access ? "full crew, only your job's necessities" : "skeleton crew, additional access may"] have been added to your ID card.</B></font>"
 
-	H.update_hud() 	// Tmp fix for Github issue 1006. TODO: make all procs in update_icons.dm do client.screen |= equipment no matter what.
+	if(H)
+		H.update_hud() 	// Tmp fix for Github issue 1006. TODO: make all procs in update_icons.dm do client.screen |= equipment no matter what.
 	return 1
 
 
