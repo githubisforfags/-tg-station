@@ -417,9 +417,13 @@
 
 	if(check_anomalies)	//if it's set to check for xenos/simpleanimals
 		for(var/mob/living/simple_animal/SA in turretview)
-			if(!SA.stat && (!SA.has_unlimited_silicon_privilege || !(faction in SA.faction)) ) //don't target dead animals or NT maint drones.
+			if(!on)
+				continue
+			if(!SA.stat && (!SA.has_unlimited_silicon_privilege || !(faction in SA.faction))  ) //don't target dead animals or NT maint drones.
 				targets += SA
 		for(var/mob/living/carbon/monkey/M in turretview)
+			if(!on)
+				continue
 			if(!M.stat)
 				targets += M
 
@@ -428,7 +432,7 @@
 			targets += C
 			continue
 
-		if(C.stat || C.handcuffed || C.lying)	//if the perp is handcuffed or lying or dead/dying, no need to bother really
+		if(C.stat || C.handcuffed || C.lying || !on)	//if the perp is handcuffed or lying or dead/dying, no need to bother really //we also shouldn't bother if we're offline
 			continue
 
 		if(ai)	//If it's set to attack all nonsilicons, target them!
@@ -448,7 +452,7 @@
 
 	for(var/obj/mecha/M in turretview)
 		if(M.occupant)
-			if(ai || emagged) // we target all occupied mechs if we're emagged or set to attack all non silicons.
+			if((ai && on) || emagged) // we target all occupied mechs if we're emagged or set to attack all non silicons.
 				targets += M
 
 	if(!tryToShootAt(targets))
@@ -1038,6 +1042,7 @@ Status: []<BR>"},
 				control_area = A
 				break
 	power_change() //Checks power and initial settings
+	updateTurrets()
 	//don't have to check if control_area is path, since get_area_all_atoms can take path.
 	return
 
