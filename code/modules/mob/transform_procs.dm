@@ -55,8 +55,8 @@
 	if(dna)
 		dna.transfer_identity(O)
 		if(tr_flags & TR_KEEPSE)
-			//O.dna.struc_enzymes = dna.struc_enzymes
-			hardset_dna(O, null, dna.struc_enzymes)
+			O.dna.struc_enzymes = dna.struc_enzymes
+			//hardset_dna(O, null, dna.struc_enzymes)
 
 	if(suiciding)
 		O.suiciding = suiciding
