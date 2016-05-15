@@ -11,6 +11,8 @@
 	var/welded = 0
 	var/locked = 0
 	var/broken = 0
+	var/weldable = 1
+	var/weldoverlay = "welded"
 	var/large = 1
 	var/wall_mounted = 0 //never solid (You can always pass over it)
 	var/health = 100
@@ -40,7 +42,7 @@
 		else
 			overlays += "[icon_state]_door"
 		if(welded)
-			overlays += "welded"
+			overlays += weldoverlay
 		if(secure)
 			if(!broken)
 				if(locked)
@@ -204,7 +206,7 @@
 			return
 		if(istype(W,/obj/item/tk_grab))
 			return 0
-		if(istype(W, /obj/item/weapon/weldingtool))
+		if(istype(W, /obj/item/weapon/weldingtool) && weldable)
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.remove_fuel(0,user))
 				user << "<span class='notice'>You begin cutting \the [src] apart...</span>"
@@ -228,7 +230,7 @@
 			return
 		if(istype(W, /obj/item/weapon/extraction_pack))
 			return
-		if(istype(W, /obj/item/weapon/weldingtool))
+		if(istype(W, /obj/item/weapon/weldingtool)  && weldable)
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.remove_fuel(0,user))
 				user << "<span class='notice'>You begin [welded ? "unwelding":"welding"] \the [src]...</span>"
