@@ -10,7 +10,7 @@
 	origin_tech = "combat=2"
 	attack_verb = list("beaten")
 	var/stunforce = 7
-	var/throw_stun_chance = 75
+	var/throw_stun_chance = 100
 	var/status = 0
 	var/obj/item/weapon/stock_parts/cell/high/bcell = null
 	var/hitcost = 1000
@@ -209,5 +209,5 @@
 	stunforce = 5
 	hitcost = 2500
 	losspertick = 5
-	throw_stun_chance = 50
+	throw_stun_chance = 100
 	slot_flags = null
