@@ -197,6 +197,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 	if(limb_icon_cache[icon_render_key])
 		load_limb_from_cache()
 		update_damage_overlays()
+		update_disabled_overlays()
 		update_inv_gloves()
 		update_hair()
 		return
@@ -323,7 +324,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 		var/datum/organ/limb/left = get_organ("l_arm")
 		var/datum/organ/limb/right = get_organ("r_arm")
-		if(!left && !right) return
+		if(!left || !right) return
 		var/obj/item/organ/larm = left.organitem
 		var/obj/item/organ/rarm = right.organitem
 		if((larm && larm.organtype == ORGAN_WEAPON) || (rarm && rarm.organtype == ORGAN_WEAPON))
@@ -543,12 +544,12 @@ Please contact me on #coderbus IRC. ~Carnie x
 			L.overlays = null
 		if(hud_used.hud_shown && hud_used.inventory_shown)
 			var/obj/screen/inventory/S = hud_used.other[8]
-			if(!exists("l_leg") && !exists("r_leg"))
+			if(!exists("l_leg") || !exists("r_leg"))
 				S.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="x")
 			else
 				S.overlays = null
 			var/obj/screen/inventory/G = hud_used.other[4]
-			if(!exists("l_arm") && !exists("r_arm"))
+			if(!exists("l_arm") || !exists("r_arm"))
 				G.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="x")
 			else
 				G.overlays = null

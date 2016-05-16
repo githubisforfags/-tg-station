@@ -7,13 +7,16 @@
 
 	//This part is based on Baycode. |- Ricotez
 
-//If we're riding in a wheelchair, we need to only check our hands.
+//If we're riding in a wheelchair or we have no legs, we need to only check our hands.
 
 	if(istype(buckled, /obj/structure/stool/bed/chair/wheelchair))
 		. += get_penalty_for_limb("l_arm")
 		. += get_penalty_for_limb("r_arm")
 //If we're not, we need to check our legs.
 	else
+		if(!get_num_legs()) //Make them crawl slower if no arms
+			.+= get_penalty_for_limb("l_arm")
+			.+= get_penalty_for_limb("r_arm")
 		. += get_penalty_for_limb("l_leg")
 		. += get_penalty_for_limb("r_leg")
 

@@ -92,6 +92,32 @@ mob/proc/exists(var/organname)
 /mob/proc/get_limbs()
 	return 0
 
+
+/mob/proc/get_num_arms()
+	return 2
+/mob/proc/get_num_legs()
+	return 2
+
+/mob/living/carbon/human/get_num_arms()
+	. = 0
+	var/datum/organ/limb/L
+	L = get_organ("r_arm")
+	if(L && L.exists())
+		.++
+	L = get_organ("l_arm")
+	if(L && L.exists())
+		.++
+
+/mob/living/carbon/human/get_num_legs()
+	. = 0
+	var/datum/organ/limb/L
+	L = get_organ("r_leg")
+	if(L && L.exists())
+		.++
+	L = get_organ("l_leg")
+	if(L && L.exists())
+		.++
+
 //Returns all limb datums
 /mob/living/carbon/get_limbs()
 	if(organsystem)

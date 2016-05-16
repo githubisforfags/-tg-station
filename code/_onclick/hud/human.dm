@@ -208,9 +208,8 @@
 	inv_box.name = "gloves"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "gloves"
-	//Only if both hands are missing do we draw the X.
 	if(mycarbon && mycarbon.organsystem)
-		if(!mycarbon.exists("l_arm") && !mycarbon.exists("r_arm"))
+		if(!mycarbon.exists("l_arm") || !mycarbon.exists("r_arm"))
 			inv_box.overlays += image("icons/mob/screen_gen.dmi", "x")
 	inv_box.screen_loc = ui_gloves
 	inv_box.slot_id = slot_gloves
@@ -248,9 +247,8 @@
 	inv_box.name = "shoes"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "shoes"
-	//Only if both feet are missing do we draw the X.
 	if(mycarbon && mycarbon.organsystem)
-		if(!mycarbon.exists("l_leg") && !mycarbon.exists("r_leg"))
+		if(!mycarbon.exists("l_leg") || !mycarbon.exists("r_leg"))
 			inv_box.overlays += image("icons/mob/screen_gen.dmi", "x")
 	inv_box.screen_loc = ui_shoes
 	inv_box.slot_id = slot_shoes
