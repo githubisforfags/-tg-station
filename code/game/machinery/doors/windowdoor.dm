@@ -334,11 +334,11 @@
 	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/weapon/card) )
 		user.changeNext_move(CLICK_CD_MELEE)
 		user.do_attack_animation(src)
+		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+		visible_message("<span class='danger'>[user] has hit \the [src] with [I].</span>")
 		if( (I.flags&NOBLUDGEON) || !I.force )
 			return
 		var/aforce = I.force
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-		visible_message("<span class='danger'>[user] has hit \the [src] with [I].</span>")
 		if(I.damtype == BURN || I.damtype == BRUTE)
 			take_damage(aforce)
 		return
