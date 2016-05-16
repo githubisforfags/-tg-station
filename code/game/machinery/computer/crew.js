@@ -361,7 +361,7 @@ function onResize()
 
 	if (expandHealth())
 	{
-		$(".colhealth").css("width", "150px");
+		$(".colhealth").css("width", "180px");
 		$(".health").removeClass("tt");
 	}
 	else

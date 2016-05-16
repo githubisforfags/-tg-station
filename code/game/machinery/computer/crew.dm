@@ -93,7 +93,7 @@ var/global/datum/crewmonitor/crewmonitor = new
 		var/datum/html_interface/hi
 
 		if (!src.interfaces["[z]"])
-			src.interfaces["[z]"] = new/datum/html_interface/nanotrasen(src, "Crew Monitoring", 900, 540, "<link rel=\"stylesheet\" type=\"text/css\" href=\"crewmonitor.css\" /><script type=\"text/javascript\">var z = [z]; var tile_size = [world.icon_size]; var maxx = [world.maxx]; var maxy = [world.maxy];</script><script type=\"text/javascript\" src=\"crewmonitor.js\"></script>")
+			src.interfaces["[z]"] = new/datum/html_interface/nanotrasen(src, "Crew Monitoring", 1280, 540, "<link rel=\"stylesheet\" type=\"text/css\" href=\"crewmonitor.css\" /><script type=\"text/javascript\">var z = [z]; var tile_size = [world.icon_size]; var maxx = [world.maxx]; var maxy = [world.maxy];</script><script type=\"text/javascript\" src=\"crewmonitor.js\"></script>")
 
 			hi = src.interfaces["[z]"]
 
