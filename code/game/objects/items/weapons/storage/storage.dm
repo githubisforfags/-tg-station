@@ -331,6 +331,8 @@
 	for(var/mob/M in can_see_contents())
 		if(M.client)
 			M.client.screen -= W
+			orient2hud(M)
+			show_to(M)
 //spaghetti start
 	if(ismommi(new_location))
 		var/mob/living/silicon/robot/mommi/R = new_location

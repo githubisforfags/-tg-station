@@ -176,10 +176,9 @@
 /obj/item/attack_paw(mob/user as mob)
 
 	if (istype(src.loc, /obj/item/weapon/storage))
-		for(var/mob/M in range(1, src.loc))
-			if (M.s_active == src.loc)
-				if (M.client)
-					M.client.screen -= src
+		//If the item is in a storage item, take it out
+		var/obj/item/weapon/storage/S = src.loc
+		S.remove_from_storage(src, user.loc)
 	src.throwing = 0
 	if (src.loc == user)
 		if(!user.unEquip(src))
