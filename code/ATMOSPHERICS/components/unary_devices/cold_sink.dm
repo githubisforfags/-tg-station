@@ -1,7 +1,7 @@
 /obj/machinery/atmospherics/components/unary/cold_sink
 
 	icon_state = "cold_map"
-	use_power = 1
+	use_power = 0
 
 	name = "cold sink"
 	desc = "Cools gas when connected to pipe network"
@@ -26,6 +26,8 @@
 /obj/machinery/atmospherics/components/unary/cold_sink/process_atmos()
 	..()
 	if(!on)
+		if(active_power_usage)
+			active_power_usage = 0
 		return 0
 	var/datum/gas_mixture/air_contents = airs[AIR1]
 
@@ -33,8 +35,12 @@
 	var/combined_heat_capacity = current_heat_capacity + air_heat_capacity
 	var/old_temperature = air_contents.temperature
 
+
 	if(combined_heat_capacity > 0)
 		var/combined_energy = current_temperature*current_heat_capacity + air_heat_capacity*air_contents.temperature
+		var/power_consumption = current_heat_capacity * (T20C - current_temperature) / 100
+		if(use_power)
+			active_power_usage = round(power_consumption + idle_power_usage)
 		air_contents.temperature = combined_energy/combined_heat_capacity
 
 	//todo: have current temperature affected. require power to bring down current temperature again

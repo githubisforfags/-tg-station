@@ -2,7 +2,7 @@
 //currently the same code as cold_sink but anticipating process() changes
 
 	icon_state = "cold_map"
-	use_power = 1
+	use_power = 0
 
 	name = "heat reservoir"
 	desc = "Heats gas when connected to pipe network"
@@ -27,6 +27,8 @@
 /obj/machinery/atmospherics/components/unary/heat_reservoir/process_atmos()
 	..()
 	if(!on)
+		if(active_power_usage)
+			active_power_usage = 0
 		return 0
 
 	var/datum/gas_mixture/air_contents = airs[AIR1]
@@ -37,6 +39,9 @@
 
 	if(combined_heat_capacity > 0)
 		var/combined_energy = current_temperature*current_heat_capacity + air_heat_capacity*air_contents.temperature
+		var/power_consumption = current_heat_capacity * (current_temperature - T20C) / 100
+		if(use_power)
+			active_power_usage = round(power_consumption + idle_power_usage)
 		air_contents.temperature = combined_energy/combined_heat_capacity
 
 	//todo: have current temperature affected. require power to bring up current temperature again
