@@ -40,7 +40,8 @@ body
 #textbased td
 {
 	vertical-align: top;
-	padding: 2px;
+	padding: 1px;
+	white-space: pre;
 }
 
 #textbased tbody td
@@ -87,6 +88,7 @@ body
 	position: relative;
 	display: inline-block;
 	height: 16px;
+	white-space: pre;
 }
 
 .tt > div
@@ -151,4 +153,8 @@ body
 .zoom.in
 {
 	margin-left: -3px !important;
+}
+
+.colhealth {
+	white-space: nowrap;
 }
