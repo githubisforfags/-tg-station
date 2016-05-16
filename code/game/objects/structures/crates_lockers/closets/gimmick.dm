@@ -2,6 +2,7 @@
 	name = "cabinet"
 	desc = "Old will forever be in fashion."
 	icon_state = "cabinet"
+	weldable = 0
 
 
 /obj/structure/closet/acloset

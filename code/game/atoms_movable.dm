@@ -15,6 +15,7 @@
 	var/pass_flags = 0
 	var/paused = FALSE //for suspending the projectile midair
 	glide_size = 8
+	appearance_flags = TILE_BOUND
 
 /atom/movable/Move(atom/newloc, direct = 0)
 	if(!loc || !newloc) return 0

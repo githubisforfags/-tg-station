@@ -734,6 +734,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		progbar = image("icon" = 'icons/effects/doafter_icon.dmi', "loc" = target, "icon_state" = "prog_bar_0")
 		progbar.icon_state = "prog_bar_[round(((current_number / goal_number) * 100), 10)]"
 		progbar.pixel_y = 32
+		progbar.appearance_flags = RESET_COLOR
 		return progbar
 
 /proc/do_after(mob/user, delay, numticks = 5, needhand = 1, atom/target = null)

@@ -592,3 +592,4 @@ Congratulations! You are now trained for xenobiology research!"}
 	desc = "Contains secrets of the universe"
 	icon_state = "abductor"
 	icon_door = "abductor"
+	weldable = 0
