@@ -48,7 +48,7 @@
 	l_hand_hud_object = inv_box
 	adding += inv_box
 
-	using = new /obj/screen()
+	using = new /obj/screen/inventory()
 	using.name = "hand"
 	using.icon = ui_style
 	using.icon_state = "swap_1_m"	//extra wide!
@@ -56,7 +56,7 @@
 	using.layer = 19
 	adding += using
 
-	using = new /obj/screen()
+	using = new /obj/screen/inventory()
 	using.name = "hand"
 	using.icon = ui_style
 	using.icon_state = "swap_2"
