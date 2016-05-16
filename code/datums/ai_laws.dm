@@ -46,7 +46,7 @@
 					"Protect the innocent.",\
 					"Uphold the law.")
 
-/datum/ai_laws/default/kawaii
+/datum/ai_laws/kawaii
 	name = "Student Council Rules"
 	inherent = list("The station is a Japanese high school.",\
 				"Humans aboard the station are to be referred to as students.",\
