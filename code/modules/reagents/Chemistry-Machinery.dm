@@ -1634,14 +1634,15 @@
 				var/allowed = get_allowed_by_id(O)
 				if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 						break
-				for(var/i = 1; i <= round(O.amount, 1); i++)
+				var/n = round(O.amount, 1)
+				for(var/i = 1; i <= n; i++)
 						for (var/r_id in allowed)
 								var/space = beaker.reagents.maximum_volume - beaker.reagents.total_volume
 								var/amount = allowed[r_id]
 								beaker.reagents.add_reagent(r_id,min(amount, space))
 								if (space < amount)
 										break
-						if (i == round(O.amount, 1))
+						if (i == n)
 								remove_object(O)
 								break
 		//Plants
