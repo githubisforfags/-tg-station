@@ -9,7 +9,7 @@
 	desc = "If left untreated the subject will cough often."
 	severity = MEDIUM
 	longevity = 1000
-	disease_flags = CAN_CARRY|CAN_RESIST
+	disease_flags = CAN_CARRY
 	spread_flags = NON_CONTAGIOUS
 	visibility_flags = HIDDEN_PANDEMIC
 	required_organs = list(/obj/item/organ/internal/lungs)
