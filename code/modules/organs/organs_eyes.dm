@@ -96,6 +96,8 @@
 			owner.sight |= save_sight
 			owner.disabilities ^= BLIND
 
+/obj/item/organ/internal/eyes/cyberimp/prepare_eat()
+	return //Cyber implants are inedible!
 
 
 /obj/item/organ/internal/eyes/cyberimp/xray

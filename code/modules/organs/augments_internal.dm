@@ -16,7 +16,8 @@
 		overlays |= overlay
 	return ..()
 
-
+/obj/item/organ/internal/cyberimp/prepare_eat() //do not eat the robot
+	return
 
 //[[[[BRAIN]]]]
 
@@ -27,6 +28,7 @@
 	icon_state = "brain_implant"
 	implant_overlay = "brain_implant_overlay"
 	zone = "head"
+
 
 /obj/item/organ/internal/cyberimp/brain/emp_act(severity)
 	if(!owner)
