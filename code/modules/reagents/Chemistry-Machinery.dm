@@ -1200,7 +1200,7 @@
 									DT.name = D.name
 								d_test = 0
 						if(d_test)
-							new_diseases += D
+							new_diseases += D.Copy() //add a copy instead of the beaker disease
 							user << "New disease added to the database!"
 
 /obj/machinery/computer/pandemic/proc/upload_vaccine(var/mob/user)
