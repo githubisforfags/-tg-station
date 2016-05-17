@@ -1,9 +1,18 @@
-/mob/proc/get_organ()
+/mob/proc/get_organdatum()
 	return
 
-/mob/living/carbon/get_organ(var/organ)
+/mob/living/carbon/get_organdatum(var/organ)
 	if(organsystem) //If the mob has an organ system, you should give the name of the organ, i.e. "brain"
 		return organsystem.get_organ(organ)
+
+/mob/proc/get_organitem()
+	return
+
+/mob/living/carbon/get_organitem(var/organ)
+	if(organsystem) //If the mob has an organ system, you should give the name of the organ, i.e. "brain"
+		var/datum/organ/O = organsystem.get_organ(organ)
+		return O.organitem  //Can be null!
+
 
 /*
 /mob/living/carbon/human/get_organ(var/organ)
@@ -22,7 +31,7 @@
 
 mob/living/carbon/exists(var/organname)
 	if(organsystem)
-		var/datum/organ/O = get_organ(organname)
+		var/datum/organ/O = get_organdatum(organname)
 		return (O && O.exists())
 	else
 		return 1
@@ -38,7 +47,7 @@ mob/proc/exists(var/organname)
 	if(organsystem)
 		var/list/returnorg = list()
 
-		var/datum/organ/PO = get_organ(zone)
+		var/datum/organ/PO = get_organdatum(zone)
 		if(PO && PO.exists() && isorgan(PO.organitem))
 			if(istype(PO, /datum/organ/internal))	//If we've already found an internal organ we can skip the next step
 				returnorg += PO
@@ -59,7 +68,7 @@ mob/proc/exists(var/organname)
 		var/list/returnorg = list()
 
 		for(var/organname in organsystem.organlist)
-			var/datum/organ/org = get_organ(organname)
+			var/datum/organ/org = get_organdatum(organname)
 			var/obj/item/OI = org.organitem
 			if(isinternalorgan(OI))
 				returnorg += org
@@ -71,7 +80,7 @@ mob/proc/exists(var/organname)
 //Returns whether the zone has a slot for the organ
 /mob/living/carbon/has_organ_slot(zone, organname)
 	if(organsystem)
-		var/datum/organ/PO = get_organ(zone)
+		var/datum/organ/PO = get_organdatum(zone)
 		if(PO && PO.exists())
 			if(isorgan(PO.organitem))
 				var/obj/item/organ/OI = PO.organitem
@@ -101,20 +110,20 @@ mob/proc/exists(var/organname)
 /mob/living/carbon/human/get_num_arms()
 	. = 0
 	var/datum/organ/limb/L
-	L = get_organ("r_arm")
+	L = get_organdatum("r_arm")
 	if(L && L.exists())
 		.++
-	L = get_organ("l_arm")
+	L = get_organdatum("l_arm")
 	if(L && L.exists())
 		.++
 
 /mob/living/carbon/human/get_num_legs()
 	. = 0
 	var/datum/organ/limb/L
-	L = get_organ("r_leg")
+	L = get_organdatum("r_leg")
 	if(L && L.exists())
 		.++
-	L = get_organ("l_leg")
+	L = get_organdatum("l_leg")
 	if(L && L.exists())
 		.++
 
@@ -123,7 +132,7 @@ mob/proc/exists(var/organname)
 	if(organsystem)
 		var/list/returnlimbs = list()
 		for(var/limbname in list_limbs())
-			var/datum/organ/limb/LI = get_organ(limbname)
+			var/datum/organ/limb/LI = get_organdatum(limbname)
 			if(LI)
 				returnlimbs += LI
 		return returnlimbs

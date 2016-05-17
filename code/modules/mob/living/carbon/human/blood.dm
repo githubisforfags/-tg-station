@@ -2,6 +2,8 @@
 				BLOOD SYSTEM
 ****************************************************/
 //Blood levels
+
+var/list/bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
 var/const/BLOOD_VOLUME_SAFE = 501
 var/const/BLOOD_VOLUME_OKAY = 336
 var/const/BLOOD_VOLUME_BAD = 224

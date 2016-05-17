@@ -191,7 +191,7 @@
 		if(H.gloves)
 			return 0
 		var/organ = ((H.hand ? "l_":"r_") + "arm")
-		var/datum/organ/limb/L = H.get_organ(organ)
+		var/datum/organ/limb/L = H.get_organdatum(organ)
 		if(L && L.exists())
 			var/obj/item/organ/limb/affecting = L.organitem
 			if(affecting && affecting.take_damage(0, force))

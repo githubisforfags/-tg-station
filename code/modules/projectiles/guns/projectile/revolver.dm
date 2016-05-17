@@ -201,7 +201,7 @@
 			var/obj/item/ammo_casing/AC = chambered
 			if(AC.fire(user, user))
 				playsound(user, fire_sound, 50, 1)
-				var/datum/organ/limb/L = H.get_organ(check_zone(user.zone_sel.selecting))
+				var/datum/organ/limb/L = H.get_organdatum(check_zone(user.zone_sel.selecting))
 				if(L && L.exists())
 					var/obj/item/organ/limb/affecting = L.organitem
 					if(affecting.name == "head" || affecting.name == "eyes" || affecting.name == "mouth")

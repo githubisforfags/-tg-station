@@ -140,7 +140,7 @@
 	if(H.stat == DEAD)
 		say("Specimen deceased - please provide fresh sample.")
 		return "<span class='bad'>Specimen Deceased</span>"
-	var/datum/organ/internal/heart/HE = H.get_organ("heart")
+	var/datum/organ/internal/heart/HE = H.get_organdatum("heart")
 	if(!istype(HE.organitem, /obj/item/organ/internal/heart/gland))
 		say("Experimental dissection not detected!")
 		return "<span class='bad'>No glands detected!</span>"
@@ -167,7 +167,7 @@
 			H << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 			obj_count++
 
-		var/datum/organ/internal/heart/heart = H.get_organ("heart")
+		var/datum/organ/internal/heart/heart = H.get_organdatum("heart")
 		if(heart && heart.exists())
 			if(istype(heart.organitem, /obj/item/organ/internal/heart/gland))
 				var/obj/item/organ/internal/heart/gland/G = heart.organitem

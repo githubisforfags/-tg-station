@@ -37,11 +37,11 @@
 			var/datum/dna/D = H.dna
 			var/datum/organ/limb/L
 			if(user.hand)
-				L = H.get_organ("l_arm")
+				L = H.get_organdatum("l_arm")
 				if(L && !L.exists())
 					L.regenerate_organitem(D)
 			else
-				L = H.get_organ("r_arm")
+				L = H.get_organdatum("r_arm")
 				if(L && !L.exists())
 					L.regenerate_organitem(D)
 			H.update_hud()

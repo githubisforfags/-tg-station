@@ -471,7 +471,7 @@ proc/is_special_character(mob/M) // returns 1 for special characters and 2 for h
 				O << sound(ghost_sound)
 
 /proc/item_heal_robotic(var/mob/living/carbon/human/H, var/mob/user, var/brute, var/burn)
-	var/datum/organ/limb/limbdata = H.get_organ(check_zone(user.zone_sel.selecting))
+	var/datum/organ/limb/limbdata = H.get_organdatum(check_zone(user.zone_sel.selecting))
 	var/obj/item/organ/limb/affecting = limbdata.organitem
 
 	var/dam //changes repair text based on how much brute/burn was supplied
@@ -520,9 +520,9 @@ mob/proc/active_hand_exists()
 	if(organsystem)
 		var/datum/organ/limb/L
 		if(hand && !invert || !hand && invert)
-			L = get_organ("l_arm")
+			L = get_organdatum("l_arm")
 		else
-			L = get_organ("r_arm")
+			L = get_organdatum("r_arm")
 		if(!(L && L.exists()))
 			return 0
 	return 1

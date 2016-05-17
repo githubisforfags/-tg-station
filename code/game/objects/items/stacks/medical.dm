@@ -61,7 +61,7 @@
 
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		var/datum/organ/O = H.get_organ(check_zone(user.zone_sel.selecting))
+		var/datum/organ/O = H.get_organdatum(check_zone(user.zone_sel.selecting))
 		var/obj/item/organ/limb/affecting = O.organitem
 		if(stop_bleeding)
 			if(!H.bleedsuppress) //so you can't stack bleed suppression

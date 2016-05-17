@@ -29,7 +29,7 @@
 		if("drop organ/implant", "remove organ/implant")
 			if(C.organsystem)
 				for(var/organname in C.organsystem.organlist)
-					var/datum/organ/ORG = C.get_organ(organname)
+					var/datum/organ/ORG = C.get_organdatum(organname)
 					if(ORG && ORG.exists())
 						organs["[ORG.organitem] ([ORG.organitem.type])"] = ORG
 

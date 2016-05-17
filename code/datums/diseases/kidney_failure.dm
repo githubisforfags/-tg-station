@@ -24,7 +24,7 @@
 				affected_mob << "<span class='warning'>You feel tired.</span>"
 		if(2)
 			var/obj/item/organ/internal/kidneys/K = null
-			var/datum/organ/internal/kidneys/kidneys = affected_mob.get_organ("kidneys")
+			var/datum/organ/internal/kidneys/kidneys = affected_mob.get_organdatum("kidneys")
 			if(kidneys && kidneys.exists())
 				K = kidneys.organitem
 			if(K)

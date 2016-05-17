@@ -22,7 +22,7 @@
 	if(!iscarbon(M) || owner == M)
 		return 0
 
-	var/datum/organ/OR = M.get_organ(hardpoint)
+	var/datum/organ/OR = M.get_organdatum(hardpoint)
 	if(OR && !OR.exists())
 		if(OR.set_organitem(src))
 			add_suborgans()

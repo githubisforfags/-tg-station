@@ -24,7 +24,7 @@
 				affected_mob.emote("cough")
 		if(2)
 			var/obj/item/organ/internal/liver/L = null
-			var/datum/organ/internal/liver/liver = affected_mob.get_organ("liver")
+			var/datum/organ/internal/liver/liver = affected_mob.get_organdatum("liver")
 			if(liver && liver.exists())
 				L = liver.organitem
 			if(L)

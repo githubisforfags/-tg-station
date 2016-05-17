@@ -260,7 +260,7 @@
 		return 1
 	if(isinternalorgan(target))
 		var/obj/item/organ/internal/ORG = target
-		if(ORG.organdatum == user.get_organ(ORG.hardpoint))
+		if(ORG.organdatum == user.get_organdatum(ORG.hardpoint))
 			return 0
 	return 1
 

@@ -24,7 +24,7 @@
 				affected_mob.emote("cough")
 		if(2)
 			var/obj/item/organ/internal/appendix/A = null
-			var/datum/organ/internal/appendix/appendix = affected_mob.get_organ("appendix")
+			var/datum/organ/internal/appendix/appendix = affected_mob.get_organdatum("appendix")
 			if(appendix && appendix.exists())
 				A = appendix.organitem
 			if(A)

@@ -11,7 +11,7 @@
 	var/list/organs = user.get_internal_organs("head")
 	var/list/organitems
 
-	var/datum/organ/brain = user.get_organ("brain")
+	var/datum/organ/brain = user.get_organdatum("brain")
 	var/obj/item/organ/internal/brain/B
 	if(brain)
 		B = brain.organitem

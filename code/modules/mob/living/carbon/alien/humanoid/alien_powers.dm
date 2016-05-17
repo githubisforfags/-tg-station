@@ -30,7 +30,7 @@ Doesn't work on other aliens/AI.*/
 
 	if(target.loc && isinternalorgan(target.loc))
 		var/obj/item/organ/internal/ORG = target.loc
-		if(ORG.organdatum == C.get_organ(ORG.hardpoint))
+		if(ORG.organdatum == C.get_organdatum(ORG.hardpoint))
 			return 0
 
 	return 1
@@ -294,14 +294,14 @@ Doesn't work on other aliens/AI.*/
 	return 1
 
 /mob/living/carbon/proc/getPlasma()
-	var/datum/organ/internal/alien/plasmavessel/OR = get_organ("plasmavessel")
+	var/datum/organ/internal/alien/plasmavessel/OR = get_organdatum("plasmavessel")
 	if(OR && OR.exists())
 		var/obj/item/organ/internal/alien/plasmavessel/vessel = OR.organitem
 		return vessel.storedPlasma
 
 
 /mob/living/carbon/proc/adjustPlasma(amount)
-	var/datum/organ/internal/alien/plasmavessel/OR = get_organ("plasmavessel")
+	var/datum/organ/internal/alien/plasmavessel/OR = get_organdatum("plasmavessel")
 	if(OR && OR.exists())
 		var/obj/item/organ/internal/alien/plasmavessel/vessel = OR.organitem
 		vessel.storedPlasma = max(vessel.storedPlasma + amount,0)

@@ -76,7 +76,7 @@
 	add_logs(user, target, "attacked", "[name]", "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		var/obj/item/organ/limb/affecting = H.get_organ("chest")
+		var/obj/item/organ/limb/affecting = H.get_organitem("chest")
 		affecting.take_damage(drill_damage)
 		H.update_damage_overlays(0)
 	else

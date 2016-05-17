@@ -178,7 +178,7 @@
 			if(!def_zone)
 				def_zone = ran_zone(def_zone)
 			def_zone = check_zone(def_zone)
-			organ = get_organ(def_zone)
+			organ = get_organitem(def_zone)
 			if(!organ)
 				return 0
 

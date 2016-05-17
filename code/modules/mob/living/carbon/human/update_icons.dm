@@ -144,7 +144,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 	//Reset our hair
 	remove_overlay(HAIR_LAYER)
 
-	var/datum/organ/H = get_organ("head")
+	var/datum/organ/H = get_organdatum("head")
 	if((disabilities & HUSK ) || (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)))
 		return
 
@@ -322,8 +322,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 			client.screen += gloves					//Either way, add the item to the HUD
 
 
-		var/datum/organ/limb/left = get_organ("l_arm")
-		var/datum/organ/limb/right = get_organ("r_arm")
+		var/datum/organ/limb/left = get_organdatum("l_arm")
+		var/datum/organ/limb/right = get_organdatum("r_arm")
 		if(!left || !right) return
 		var/obj/item/organ/larm = left.organitem
 		var/obj/item/organ/rarm = right.organitem
@@ -706,7 +706,7 @@ var/global/list/limb_icon_cache = list()
 
 	for(var/limbname in organsystem.organlist)
 		. += "-[initial(limbname)]"
-		var/datum/organ/limb/limbdata = get_organ(limbname)
+		var/datum/organ/limb/limbdata = get_organdatum(limbname)
 		if(!limbdata.exists())
 			. += "-removed"
 		else

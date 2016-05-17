@@ -34,7 +34,7 @@
 		name = "[dna.species.id] [originalname]"
 
 	if(counterpart)
-		var/datum/organ/limb/OR = owner.get_organ(counterpart)
+		var/datum/organ/limb/OR = owner.get_organdatum(counterpart)
 		if(OR && OR.exists())
 			if(isorgan(OR.organitem))
 				var/obj/item/organ/OI = OR.organitem

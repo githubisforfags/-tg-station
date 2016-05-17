@@ -200,7 +200,7 @@
 	brainmob.container = src
 
 	if(istype(H))
-		var/datum/organ/internal/brain/B = H.get_organ("brain")
+		var/datum/organ/internal/brain/B = H.get_organdatum("brain")
 		if(B && B.exists())
 			var/obj/item/organ/internal/brain/newbrain = B.organitem
 			newbrain.loc = src

@@ -236,7 +236,7 @@
 					limbs += LI.name
 			organname = input("Amputate which limb?", "Surgery", null, null) as null|anything in limbs
 			if(occupant.exists(organname))
-				var/datum/organ/OR = occupant.get_organ(organname)
+				var/datum/organ/OR = occupant.get_organdatum(organname)
 				locktime = SURGERYTIME_LONGEST
 				surgerystring = "[OR.getDisplayName()] amputation"
 			errstring = "no limb to amputate"
@@ -258,7 +258,7 @@
 					organs += OR.name
 			organname = input("Remove which organ?", "Surgery", null, null) as null|anything in organs
 			if(occupant.exists(organname))
-				var/datum/organ/OR = occupant.get_organ(organname)
+				var/datum/organ/OR = occupant.get_organdatum(organname)
 				locktime = SURGERYTIME_LONGEST
 				surgerystring = "[OR.getDisplayName()] removal"
 			errstring = "no organ to remove"
@@ -352,7 +352,7 @@
 
 //Amputation, appendectomy, xeno removal
 /obj/machinery/rapidsexchanger/proc/remove_organ(var/organname)
-	var/datum/organ/OR = occupant.get_organ(organname)
+	var/datum/organ/OR = occupant.get_organdatum(organname)
 	if(OR && OR.exists())
 		return OR.dismember(ORGAN_REMOVED)
 	return 0
@@ -404,6 +404,11 @@
 		occupant.real_name = random_name(occupant.gender)
 		var/mob/living/carbon/human/H = occupant
 		H.sec_hud_set_security_status()	//Update HUD
+	if(ishuman(occupant))
+		var/mob/living/carbon/human/Hu = occupant
+		Hu.update_body()
+		Hu.update_body_parts()
+		Hu.update_damage_overlays(0)
 	return 1
 
 //Finally, something useful

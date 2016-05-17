@@ -146,7 +146,7 @@
 /datum/species/proc/handle_hair(var/mob/living/carbon/human/H)
 	H.remove_overlay(HAIR_LAYER)
 
-	var/datum/organ/head = H.get_organ("head")
+	var/datum/organ/head = H.get_organdatum("head")
 	if(!head.exists())
 		return //We're very well not going to render hair if this human has no head, are we?
 
@@ -226,7 +226,7 @@
 
 	// eyes
 	if(H.exists("head") && EYECOLOR in specflags)
-		var/datum/organ/internal/eyes/EY = H.get_organ("eyes")
+		var/datum/organ/internal/eyes/EY = H.get_organdatum("eyes")
 		if(EY && EY.exists())
 			var/obj/item/organ/internal/eyes/OI = EY.organitem
 			standing	+= OI.get_img()
@@ -602,7 +602,7 @@
 	H.see_in_dark = darksight //Reset to defaults, this will be fixed up later down after all other flags have been applied
 	H.see_invisible = invis_sight
 	if(H.exists("eyes"))
-		var/datum/organ/internal/eyes/eyedatum = H.get_organ("eyes")
+		var/datum/organ/internal/eyes/eyedatum = H.get_organdatum("eyes")
 		var/obj/item/organ/internal/eyes/E = eyedatum.organitem
 		H.see_in_dark = max(H.see_in_dark, E.dark_sight)
 		H.see_invisible = min(H.see_invisible, E.invis_sight)
@@ -683,7 +683,7 @@
 		H.healthdoll.icon_state = "healthdoll_SHADE"
 		var/list/healthdollorgans = list("head", "chest", "l_arm", "r_arm", "l_leg", "r_leg")
 		for(var/HDO in healthdollorgans)
-			var/datum/organ/limb/O = H.get_organ(HDO)
+			var/datum/organ/limb/O = H.get_organdatum(HDO)
 			var/obj/item/organ/limb/L = O.organitem
 			var/icon_name = null
 			if(O.exists())
@@ -906,7 +906,7 @@
 
 				var/zone = ran_zone(M.zone_sel.selecting)
 				zone = check_zone(zone)
-				var/datum/organ/limb/targetorgan = H.get_organ(zone)
+				var/datum/organ/limb/targetorgan = H.get_organdatum(zone)
 				if(!targetorgan.exists())
 					//If target organ does not exist, the attack misses.
 					//Combined with the slight randomness of attack zones, this means that targets with less limbs are less likely to get hit.
@@ -946,7 +946,7 @@
 
 				var/zone = ran_zone(M.zone_sel.selecting)
 				zone = check_zone(zone)
-				var/datum/organ/limb/targetorgan = H.get_organ(zone)
+				var/datum/organ/limb/targetorgan = H.get_organdatum(zone)
 				if(!targetorgan.exists())
 					//If target organ does not exist, the disarm misses.
 					//Same story as attacks. |- Ricotez
@@ -1130,7 +1130,7 @@
 */
 
 	if(!def_zone)	def_zone = ran_zone(def_zone)
-	var/datum/organ/O = H.get_organ(check_zone(def_zone))
+	var/datum/organ/O = H.get_organdatum(check_zone(def_zone))
 	organ = O.organitem
 	if(!organ)	return 0
 

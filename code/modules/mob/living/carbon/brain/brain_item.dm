@@ -66,7 +66,7 @@
 	brainmob.timeofhostdeath = owner.timeofdeath
 	if(owner.mind)
 		owner.mind.transfer_to(brainmob)
-	var/datum/organ/P = owner.get_organ(organdatum.parent.hardpoint)
+	var/datum/organ/P = owner.get_organdatum(organdatum.parent.hardpoint)
 	if(!(P && P.exists())) //If the organdatum is not null, this brain is a suborgan. We check for the parent just in case.
 		brainmob << "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [organdatum.parent]."
 	else
@@ -99,7 +99,7 @@
 
 	var/B = null
 	if(M.organsystem)
-		var/datum/organ/C = M.get_organ("brain")
+		var/datum/organ/C = M.get_organdatum("brain")
 		B = C.organitem
 	if(!B)
 		user.drop_item()

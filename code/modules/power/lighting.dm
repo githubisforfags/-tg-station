@@ -508,7 +508,7 @@
 		else
 			user << "You try to remove the light [fitting], but you burn your hand on it!"
 
-			var/datum/organ/limb/L = H.get_organ("[user.hand ? "l" : "r" ]_arm")
+			var/datum/organ/limb/L = H.get_organdatum("[user.hand ? "l" : "r" ]_arm")
 			if(L && L.exists())
 				var/obj/item/organ/limb/affecting = L.organitem
 				if(affecting.take_damage( 0, 5 ))		// 5 burn damage

@@ -32,7 +32,7 @@
 					C_target = target
 
 				if(C_target.organsystem)
-					var/datum/organ/internal/brain/B = C_target.get_organ("brain")
+					var/datum/organ/internal/brain/B = C_target.get_organdatum("brain")
 					if(B && B.exists())
 						B.dismember(ORGAN_REMOVED)
 				target.gib()

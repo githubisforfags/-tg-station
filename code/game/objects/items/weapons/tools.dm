@@ -201,7 +201,7 @@
 	if(!istype(H))
 		return ..()
 
-	var/datum/organ/limb/limbdata = H.get_organ(check_zone(user.zone_sel.selecting))
+	var/datum/organ/limb/limbdata = H.get_organdatum(check_zone(user.zone_sel.selecting))
 	if(limbdata.exists())
 		var/obj/item/organ/limb/affecting = limbdata.organitem
 		if(affecting.organtype == ORGAN_ROBOTIC && user.a_intent != "harm")

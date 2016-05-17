@@ -20,7 +20,7 @@
 		user.Paralyse(5)
 		user << "<span class='danger'>An unexplicable force powerfully repels the sword from [target]!</span>"
 		var/organ = ((user.hand ? "l_":"r_") + "arm")
-		var/datum/organ/limb/L = user.get_organ(organ)
+		var/datum/organ/limb/L = user.get_organdatum(organ)
 		if(L && L.exists())
 			var/obj/item/organ/limb/affecting = L.organitem
 			if(affecting.take_damage(rand(force/2, force))) //random amount of damage between half of the blade's force and the full force of the blade.

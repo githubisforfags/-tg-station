@@ -14,7 +14,7 @@
 	var/success = 0
 
 /datum/surgery_step/add_limb/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	L = target.get_organ(target_zone)
+	L = target.get_organdatum(target_zone)
 	if(istype(tool, /obj/item/organ/limb))
 		LI = tool
 	if(check_validity(tool, target_zone))
