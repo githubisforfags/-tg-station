@@ -170,7 +170,8 @@
 	hardpoint = "l_arm"
 	icon_state = "l_arm"
 	body_part = ARM_LEFT
-	counterpart = "r_arm"
+//	counterpart = "r_arm"
+
 
 //Unwields twohanded weapons in right hand and drops any item in left hand
 /obj/item/organ/limb/arm/l_arm/Remove(special = 0)
@@ -198,14 +199,15 @@
 	hardpoint = "l_leg"
 	icon_state = "l_leg"
 	body_part = LEG_LEFT
-	counterpart = "r_leg"
+//	counterpart = "r_leg"
+
 
 /obj/item/organ/limb/arm/r_arm
 	name = "right arm"
 	hardpoint = "r_arm"
 	icon_state = "r_arm"
 	body_part = ARM_RIGHT
-	counterpart = "l_arm"
+//	counterpart = "l_arm"
 
 //Pretty much a mirror of the other proc
 /obj/item/organ/limb/arm/r_arm/Remove(special = 0)
@@ -223,7 +225,7 @@
 	hardpoint = "r_leg"
 	icon_state = "r_leg"
 	body_part = LEG_RIGHT
-	counterpart = "l_leg"
+//	counterpart = "l_leg"
 
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
 //Damage will not exceed max_damage using this proc

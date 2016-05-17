@@ -363,8 +363,8 @@
 				return 0
 			if( !(I.slot_flags & SLOT_GLOVES) )
 				return 0
-			if(!H.exists("l_arm") && !H.exists("r_arm")) //Can still wear gloves with just 1 hand.
-				H << "<span class='warning'>You need hands before you can wear [I.name]!</span>"
+			if(!H.exists("l_arm") || !H.exists("r_arm"))
+				H << "<span class='warning'>You need two hands before you can wear [I.name]!</span>"
 				return 0
 			return 1
 		if(slot_shoes)
@@ -372,8 +372,8 @@
 				return 0
 			if( !(I.slot_flags & SLOT_FEET) )
 				return 0
-			if(!H.exists("l_leg") && !H.exists("r_leg")) //Can still wear shoes with just 1 foot.
-				H << "<span class='warning'>You need feet before you can wear [I.name]!</span>"
+			if(!H.exists("l_leg") || !H.exists("r_leg"))
+				H << "<span class='warning'>You need two feet before you can wear [I.name]!</span>"
 				return 0
 			return 1
 		if(slot_belt)
