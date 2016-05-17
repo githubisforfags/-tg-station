@@ -66,7 +66,7 @@
 	if(!H.exists())
 		return if_no_face
 	var/obj/item/organ/limb/head/O = H.organitem
-	if( (O.status_flags & DISFIGURED) || (O.brutestate+O.burnstate)>2 || cloneloss>50 || !real_name ) //Disfigured or headless, use ID if possible.
+	if(status_flags & DISFIGURED || (O.brutestate+O.burnstate)>2 || cloneloss>50 || !real_name ) //Disfigured or headless, use ID if possible.
 		return if_no_face
 	return real_name
 

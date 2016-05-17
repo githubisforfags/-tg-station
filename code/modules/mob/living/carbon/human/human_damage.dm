@@ -14,7 +14,7 @@
 			total_brute += L.brute_dam
 			total_burn += L.burn_dam
 	health = maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute
-	//TODO: fix husking
+	//TODO: fix husking //fuck you leatherman
 	if( ((maxHealth - total_burn) < config.health_threshold_dead) && stat == DEAD )
 		ChangeToHusk()
 	med_hud_set_health()

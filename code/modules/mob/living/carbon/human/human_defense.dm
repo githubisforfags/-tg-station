@@ -351,12 +351,15 @@ emp_act
 
 
 	//DAMAGE//
-	for(var/obj/item/organ/limb/affecting in damaged)
-		affecting.take_damage(acidity, 2*acidity)
+	for(var/datum/organ/limb/L in damaged)
+		if(!L || !L.exists())
+			continue
+		var/obj/item/organ/limb/affecting = L.organitem
+		affecting.take_damage(acidity, 2*acidity, 1)
 
-		if(affecting.name == "head")
+		if(affecting.name == "head" && affecting.organtype != ORGAN_ROBOTIC)
 			if(prob(min(acidpwr*acid_volume/10, 90))) //Applies disfigurement
-				affecting.take_damage(acidity, 2*acidity)
+				affecting.take_damage(acidity, 2*acidity, 1)
 				emote("scream")
 				facial_hair_style = "Shaved"
 				hair_style = "Bald"

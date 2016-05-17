@@ -25,4 +25,9 @@
 			H.sec_hud_set_security_status()	//Update HUD
 		var/newname = target.real_name	//something about how the code handles names required that I use this instead of target.real_name
 		user.visible_message("<span class='notice'>[user] alters [oldname]'s appearance completely, they are now [newname]!</span>")
+	if(ishuman(target))
+		var/mob/living/carbon/human/Hu = target
+		Hu.update_body()
+		Hu.update_body_parts()
+		Hu.update_damage_overlays(0)
 	return 1

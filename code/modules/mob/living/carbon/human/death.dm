@@ -54,6 +54,8 @@
 	if(disabilities & HUSK)	return
 	disabilities |= HUSK
 	status_flags |= DISFIGURED	//makes them unknown without fucking up other stuff like admintools
+	if(!organsystem)
+		return 1
 	return 1
 
 /mob/living/carbon/human/ChangeToHusk()
@@ -61,6 +63,7 @@
 	if(.)
 		update_hair()
 		update_body()
+		update_body_parts()
 
 /mob/living/carbon/proc/Drain()
 	ChangeToHusk()
