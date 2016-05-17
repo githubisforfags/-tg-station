@@ -436,7 +436,7 @@
 		var/timeout = world.time + 600
 		var/reason = stripped_input(usr,"Reason:","Why do you require this item?","")
 		if(world.time > timeout)	return
-//		if(!reason)	return
+		if(!reason)	return
 
 		var/idname = "*None Provided*"
 		var/idrank = "*None Provided*"
