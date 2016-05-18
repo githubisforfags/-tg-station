@@ -196,7 +196,7 @@
 			meatslab.throw_at(pick(nearby_turfs),i,3)
 			for (var/turfs=1 to meat_produced*3)
 				var/turf/gibturf = pick(nearby_turfs)
-				if (!gibturf.density && src in viewers(gibturf))
+				if (!gibturf.density && src in view(gibturf))
 					new gibtype(gibturf,i)
 
 		src.operating = 0
