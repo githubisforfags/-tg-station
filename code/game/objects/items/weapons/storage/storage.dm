@@ -45,7 +45,7 @@
 
 
 		if(!( M.restrained() ) && !( M.stat ))
-			if(!( istype(over_object, /obj/screen) ))
+			if(!( istype(over_object, /obj/screen) ) && !(over_object.loc == usr))
 				return content_can_dump(over_object, M)
 
 			if(!(loc == usr) || (loc && loc.loc == usr))
