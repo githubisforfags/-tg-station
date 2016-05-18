@@ -34,6 +34,7 @@
 			user.visible_message("<span class='notice'>[user] stuffs [tool] into [target]'s [target_zone]!</span>")
 			user.drop_item()
 			if(CA.set_organitem(tool))
+				tool.loc = target
 				return 1
 			else return 0
 	else
