@@ -34,7 +34,7 @@
 		name = "[dna.species.id] [originalname]"
 
 	if(counterpart)
-		var/datum/organ/limb/OR = owner.get_organ(counterpart)
+		var/datum/organ/limb/OR = owner.get_organdatum(counterpart)
 		if(OR && OR.exists())
 			if(isorgan(OR.organitem))
 				var/obj/item/organ/OI = OR.organitem
@@ -230,15 +230,20 @@
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
 //Damage will not exceed max_damage using this proc
 //Cannot apply negative damage
-/obj/item/organ/limb/proc/take_damage(brute, burn)
+/obj/item/organ/limb/proc/take_damage(brute, burn, chemical = 0)
 	if(owner && (owner.status_flags & GODMODE))	return 0	//godmode
 	brute	= max(brute,0)
 	burn	= max(burn,0)
 
 
 	if(organtype == ORGAN_ROBOTIC) //This makes robolimbs not damageable by chems and makes it stronger
-		brute = max(0, brute - 5)
-		burn = max(0, burn - 4)
+		if(chemical)
+			brute = 0
+			burn = 0
+		else
+			brute = max(0, brute - 5)
+			burn = max(0, burn - 4)
+
 
 	var/can_inflict = max_damage - (brute_dam + burn_dam)
 	if(!can_inflict)	return 0

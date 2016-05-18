@@ -51,11 +51,11 @@
 					pulse(0)
 					return 0
 				if(!H.shoes)
-					L = H.get_organ(pick("l_leg", "r_leg"))
+					L = H.get_organdatum(pick("l_leg", "r_leg"))
 					H.Weaken(3)
 			if("l_hand", "r_hand")
 				if(!H.gloves)
-					L = H.get_organ(type)
+					L = H.get_organdatum(type)
 					H.Stun(3)
 		if(L && L.exists())
 			var/obj/item/organ/limb/affecting = L.organitem

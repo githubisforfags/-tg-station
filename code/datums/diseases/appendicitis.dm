@@ -9,7 +9,7 @@
 	desc = "If left untreated the subject will become very weak, and may vomit often."
 	severity = "Dangerous!"
 	longevity = 1000
-	disease_flags = CAN_CARRY|CAN_RESIST
+	disease_flags = CAN_CARRY
 	spread_flags = NON_CONTAGIOUS
 	visibility_flags = HIDDEN_PANDEMIC
 	required_organs = list(/obj/item/organ/internal/appendix)
@@ -24,7 +24,7 @@
 				affected_mob.emote("cough")
 		if(2)
 			var/obj/item/organ/internal/appendix/A = null
-			var/datum/organ/internal/appendix/appendix = affected_mob.get_organ("appendix")
+			var/datum/organ/internal/appendix/appendix = affected_mob.get_organdatum("appendix")
 			if(appendix && appendix.exists())
 				A = appendix.organitem
 			if(A)

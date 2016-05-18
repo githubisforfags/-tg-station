@@ -115,6 +115,7 @@
 	. = ""
 	if(istype(character))
 		real_name = character.real_name
+		blood_type = character.dna.blood_type
 		. += md5(character.real_name)
 	else
 		. += repeat_string(DNA_UNIQUE_ENZYMES_LEN, "0")
@@ -203,6 +204,7 @@
 	C.dna = new /datum/dna(C)
 	C.dna.holder = C
 	if(S)	C.dna.species = new S()	// do not remove; this is here to prevent runtimes
+	if(!C.dna.blood_type) C.dna.blood_type = pick(bloodtypes)
 
 /datum/dna/proc/mutations_get_spans()
 	var/list/spans = list()

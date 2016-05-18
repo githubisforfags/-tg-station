@@ -300,7 +300,7 @@
 			silent = 0
 			return 1
 		else if(organsystem)
-			var/datum/organ/B = get_organ("brain")
+			var/datum/organ/B = get_organdatum("brain")
 			if(!(B && B.exists()))
 				death()
 				eye_blind = max(eye_blind, 1)
@@ -529,7 +529,7 @@
 		see_in_dark =  2
 		see_invisible =  SEE_INVISIBLE_LIVING
 		if(exists("eyes"))
-			var/datum/organ/internal/eyes/eyedatum = get_organ("eyes")
+			var/datum/organ/internal/eyes/eyedatum = get_organdatum("eyes")
 			var/obj/item/organ/internal/eyes/E = eyedatum.organitem
 			see_in_dark = max(see_in_dark, E.dark_sight)
 			see_invisible = min(see_invisible, E.invis_sight)
@@ -561,6 +561,6 @@
 	if(organsystem)
 		for(var/datum/organ/org in get_all_internal_organs())
 			give_action_button(org.organitem)	//Recursion isn't needed in the new organsystem
-		var/datum/organ/cavity/CAV = get_organ("cavity")
+		var/datum/organ/cavity/CAV = get_organdatum("cavity")
 		if(CAV && CAV.exists() && !isorgan(CAV.organitem))	//Last one's there so you can't just cavity implant cybernetic implants
 			give_action_button(CAV.organitem)

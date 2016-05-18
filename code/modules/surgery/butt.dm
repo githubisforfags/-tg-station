@@ -5,7 +5,7 @@
 	var/datum/organ/limb/butt/B = null // B because "Butt"
 
 /datum/surgery_step/saw/remove_butt/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	B = target.get_organ("butt")
+	B = target.get_organdatum("butt")
 	if(B && B.exists())
 		user.visible_message("[user] begins to saw off [target]'s butt", "<span class ='notice'>You begin to saw off [target]'s butt...</span>")
 	else
@@ -19,7 +19,7 @@
 	var/obj/item/organ/limb/butt/BU = null	//This'll be the tool
 
 /datum/surgery_step/insert_butt/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	B = target.get_organ("butt")
+	B = target.get_organdatum("butt")
 	BU = tool
 	user.visible_message("[user] begins to replace the butt on [target].", "<span class ='notice'>You begin to replace the butt on [target]...</span>")
 
@@ -33,7 +33,7 @@
 	possible_locs = list("groin")
 
 /datum/surgery/butt_removal/can_start(mob/user, mob/living/carbon/target, datum/organ/organdata)
-	organdata = target.get_organ("butt")
+	organdata = target.get_organdatum("butt")
 	if(organdata && organdata.exists())	//Can only be done if target has a butt
 		return 1
 	else return 0
@@ -46,7 +46,7 @@
 	possible_locs = list("groin")
 
 /datum/surgery/butt_replacement/can_start(mob/user, mob/living/carbon/target, datum/organ/organdata)
-	organdata = target.get_organ("butt")
+	organdata = target.get_organdatum("butt")
 	if(organdata && (organdata.status & ORGAN_REMOVED))	//Can only be done when mob has no butt
 		return 1
 	else return 0

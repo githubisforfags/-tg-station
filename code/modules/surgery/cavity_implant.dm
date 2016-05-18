@@ -17,7 +17,7 @@
 	var/datum/organ/cavity/CA = null
 
 /datum/surgery_step/handle_cavity/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	CA = target.get_organ("cavity")
+	CA = target.get_organdatum("cavity")
 	if(CA && CA.exists())
 		IC = CA.organitem
 	if(tool)
@@ -34,6 +34,7 @@
 			user.visible_message("<span class='notice'>[user] stuffs [tool] into [target]'s [target_zone]!</span>")
 			user.drop_item()
 			if(CA.set_organitem(tool))
+				tool.loc = target
 				return 1
 			else return 0
 	else

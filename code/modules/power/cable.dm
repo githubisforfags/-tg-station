@@ -520,7 +520,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	if(!istype(H))
 		return ..()
 
-	var/datum/organ/limb/limbdata = H.get_organ(check_zone(user.zone_sel.selecting))
+	var/datum/organ/limb/limbdata = H.get_organdatum(check_zone(user.zone_sel.selecting))
 	var/obj/item/organ/limb/affecting = limbdata.organitem
 
 	if(user && affecting.organtype == ORGAN_ROBOTIC)

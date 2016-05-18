@@ -40,7 +40,7 @@
 		see_in_dark =  4
 		see_invisible =  SEE_INVISIBLE_LEVEL_TWO
 		if(exists("eyes"))
-			var/datum/organ/internal/eyes/eyedatum = get_organ("eyes")
+			var/datum/organ/internal/eyes/eyedatum = get_organdatum("eyes")
 			var/obj/item/organ/internal/eyes/E = eyedatum.organitem
 			see_in_dark = max(see_in_dark, E.dark_sight)
 			see_invisible = min(see_invisible, E.invis_sight)

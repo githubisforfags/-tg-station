@@ -46,7 +46,7 @@
 				if("head")
 					RL = new /obj/item/organ/limb/head/robot(src)
 					L.switch_organitem(RL)
-					var/datum/organ/internal/eyes/EY = target.get_organ("eyes")
+					var/datum/organ/internal/eyes/EY = target.get_organdatum("eyes")
 					if(EY && EY.exists())
 						var/obj/item/organ/internal/eyes/org = EY.organitem
 						if(org.status == ORGAN_ORGANIC)

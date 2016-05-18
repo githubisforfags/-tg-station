@@ -7,8 +7,8 @@
 
 		if(istype(M, /mob/living/carbon/))
 			C = M
-			var/datum/organ/limb/limbdata = C.get_organ(check_zone(selected_zone))
-			organdata = C.get_organ(selected_zone)	//This can be eyes, mouth or groin too
+			var/datum/organ/limb/limbdata = C.get_organdatum(check_zone(selected_zone))
+			organdata = C.get_organdatum(selected_zone)	//This can be eyes, mouth or groin too
 			affecting = limbdata.organitem
 
 		if(M.lying || isslime(M))	//if they're prone or a slime

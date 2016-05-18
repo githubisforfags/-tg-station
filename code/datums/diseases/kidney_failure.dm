@@ -9,7 +9,7 @@
 	desc = "If left untreated the subject will eventually die of toxin buildup."
 	severity = "Dangerous!"
 	longevity = 1000
-	disease_flags = CAN_CARRY|CAN_RESIST
+	disease_flags = CAN_CARRY
 	spread_flags = NON_CONTAGIOUS
 	visibility_flags = HIDDEN_PANDEMIC
 	required_organs = list(/obj/item/organ/internal/kidneys)
@@ -24,7 +24,7 @@
 				affected_mob << "<span class='warning'>You feel tired.</span>"
 		if(2)
 			var/obj/item/organ/internal/kidneys/K = null
-			var/datum/organ/internal/kidneys/kidneys = affected_mob.get_organ("kidneys")
+			var/datum/organ/internal/kidneys/kidneys = affected_mob.get_organdatum("kidneys")
 			if(kidneys && kidneys.exists())
 				K = kidneys.organitem
 			if(K)

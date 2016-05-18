@@ -144,8 +144,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 	//Reset our hair
 	remove_overlay(HAIR_LAYER)
 
-	var/datum/organ/H = get_organ("head")
-	if((HUSK in mutations) || (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)))
+	var/datum/organ/H = get_organdatum("head")
+	if((disabilities & HUSK ) || (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)))
 		return
 
 	if(H.exists() && isorgan(H.organitem))
@@ -322,8 +322,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 			client.screen += gloves					//Either way, add the item to the HUD
 
 
-		var/datum/organ/limb/left = get_organ("l_arm")
-		var/datum/organ/limb/right = get_organ("r_arm")
+		var/datum/organ/limb/left = get_organdatum("l_arm")
+		var/datum/organ/limb/right = get_organdatum("r_arm")
 		if(!left || !right) return
 		var/obj/item/organ/larm = left.organitem
 		var/obj/item/organ/rarm = right.organitem
@@ -670,16 +670,17 @@ var/global/list/limb_icon_cache = list()
 		var/datum/species/race = dna ? dna.species : null
 		if(race)
 			sm_type = race.id
-
 		if(HULK in dna.mutations)
 			sm_type = "hulk"
-		if(HUSK in dna.mutations)
-			sm_type = "husk"
+
 	else sm_type = "non-human"
+	if(owner && owner.disabilities & HUSK)
+		sm_type = "husk"
 	return sm_type
 
 /obj/item/organ/limb/proc/has_color()
-
+	if(owner && owner.disabilities & HUSK)
+		return 0
 	if(dna)
 		var/datum/species/race = dna ? dna.species : null
 		if(race)
@@ -688,7 +689,8 @@ var/global/list/limb_icon_cache = list()
 	return 0
 
 /obj/item/organ/limb/proc/has_gender()
-
+	if(owner && owner.disabilities & HUSK)
+		return 0
 	//Robot limbs have gendered appearance, but no DNA
 	if(organtype == ORGAN_ROBOTIC)
 		return 1
@@ -704,7 +706,7 @@ var/global/list/limb_icon_cache = list()
 
 	for(var/limbname in organsystem.organlist)
 		. += "-[initial(limbname)]"
-		var/datum/organ/limb/limbdata = get_organ(limbname)
+		var/datum/organ/limb/limbdata = get_organdatum(limbname)
 		if(!limbdata.exists())
 			. += "-removed"
 		else

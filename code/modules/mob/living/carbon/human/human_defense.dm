@@ -11,7 +11,7 @@ emp_act
 	var/organnum = 0
 
 	if(def_zone)
-		var/datum/organ/limb/limbdata = get_organ(check_zone(def_zone))
+		var/datum/organ/limb/limbdata = get_organdatum(check_zone(def_zone))
 		if(limbdata.exists())
 			var/obj/item/organ/limb/affecting = limbdata.organitem
 			return checkarmor(affecting, type)
@@ -125,9 +125,9 @@ emp_act
 
 	def_zone = check_zone(def_zone)
 	var/target_area = parse_zone(def_zone)
-	var/datum/organ/limb/target_limb = get_organ(def_zone)
+	var/datum/organ/limb/target_limb = get_organdatum(def_zone)
 	def_zone = ran_zone(def_zone)
-	var/datum/organ/limb/affecting = get_organ(def_zone)
+	var/datum/organ/limb/affecting = get_organdatum(def_zone)
 	var/hit_area = parse_zone(def_zone)
 
 	if(try_dismember(I, def_zone))
@@ -264,7 +264,7 @@ emp_act
 		else
 			src << "<span class='notice'>Your [head_clothes.name] protects your head and face from the acid!</span>"
 	else
-		. = get_organ("head")
+		. = get_organdatum("head")
 		if(.)
 			damaged += .
 		if(ears)
@@ -285,7 +285,7 @@ emp_act
 		else
 			src << "<span class='notice'>Your [chest_clothes.name] protects your body from the acid!</span>"
 	else
-		. = get_organ("chest")
+		. = get_organdatum("chest")
 		if(.)
 			damaged += .
 		if(wear_id)
@@ -316,10 +316,10 @@ emp_act
 		else
 			src << "<span class='notice'>Your [arm_clothes.name] protects your arms and hands from the acid!</span>"
 	else
-		. = get_organ("r_arm")
+		. = get_organdatum("r_arm")
 		if(.)
 			damaged += .
-		. = get_organ("l_arm")
+		. = get_organdatum("l_arm")
 		if(.)
 			damaged += .
 
@@ -342,21 +342,24 @@ emp_act
 		else
 			src << "<span class='notice'>Your [leg_clothes.name] protects your legs and feet from the acid!</span>"
 	else
-		. = get_organ("r_leg")
+		. = get_organdatum("r_leg")
 		if(.)
 			damaged += .
-		. = get_organ("l_leg")
+		. = get_organdatum("l_leg")
 		if(.)
 			damaged += .
 
 
 	//DAMAGE//
-	for(var/obj/item/organ/limb/affecting in damaged)
-		affecting.take_damage(acidity, 2*acidity)
+	for(var/datum/organ/limb/L in damaged)
+		if(!L || !L.exists())
+			continue
+		var/obj/item/organ/limb/affecting = L.organitem
+		affecting.take_damage(acidity, 2*acidity, 1)
 
-		if(affecting.name == "head")
+		if(affecting.name == "head" && affecting.organtype != ORGAN_ROBOTIC)
 			if(prob(min(acidpwr*acid_volume/10, 90))) //Applies disfigurement
-				affecting.take_damage(acidity, 2*acidity)
+				affecting.take_damage(acidity, 2*acidity, 1)
 				emote("scream")
 				facial_hair_style = "Shaved"
 				hair_style = "Bald"
@@ -440,7 +443,7 @@ emp_act
 	if(M.occupant.a_intent == "harm")
 		if(M.damtype == "brute")
 			step_away(src,M,15)
-		var/obj/item/organ/limb/temp = get_organ(pick("chest", "chest", "chest", "head"))
+		var/obj/item/organ/limb/temp = get_organitem(pick("chest", "chest", "chest", "head"))
 		if(temp)
 			var/update = 0
 			switch(M.damtype)

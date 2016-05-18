@@ -9,7 +9,7 @@
 	desc = "If left untreated the subject will cough often."
 	severity = MEDIUM
 	longevity = 1000
-	disease_flags = CAN_CARRY|CAN_RESIST
+	disease_flags = CAN_CARRY
 	spread_flags = NON_CONTAGIOUS
 	visibility_flags = HIDDEN_PANDEMIC
 	required_organs = list(/obj/item/organ/internal/lungs)
@@ -28,7 +28,7 @@
 			if(prob(10))
 				affected_mob.emote("cough")
 			var/obj/item/organ/internal/lungs/L = null
-			var/datum/organ/internal/lungs/lungs = affected_mob.get_organ("lungs")
+			var/datum/organ/internal/lungs/lungs = affected_mob.get_organdatum("lungs")
 			if(lungs && lungs.exists())
 				L = lungs.organitem
 			if(L)

@@ -31,6 +31,22 @@
 		user.visible_message("<span class='warning'>With a sickening crunch, [user] reforms his [weapon_name_simple] into an arm!</span>", "<span class='notice'>We assimilate the [weapon_name_simple] back into our body.</span>", "<span class='italics>You hear organic matter ripping and tearing!</span>")
 		user.update_inv_r_hand()
 		return
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.dna)
+			var/datum/dna/D = H.dna
+			var/datum/organ/limb/L
+			if(user.hand)
+				L = H.get_organdatum("l_arm")
+				if(L && !L.exists())
+					L.regenerate_organitem(D)
+			else
+				L = H.get_organdatum("r_arm")
+				if(L && !L.exists())
+					L.regenerate_organitem(D)
+			H.update_hud()
+			H.update_body_parts()
+			H.update_damage_overlays(0)
 	..(user, target)
 
 /obj/effect/proc_holder/changeling/weapon/sting_action(var/mob/user)

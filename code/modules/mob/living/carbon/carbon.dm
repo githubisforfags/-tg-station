@@ -53,7 +53,7 @@
 				var/d = rand(round(I.force / 4), I.force)
 				if(istype(src, /mob/living/carbon/human))
 					var/mob/living/carbon/human/H = src
-					var/organ = H.get_organ("chest")
+					var/organ = H.get_organitem("chest")
 					if (istype(organ, /obj/item/organ/limb))
 						var/obj/item/organ/limb/temp = organ
 						if(temp.take_damage(d, 0))
@@ -634,7 +634,7 @@ var/const/GALOSHES_DONT_HELP = 8
 
 /mob/living/carbon/check_eye_prot()
 	var/number = ..()
-	var/datum/organ/internal/eyes/EY = get_organ("eyes")
+	var/datum/organ/internal/eyes/EY = get_organdatum("eyes")
 	if(EY && EY.exists())
 		var/obj/item/organ/internal/eyes/EFP = EY.organitem
 		number += EFP.flash_protect
@@ -694,7 +694,7 @@ var/const/GALOSHES_DONT_HELP = 8
 /mob/living/carbon/Stat()
 	..()
 	if(statpanel("Status"))
-		var/datum/organ/internal/alien/plasmavessel/vessel = get_organ("plasmavessel")
+		var/datum/organ/internal/alien/plasmavessel/vessel = get_organdatum("plasmavessel")
 		if(vessel && vessel.exists())
 			var/obj/item/organ/internal/alien/plasmavessel/PV = vessel.organitem
 			stat(null, "Plasma Stored: [PV.storedPlasma]/[PV.max_plasma]")

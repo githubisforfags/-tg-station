@@ -81,7 +81,7 @@
 	if(organsystem && ishuman(src))
 		if(zone == "mouth")
 			zone = "head"
-		var/datum/organ/limb/L = get_organ(zone)
+		var/datum/organ/limb/L = get_organdatum(zone)
 		if(!L.exists())
 			return 0
 		else

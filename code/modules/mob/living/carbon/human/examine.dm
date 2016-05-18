@@ -88,7 +88,7 @@
 		msg += "<span class='warning'>[t_His] left arm is missing!</span>\n"
 	else if(l_hand)
 		if(l_hand.flags & ABSTRACT)
-			var/datum/organ/limb/left = get_organ("l_arm")
+			var/datum/organ/limb/left = get_organdatum("l_arm")
 			var/obj/item/organ/limb/leftarm = left.organitem
 			if (leftarm.organtype == ORGAN_WEAPON)
 				msg += "[t_his] left arm has been replaced by \icon[l_hand] \a [l_hand].\n"
@@ -102,7 +102,7 @@
 		msg += "<span class='warning'>[t_His] right arm is missing!</span>\n"
 	else if(r_hand)
 		if(r_hand.flags & ABSTRACT)
-			var/datum/organ/limb/right = get_organ("r_arm")
+			var/datum/organ/limb/right = get_organdatum("r_arm")
 			var/obj/item/organ/limb/rightarm = right.organitem
 			if (rightarm.organtype == ORGAN_WEAPON)
 				msg += "[t_his] right arm has been replaced by \icon[r_hand] \a [r_hand].\n"
@@ -294,7 +294,7 @@
 
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		var/datum/organ/internal/eyes/EY= H.get_organ("eyes")
+		var/datum/organ/internal/eyes/EY= H.get_organdatum("eyes")
 		var/obj/item/organ/internal/eyes/cyberimp/hud/CIH = null
 		if(EY && EY.exists())
 			CIH = EY.organitem

@@ -18,6 +18,9 @@
 	SSobj.processing -= src
 	..()
 
+/obj/item/device/radio/intercom/throw_at() //why is this an item kill me pete
+	return
+
 /obj/item/device/radio/intercom/attack_ai(mob/user as mob)
 	src.add_fingerprint(user)
 	spawn (0)

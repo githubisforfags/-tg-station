@@ -99,7 +99,7 @@
 /datum/organ/limb/head/make_robotic()
 	var/RL = new /obj/item/organ/limb/head/robot(src)
 	switch_organitem(RL)
-	var/datum/organ/internal/eyes/EY = owner.get_organ("eyes")
+	var/datum/organ/internal/eyes/EY = owner.get_organdatum("eyes")
 	if(EY && EY.exists())
 		var/obj/item/organ/internal/eyes/org = EY.organitem
 		if(org.status == ORGAN_ORGANIC)

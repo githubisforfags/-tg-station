@@ -1200,7 +1200,7 @@
 									DT.name = D.name
 								d_test = 0
 						if(d_test)
-							new_diseases += D
+							new_diseases += D.Copy() //add a copy instead of the beaker disease
 							user << "New disease added to the database!"
 
 /obj/machinery/computer/pandemic/proc/upload_vaccine(var/mob/user)
@@ -1634,16 +1634,19 @@
 				var/allowed = get_allowed_by_id(O)
 				if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 						break
-				for(var/i = 1; i <= round(O.amount, 1); i++)
-						for (var/r_id in allowed)
-								var/space = beaker.reagents.maximum_volume - beaker.reagents.total_volume
-								var/amount = allowed[r_id]
-								beaker.reagents.add_reagent(r_id,min(amount, space))
-								if (space < amount)
-										break
-						if (i == round(O.amount, 1))
-								remove_object(O)
+				var/removed = 0
+				for (var/r_id in allowed)
+						var/space = beaker.reagents.maximum_volume - beaker.reagents.total_volume
+						var/amount = allowed[r_id] * O.amount
+						var/quantity = min(amount, space)
+						beaker.reagents.add_reagent(r_id,quantity)
+						removed += quantity
+						if (space < amount)
 								break
+				if(removed > 0)
+						remove_object(O)
+				break
+
 		//Plants
 		for (var/obj/item/weapon/grown/O in holdingitems)
 				if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
