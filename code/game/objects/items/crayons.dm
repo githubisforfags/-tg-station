@@ -2,31 +2,37 @@
 	icon_state = "crayonred"
 	colour = "#DA0000"
 	colourName = "red"
+	grind_reagents = list("redcrayonpowder" = 10)
 
 /obj/item/toy/crayon/orange
 	icon_state = "crayonorange"
 	colour = "#FF9300"
 	colourName = "orange"
+	grind_reagents = list("orangecrayonpowder" = 10)
 
 /obj/item/toy/crayon/yellow
 	icon_state = "crayonyellow"
 	colour = "#FFF200"
 	colourName = "yellow"
+	grind_reagents = list("yellowcrayonpowder" = 10)
 
 /obj/item/toy/crayon/green
 	icon_state = "crayongreen"
 	colour = "#A8E61D"
 	colourName = "green"
+	grind_reagents = list("greencrayonpowder" = 10)
 
 /obj/item/toy/crayon/blue
 	icon_state = "crayonblue"
 	colour = "#00B7EF"
 	colourName = "blue"
+	grind_reagents = list("bluecrayonpowder" = 10)
 
 /obj/item/toy/crayon/purple
 	icon_state = "crayonpurple"
 	colour = "#DA00FF"
 	colourName = "purple"
+	grind_reagents = list("purplecrayonpowder" = 10)
 
 /obj/item/toy/crayon/white
 	icon_state = "crayonwhite"
@@ -38,6 +44,7 @@
 	desc = "A very sad-looking crayon."
 	colour = "#FFFFFF"
 	colourName = "mime"
+	grind_reagents = list("invisiblecrayonpowder" = 50)
 	uses = -1
 
 /obj/item/toy/crayon/mime/attack_self(mob/living/user as mob)

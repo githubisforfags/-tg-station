@@ -101,6 +101,7 @@
 	cooked_type = /obj/item/weapon/reagent_containers/food/snacks/popcorn
 	filling_color = "#FFFF00"
 	trash = /obj/item/weapon/grown/corncob
+	juice_reagents = list("corn_starch" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/corn/add_juice()
 	if(..())
@@ -116,6 +117,7 @@
 	icon_state = "cherry"
 	gender = PLURAL
 	filling_color = "#FF0000"
+	grind_reagents = list("cherryjelly" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/cherries/add_juice()
 	if(..())
@@ -129,6 +131,7 @@
 	desc = "They're cherries that are blue."
 	icon_state = "bluecherry"
 	filling_color = "#6495ED"
+	grind_reagents = list("bluecherryjelly" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/bluecherries/add_juice()
 	if(..())
@@ -185,6 +188,7 @@
 	desc = "Boil 'em! Mash 'em! Stick 'em in a stew!"
 	icon_state = "potato"
 	filling_color = "#E9967A"
+	juice_reagents = list("potato" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/potato/add_juice()
 	if(..())
@@ -256,6 +260,7 @@
 	desc = "Nutritious!"
 	icon_state = "berrypile"
 	gender = PLURAL
+	juice_reagents = list("berryjuice" = 0)
 	filling_color = "#FF00FF"
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/berries/add_juice()
@@ -270,6 +275,7 @@
 	desc = "Taste so good, you could die!"
 	icon_state = "poisonberrypile"
 	filling_color = "#C71585"
+	juice_reagents = list("poisonberryjuice" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/berries/poison/add_juice()
 	..()
@@ -439,6 +445,7 @@
 	dried_type = null
 	w_class = 3
 	filling_color = "#008000"
+	juice_reagents = list("watermelonjuice" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/watermelon/add_juice()
 	if(..())
@@ -465,6 +472,7 @@
 	desc = "It's large and scary."
 	icon_state = "pumpkin"
 	filling_color = "#FFA500"
+	juice_reagents = list("pumpkinjuice" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/pumpkin/add_juice()
 	if(..())
@@ -486,6 +494,7 @@
 	desc = "When you're making a mess this blumpkin's there to clean you up."
 	icon_state = "blumpkin"
 	filling_color = "#87CEFA"
+	juice_reagents = list("blumpkinjuice" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/blumpkin/add_juice()
 	if(..())
@@ -511,6 +520,7 @@
 	desc = "It's so sour, your face will twist."
 	icon_state = "lime"
 	filling_color = "#00FF00"
+	juice_reagents = list("limejuice" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/citrus/lemon
 	seed = /obj/item/seeds/lemonseed
@@ -518,6 +528,7 @@
 	desc = "When life gives you lemons, be grateful they aren't limes."
 	icon_state = "lemon"
 	filling_color = "#FFD700"
+	juice_reagents = list("lemonjuice" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/citrus/orange
 	seed = /obj/item/seeds/orangeseed
@@ -525,6 +536,7 @@
 	desc = "It's an tangy fruit."
 	icon_state = "orange"
 	filling_color = "#FFA500"
+	juice_reagents = list("orangejuice" = 0)
 
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/whitebeet
@@ -587,6 +599,7 @@
 	item_state = "banana"
 	trash = /obj/item/weapon/grown/bananapeel
 	filling_color = "#FFFF00"
+	juice_reagents = list("banana" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/banana/add_juice()
 	if(..())
@@ -740,6 +753,7 @@
 	gender = PLURAL
 	icon_state = "soybeans"
 	filling_color = "#F0E68C"
+	grind_reagents = list("soymilk" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/soybeans/add_juice()
 	if(..())
@@ -784,6 +798,8 @@
 	icon_state = "tomato"
 	var/splat = /obj/effect/decal/cleanable/tomato_smudge
 	filling_color = "#FF6347"
+	grind_reagents = list("ketchup" = 0)
+	juice_reagents = list("tomatojuice" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/tomato/add_juice()
 	if(..())
@@ -903,6 +919,7 @@
 	gender = PLURAL
 	icon_state = "wheat"
 	filling_color = "#F0E68C"
+	grind_reagents = list("flour" = -5)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/wheat/add_juice()
 	if(..())
@@ -916,6 +933,7 @@
 	gender = PLURAL
 	icon_state = "oat"
 	filling_color = "#556B2F"
+	grind_reagents = list("flour" = -5)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/oat/add_juice()
 	if(..())
@@ -1012,6 +1030,7 @@
 	desc = "It's good for the eyes!"
 	icon_state = "carrot"
 	filling_color = "#FFA500"
+	juice_reagents = list("carrotjuice" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/carrot/add_juice()
 	if(..())
@@ -1254,12 +1273,14 @@
 	name = "coffee arabica beans"
 	desc = "Dry them out to make coffee."
 	icon_state = "coffee_arabica"
+	grind_reagents = list("coffeepowder" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/coffee/robusta
 	seed = /obj/item/seeds/coffee_robusta_seed
 	name = "coffee robusta beans"
 	desc = "Dry them out to make coffee."
 	icon_state = "coffee_robusta"
+	grind_reagents = list("coffeepowder" = 0, "morphine" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/coffee/robusta/add_juice(var/loc, var/potency = 20)
 	..()
@@ -1306,6 +1327,7 @@
 	seed = /obj/item/seeds/tea_aspera_seed
 	name = "Tea Aspera tips"
 	filling_color = "#008000"
+	grind_reagents = list("teapowder" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/tea/astra
 	seed = /obj/item/seeds/tea_astra_seed
@@ -1313,6 +1335,7 @@
 	desc = "These aromatic tips of the tea plant can be dried to make tea."
 	icon_state = "tea_astra_leaves"
 	filling_color = "#4582B4"
+	grind_reagents = list("teapowder" = 0, "tricordrazine" = 0)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/tea/astra/add_juice()
 	..()

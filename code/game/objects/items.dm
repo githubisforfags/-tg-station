@@ -76,6 +76,8 @@
 		/obj/machinery/r_n_d/experimentor,
 		/obj/machinery/autolathe
 	)
+	var/list/grind_reagents //used for despaghettifying the all-in-one grinder
+	var/list/juice_reagents
 /obj/item/proc/check_allowed_items(atom/target, not_inside)
 	if((src in target) || ((!istype(target.loc, /turf)) && (!istype(target, /turf)) && (not_inside)) || is_type_in_list(target, can_be_placed_into))
 		return 0

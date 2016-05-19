@@ -52,6 +52,7 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	throwforce = 10.0
 	flags = CONDUCT
 	origin_tech = "materials=1"
+	grind_reagents = list("iron" = 20)
 
 /obj/item/stack/sheet/metal/cyborg
 	materials = list()
@@ -80,6 +81,7 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 	throwforce = 10.0
 	flags = CONDUCT
 	origin_tech = "materials=2"
+	grind_reagents = list("plasma" = 20, "iron" = 20)
 
 /obj/item/stack/sheet/plasteel/New(var/loc, var/amount=null)
 		recipes = plasteel_recipes
@@ -109,6 +111,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	icon = 'icons/obj/items.dmi'
 	origin_tech = "materials=1;biotech=1"
 	sheettype = "wood"
+	grind_reagents = list("carbon" = 20)
 
 /obj/item/stack/sheet/mineral/wood/New(var/loc, var/amount=null)
 	recipes = wood_recipes
