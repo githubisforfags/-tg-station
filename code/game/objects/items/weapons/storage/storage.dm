@@ -45,7 +45,7 @@
 
 
 		if(!( M.restrained() ) && !( M.stat ))
-			if(!( istype(over_object, /obj/screen) ) && !(over_object.loc == usr))
+			if(!istype(over_object, /obj/screen))
 				return content_can_dump(over_object, M)
 
 			if(!(loc == usr) || (loc && loc.loc == usr))
@@ -349,12 +349,18 @@
 		W.layer = 20
 	else
 		W.layer = initial(W.layer)
-	W.loc = new_location
+	W.forceMove(new_location)
 
 	if(usr)
 		orient2hud(usr)
 		if(usr.s_active)
 			usr.s_active.show_to(usr)
+
+	for(var/mob/M in can_see_contents()) //do it once again
+		if(M.client)
+			M.client.screen -= W
+			orient2hud(M)
+			show_to(M)
 	if(W.maptext)
 		W.maptext = ""
 	W.on_exit_storage(src)
