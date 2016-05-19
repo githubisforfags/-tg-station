@@ -132,6 +132,7 @@
 	throw_range = 3
 	plant_type = 0
 	attack_verb = list("roasted", "scorched", "burned")
+	grind_reagents = list("capsaicin" = 0, "condensedcapsaicin" = 0)
 
 /obj/item/weapon/grown/novaflower/add_juice()
 	if(..())
@@ -177,6 +178,7 @@
 	plant_type = 1
 	origin_tech = "combat=1"
 	attack_verb = list("stung")
+	grind_reagents = list("sacid" = 0)
 
 /obj/item/weapon/grown/nettle/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is eating some of the [src.name]! It looks like \he's trying to commit suicide.</span>")
@@ -228,6 +230,7 @@
 	force = 30
 	throwforce = 15
 	origin_tech = "combat=3"
+	grind_reagents = list("pacid" = 0)
 
 /obj/item/weapon/grown/nettle/death/add_juice()
 	..()

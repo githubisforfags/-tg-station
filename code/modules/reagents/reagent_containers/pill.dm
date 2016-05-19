@@ -5,6 +5,7 @@
 	icon_state = "pill"
 	item_state = "pill"
 	possible_transfer_amounts = null
+	grind_reagents = list()
 	volume = 50
 	var/apply_type = INGEST
 	var/apply_method = "swallow"
